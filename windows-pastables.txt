@@ -52,8 +52,8 @@ dir /o:d /t:w c:\windows\
 dir /o:d /t:w c:\windows\system32
 dir /o:d /t:w c:\windows\system32\winevt\logs
 Wevtutil qe security /c:25 /rd:true /f:text (whatever has updated from previous dir)
-auditpol /get /catagory:*
-ifconfig /all
+auditpol /get /category:*
+ipconfig /all
 
 #################### SURVEY ####################
 Systeminfo

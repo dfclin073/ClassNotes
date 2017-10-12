@@ -14,6 +14,7 @@ script termscreen.$$
 ===============
 --
 ===============
+script termscreen.$$
 
 ssh -v -x -M -f -N -o ControlPath=/tmp/hop-1 root@1.1.1.1
 ssh -o ControlPath=/tmp/hop-1 root@1.1.1.1
@@ -77,6 +78,8 @@ ssh -S /tmp/hop-1 -O exit root@1.1.1.1
 ===============
 --
 ===============
+script termscreen.$$
+
 ssh -o ControlPath=/tmp/hop-1 -O forward root@1.1.1.1 -L 10602:2.2.2.2:22
 
 ssh -v -x -M -f -N -o ControlPath=/tmp/hop-2 -p 10602 root@127.0.0.1
@@ -86,13 +89,14 @@ scp -o ControlPath=/tmp/hop-2 /root/Downloads/survey.sh root@1.1.1.1:/dev/shm/.a
 source /dev/shm/.a
 rm /dev/shm/.a
 
-ssh -v -x -N -f -o ControlPath=/tmp/hop-2 root@127.0.0.1 -D 9050
 
 ssh -S /tmp/hop-2 -O exit root@127.0.0.1
 
 ===============
 --
 ===============
+script termscreen.$$
+
 ssh -o ControlPath=/tmp/hop-2 -O forward root@127.0.0.1 -p 10602 -L 10603:3.3.3.3:22
 ssh -v -x -M -f -N -o ControlPath=/tmp/hop-3 -p 10603 root@127.0.0.1
 ssh -o ControlPath=/tmp/hop-3 root@127.0.0.1
@@ -102,3 +106,20 @@ source /dev/shm/.a
 rm /dev/shm/.a
 
 ssh -S /tmp/hop-3 -O exit root@127.0.0.1
+
+
+
+ 
+===============
+--
+===============
+script termscreen.$$
+
+
+
+
+ 
+===============
+--
+===============
+script termscreen.$$

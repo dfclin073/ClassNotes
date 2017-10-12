@@ -97,11 +97,6 @@ echo -e $y"##################### CPU INFO  ####################"$d
 cat /proc/cpuinfo
 
 echo ""
-echo -e $y"##################### SELINUX INFO  ####################"$d
-sestatus
-getenforce
-
-echo ""
 echo -e $y"##################### SERVICES INFO  ####################"$d
 servcie --status-all || systemctl status --no-pager
 
