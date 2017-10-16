@@ -36,6 +36,7 @@ dir c:\ /S /T:W | findstr "10/29/2010  11:39"
 #################### Mando ####################
 date /t && time /t
 tasklist /V
+tasklist /svc | findstr windefend
 wmic process get commandline, processid, parentprocessid /format:list
 tasklist /FI "IMAGENAME eq MsMpEng.exe.exe" 2>NUL | find /I /N "MsMpEng.exe">NUL && if "%ERRORLEVEL%"=="0" echo Program is running
 netstat -anob

