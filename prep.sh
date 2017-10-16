@@ -15,7 +15,7 @@ apt-get install terminator -y
 apt-get install x11vnc -y
 echo "what is the name of the op?"
 read opname
-dirname=/cline_$(date +%F)-$opname
+dirname=/cline_$(date +%d%b)-$opname
 mkdir $dirname
 cd /tmp
 git clone git://github.com/dfclin073/tten.git/

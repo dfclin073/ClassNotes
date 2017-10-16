@@ -10,6 +10,9 @@ export y='\e[33m' #Yellow
 function get-mando (){
 
 unset HISTFILE HISTFILESIZE HISTSIZE
+export LESSHISTFILE=/dev/null
+alias ll='ls -latr'
+
 echo ""
 date; date -u
 echo ""
