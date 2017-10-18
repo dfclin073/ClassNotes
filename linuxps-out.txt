@@ -1,0 +1,86 @@
+F S UID        PID  PPID  C PRI  NI ADDR SZ WCHAN  STIME TTY          TIME CMD
+4 S root         1     0  0  80   0 - 32023 ep_pol Oct10 ?        00:00:05 /usr/lib/systemd/systemd --switched-root --system --deserialize 21
+1 S root         2     0  0  80   0 -     0 kthrea Oct10 ?        00:00:00 [kthreadd]
+1 S root         3     2  0  80   0 -     0 smpboo Oct10 ?        00:00:00 [ksoftirqd/0]
+1 S root         4     2  0  80   0 -     0 worker Oct10 ?        00:00:00 [kworker/0:0]
+1 S root         6     2  0  80   0 -     0 worker Oct10 ?        00:00:00 [kworker/u2:0]
+1 S root         7     2  0 -40   - -     0 smpboo Oct10 ?        00:00:00 [migration/0]
+1 S root         8     2  0  80   0 -     0 rcu_gp Oct10 ?        00:00:00 [rcu_bh]
+1 R root         9     2  0  80   0 -     0 -      Oct10 ?        00:00:00 [rcu_sched]
+5 S root        10     2  0 -40   - -     0 smpboo Oct10 ?        00:00:03 [watchdog/0]
+5 S root        12     2  0  80   0 -     0 devtmp Oct10 ?        00:00:00 [kdevtmpfs]
+1 S root        13     2  0  60 -20 -     0 rescue Oct10 ?        00:00:00 [netns]
+1 S root        14     2  0  80   0 -     0 watchd Oct10 ?        00:00:00 [khungtaskd]
+1 S root        15     2  0  60 -20 -     0 rescue Oct10 ?        00:00:00 [writeback]
+1 S root        16     2  0  60 -20 -     0 rescue Oct10 ?        00:00:00 [kintegrityd]
+1 S root        17     2  0  60 -20 -     0 rescue Oct10 ?        00:00:00 [bioset]
+1 S root        18     2  0  60 -20 -     0 rescue Oct10 ?        00:00:00 [kblockd]
+1 S root        19     2  0  60 -20 -     0 rescue Oct10 ?        00:00:00 [md]
+1 S root        25     2  0  80   0 -     0 kswapd Oct10 ?        00:00:00 [kswapd0]
+1 S root        26     2  0  85   5 -     0 ksm_sc Oct10 ?        00:00:00 [ksmd]
+1 S root        27     2  0  99  19 -     0 khugep Oct10 ?        00:00:02 [khugepaged]
+1 S root        28     2  0  80   0 -     0 fsnoti Oct10 ?        00:00:00 [fsnotify_mark]
+1 S root        29     2  0  60 -20 -     0 rescue Oct10 ?        00:00:00 [crypto]
+1 S root        37     2  0  60 -20 -     0 rescue Oct10 ?        00:00:00 [kthrotld]
+1 S root        39     2  0  60 -20 -     0 rescue Oct10 ?        00:00:00 [kmpath_rdacd]
+1 S root        40     2  0  60 -20 -     0 rescue Oct10 ?        00:00:00 [kpsmoused]
+1 S root        41     2  0  80   0 -     0 worker Oct10 ?        00:00:53 [kworker/0:2]
+1 S root        42     2  0  60 -20 -     0 rescue Oct10 ?        00:00:00 [ipv6_addrconf]
+1 S root        61     2  0  60 -20 -     0 rescue Oct10 ?        00:00:00 [deferwq]
+1 S root        94     2  0  80   0 -     0 kaudit Oct10 ?        00:00:00 [kauditd]
+1 S root       268     2  0  60 -20 -     0 rescue Oct10 ?        00:00:00 [ata_sff]
+1 S root       269     2  0  80   0 -     0 scsi_e Oct10 ?        00:00:00 [scsi_eh_0]
+1 S root       271     2  0  80   0 -     0 scsi_e Oct10 ?        00:00:00 [scsi_eh_1]
+1 S root       272     2  0  60 -20 -     0 rescue Oct10 ?        00:00:00 [scsi_tmf_0]
+1 S root       274     2  0  60 -20 -     0 rescue Oct10 ?        00:00:00 [scsi_tmf_1]
+1 S root       275     2  0  60 -20 -     0 rescue Oct10 ?        00:00:00 [vmw_pvscsi_wq_0]
+1 S root       277     2  0  80   0 -     0 scsi_e Oct10 ?        00:00:00 [scsi_eh_2]
+1 S root       278     2  0  80   0 -     0 worker Oct10 ?        00:00:00 [kworker/u2:2]
+1 S root       279     2  0  60 -20 -     0 rescue Oct10 ?        00:00:00 [scsi_tmf_2]
+1 S root       284     2  0  60 -20 -     0 rescue Oct10 ?        00:00:00 [ttm_swap]
+1 S root       363     2  0  60 -20 -     0 rescue Oct10 ?        00:00:00 [kdmflush]
+1 S root       364     2  0  60 -20 -     0 rescue Oct10 ?        00:00:00 [bioset]
+1 S root       373     2  0  60 -20 -     0 rescue Oct10 ?        00:00:00 [kdmflush]
+1 S root       374     2  0  60 -20 -     0 rescue Oct10 ?        00:00:00 [bioset]
+1 S root       389     2  0  60 -20 -     0 rescue Oct10 ?        00:00:00 [xfsalloc]
+1 S root       390     2  0  60 -20 -     0 rescue Oct10 ?        00:00:00 [xfs_mru_cache]
+1 S root       391     2  0  60 -20 -     0 rescue Oct10 ?        00:00:00 [xfs-buf/dm-0]
+1 S root       392     2  0  60 -20 -     0 rescue Oct10 ?        00:00:00 [xfs-data/dm-0]
+1 S root       393     2  0  60 -20 -     0 rescue Oct10 ?        00:00:00 [xfs-conv/dm-0]
+1 S root       394     2  0  60 -20 -     0 rescue Oct10 ?        00:00:00 [xfs-cil/dm-0]
+1 S root       395     2  0  60 -20 -     0 rescue Oct10 ?        00:00:00 [xfs-reclaim/dm-]
+1 S root       396     2  0  60 -20 -     0 rescue Oct10 ?        00:00:00 [xfs-log/dm-0]
+1 S root       397     2  0  60 -20 -     0 rescue Oct10 ?        00:00:00 [xfs-eofblocks/d]
+1 S root       398     2  0  80   0 -     0 xfsail Oct10 ?        00:00:02 [xfsaild/dm-0]
+4 S root       466     1  0  80   0 -  9203 ep_pol Oct10 ?        00:00:01 /usr/lib/systemd/systemd-journald
+4 S root       485     1  0  80   0 - 48780 poll_s Oct10 ?        00:00:00 /usr/sbin/lvmetad -f
+4 S root       490     1  0  80   0 - 11743 ep_pol Oct10 ?        00:00:00 /usr/lib/systemd/systemd-udevd
+1 S root       538     2  0  60 -20 -     0 rescue Oct10 ?        00:00:00 [xfs-buf/sda1]
+1 S root       539     2  0  60 -20 -     0 rescue Oct10 ?        00:00:00 [xfs-data/sda1]
+1 S root       540     2  0  60 -20 -     0 rescue Oct10 ?        00:00:00 [xfs-conv/sda1]
+1 S root       541     2  0  60 -20 -     0 rescue Oct10 ?        00:00:00 [xfs-cil/sda1]
+1 S root       542     2  0  60 -20 -     0 rescue Oct10 ?        00:00:00 [xfs-reclaim/sda]
+1 S root       543     2  0  60 -20 -     0 rescue Oct10 ?        00:00:00 [xfs-log/sda1]
+1 S root       544     2  0  60 -20 -     0 rescue Oct10 ?        00:00:00 [xfs-eofblocks/s]
+1 S root       545     2  0  80   0 -     0 xfsail Oct10 ?        00:00:00 [xfsaild/sda1]
+4 S root       558     1  0  76  -4 - 13853 ep_pol Oct10 ?        00:00:00 /sbin/auditd -n
+4 S polkitd    579     1  0  80   0 - 131878 poll_s Oct10 ?       00:00:00 /usr/lib/polkit-1/polkitd --no-debug
+4 S dbus       580     1  0  80   0 -  8175 ep_pol Oct10 ?        00:00:01 /bin/dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation
+4 S root       588     1  0  80   0 - 126730 poll_s Oct10 ?       00:00:01 /usr/sbin/NetworkManager --no-daemon
+4 S root       590     1  0  80   0 -  6070 ep_pol Oct10 ?        00:00:01 /usr/lib/systemd/systemd-logind
+4 S root       593     1  0  80   0 - 31554 hrtime Oct10 ?        00:00:01 /usr/sbin/crond -n
+4 S root       600     1  0  80   0 - 27508 n_tty_ Oct10 tty1     00:00:00 /sbin/agetty --noclear tty1 linux
+4 S root       788     1  0  80   0 - 26369 poll_s Oct10 ?        00:00:00 /usr/sbin/sshd -D
+4 S root       790     1  0  80   0 - 71327 poll_s Oct10 ?        00:00:00 /usr/sbin/rsyslogd -n
+4 S root       791     1  0  80   0 - 138288 poll_s Oct10 ?       00:01:08 /usr/bin/python -Es /usr/sbin/tuned -l -P
+5 S root      1371     1  0  80   0 - 22258 ep_pol Oct10 ?        00:00:03 /usr/libexec/postfix/master -w
+4 S postfix   1426  1371  0  80   0 - 22301 ep_pol Oct10 ?        00:00:00 qmgr -l -t unix -u
+1 S root      2092     2  0  80   0 -     0 worker Oct10 ?        00:00:28 [kworker/0:1]
+4 S root      4942   788  0  80   0 - 37067 poll_s Oct14 ?        00:00:01 sshd: root@notty
+4 S root      6183   788  0  80   0 - 36952 poll_s Oct17 ?        00:00:00 sshd: root
+1 S root      6453     2  0  60 -20 -     0 worker 08:02 ?        00:00:00 [kworker/0:2H]
+1 S root      6454     2  0  60 -20 -     0 worker 08:07 ?        00:00:00 [kworker/0:0H]
+4 S postfix   6455  1371  0  80   0 - 22284 ep_pol 08:44 ?        00:00:00 pickup -l -t unix -u
+1 S root      6469     2  0  60 -20 -     0 worker 09:02 ?        00:00:00 [kworker/0:1H]
+4 S root      6470   788  4  80   0 - 36993 poll_s 09:06 ?        00:00:00 sshd: root@notty
+4 R root      6474  6470  0  80   0 - 37763 -      09:06 ?        00:00:00 ps -elf
