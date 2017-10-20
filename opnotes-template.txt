@@ -21,7 +21,7 @@ ssh -o ControlPath=/tmp/hop-1 root@1.1.1.1
 
 unset HISTFILE HISTFILESIZE HISTSIZE 
 export LESSHISTFILE=/dev/null
-scp -o ControlPath=/tmp/hop-1 /cline_101117_op1/mando.sh root@1.1.1.1:/dev/shm/.a
+scp -o ControlPath=/tmp/hop-1 /cline_##Oct_#/mando.sh root@1.1.1.1:/dev/shm/.a
 source /dev/shm/.a
 rm -f /dev/shm/.a
 

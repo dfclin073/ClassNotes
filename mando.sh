@@ -86,9 +86,9 @@ cat /root/.viminfo
 cat /home/*/.viminfo
 echo ""
 
-echo -e $y"##################### CHECKING FOR PROCESS ACCOUNTING  ####################"$d
+echo -e $r"##################### CHECKING FOR PROCESS ACCOUNTING  ####################"
 ls -latr /var/*/*acct*/
-echo ""
+echo ""$d
 
 return 0
 }
@@ -180,6 +180,15 @@ echo ""
 echo -e $y"##################### DIR LISTING OF /VAR/LOG  ####################"$d
 ls -latr /var/log
 echo ""
+echo -e $y"##################### TAIL LOGS  ####################"$d
+echo -e $y"messages"$d
+tail /var/log/messages
+echo -e $y"secure"$d
+tail /var/log/secure
+echo -e $y"auth.log"$d
+tail /var/log/auth.log
+
+
 return 0
 }
 
@@ -193,7 +202,7 @@ echo ""
 echo -e $y"#####Checking for PSPs#####"
 ls -latr /*ossec
 ls -latr /etc/tripwire
-clamscan -V
+ls -latr /var/log/clam*
 echo -e $d""
 
 echo ""

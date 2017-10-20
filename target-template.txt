@@ -8,7 +8,7 @@ ssh -o ControlPath=/tmp/hop-1 root@1.1.1.1
 
 unset HISTFILE HISTFILESIZE HISTSIZE 
 
-scp -o ControlPath=/tmp/hop-1 /cline_101117_op1/mando.sh root@1.1.1.1:/dev/shm/.a
+scp -o ControlPath=/tmp/hop-1 /cline_##Oct_#/mando.sh root@1.1.1.1:/dev/shm/.a
 source /dev/shm/.a
 rm -f /dev/shm/.a
 
@@ -107,6 +107,7 @@ import-module c:\windows\system32\config\mslog.ps1
 date /t && time /t
 tasklist /V
 wmic process get commandline, processid, parentprocessid /format:list
+query session
 netstat -anob
 netsh advfirewall show allprofiles
 net share
@@ -124,7 +125,8 @@ dir /o:d /t:w c:\windows\system32\winevt\logs
 Wevtutil qe security /c:25 /rd:true /f:text (whatever has updated from previous dir)
 auditpol /get /category:*
 ipconfig /all
-
+powershell.exe -nop -exec bypass
+$tasks = schtasks.exe /query /v /fo csv | ConvertFrom-Csv; $tasks | where-object {$_.'Scheduled Task State' -eq "Enabled"} | select-object TaskName, 'Task To Run'
 
 ########################
 # COPY ALL SURVEY INFO #
