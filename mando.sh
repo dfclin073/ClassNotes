@@ -87,8 +87,8 @@ cat /home/*/.viminfo
 echo ""
 
 echo -e $r"##################### CHECKING FOR PROCESS ACCOUNTING  ####################"
-ls -latr /var/*/*acct*/
-echo ""$d
+ls -latr /var/*/*acct*
+echo -e ""$d
 
 return 0
 }
@@ -195,7 +195,7 @@ return 0
 function get-bad(){
 echo ""
 echo -e $y"#####Checking for backdoor#####"
-ps -elf | egrep "/-l|nc|/-p"
+ps -elf | egrep -e '-l' -e 'nc' -e '-p'
 echo -e $d""
 
 echo ""
