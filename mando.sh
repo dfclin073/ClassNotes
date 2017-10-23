@@ -199,6 +199,11 @@ ps -elf | egrep -e '-l' -e 'nc' -e '-p'
 echo -e $d""
 
 echo ""
+echo -e $y"#####CHECKING FOR ODD PROCESSES #####"
+ps -elf | egrep -e '*kdump*'
+echo -e $d""
+
+echo ""
 echo -e $y"#####Checking for PSPs#####"
 ls -latr /*ossec
 ls -latr /etc/tripwire
