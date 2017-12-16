@@ -103,3 +103,4 @@ write-host ""
 write-host "############ NETWORK INFO ###########" -foregroundcolor "DarkYellow"
 netstat -anob
 }
+get-mando
