@@ -1,5 +1,23 @@
 Windows pastable commands
 
+%%DISABLE POWERSHELL LOGGING%%
+reg query HKLM\SOFTWARE\Wow6432Node\Policies\Microsoft\Windows\PowerShell\Transcription
+ EnableTranscripting = 1   # is on
+reg query HKLM\SOFTWARE\Wow6432Node\Policies\Microsoft\Windows\PowerShell\Transcription
+ EnableInvocationHeader = 1
+reg query HKLM\SOFTWARE\Wow6432Node\Policies\Microsoft\Windows\PowerShell\Transcription
+ OutputDirectory = “”
+
+ wevtutil el  # check for powershell logs
+wevtutil gl "Windows Powershell"
+wevtutil sl "Windows Powershell" /ms:1024000
+wevtutil sl "windows Powershell" /rt:true /ab:fales
+wevtutil sl "windows Powershell" /ab:false
+
+Powershell.exe $PSVersionTable
+
+wevtutil el | Foreach-Object {wevtutil cl "$_"}  #clear all logs
+
 #################### Ping Sweep #####################
 1..20 | % {"192.168.1.$($_): $(Test-Connection -count 1 -comp 192.168.1.$($_) -quiet)"}								#powershell
 

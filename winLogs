@@ -1,0 +1,12 @@
+wevtutil gli "windows powershell"   #lists lastwritetime in zulu & current size
+powershell.exe Get-Date -date (Get-Date).ToUniversalTime()-
+uformat %y-%m-%dT%H:%M%:j   #gets system time in Zule
+
+wevtutil gl "windows powershell"    #lists max size
+
+dir /o:d /t:w c:\windows\system32\winevt\logs
+
+Wevtutil qe "windows powershell" /c:2 /rd:true /f:text
+
+
+get-winevent @{logname='application','security','system';starttime=[datetime]::today} | select logname, timecreated, id, message | formate-table -autosize

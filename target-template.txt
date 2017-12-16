@@ -127,6 +127,8 @@ dir /o:d /t:w c:\windows\system32
 dir /o:d /t:w c:\windows\system32\winevt\logs
 Wevtutil qe security /c:25 /rd:true /f:text (whatever has updated from previous dir)
 auditpol /get /category:*
+wevtutil gt "windows powershell"
+
 ipconfig /all
 powershell.exe -nop -exec bypass
 $tasks = schtasks.exe /query /v /fo csv | ConvertFrom-Csv; $tasks | where-object {$_.'Scheduled Task State' -eq "Enabled"} | select-object TaskName, 'Task To Run'
