@@ -1,9 +1,0 @@
-ssh admin@10.10.100.169
-/ip service print
-/ip service enable
-/system telnet 127.1
-ctrl ]
-set trace flash/nova/etc/devel-login
-devel 
-
-scp /root/Downloads/busybox admin@10.10.100.169:/ram/bb
