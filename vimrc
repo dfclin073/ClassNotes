@@ -59,7 +59,7 @@ imap <F7> <C-R>="\n \n===============\n--\n===============\n"<CR><Up><Up><Up><Up
 "
 "  "UI Layout
 "  "{{{
-  set number              " show line numbers
+
   set showcmd             " show command in bottom bar
   set cursorline          " highlight current line
   filetype indent on      " load filetype-specific indent files
