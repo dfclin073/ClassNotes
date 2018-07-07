@@ -8,7 +8,7 @@ ip=raw_input ("What ip would you like to scan? : ")
 #        print(each_cmd) (ip)
 
 print ('')
-print 'tcpdump -nnvX -s 0 dst',(ip)
+print 'tcpdump -nnvX -s 0 host',(ip)
 print ('')
 print 'ping -c1' ,(ip)
 print ('')
@@ -23,7 +23,7 @@ print ('')
 print 'telnet', (ip), '80'
 print 'GET / http/1.0'
 print ('')
-print 'wget https://'+(ip), '-0 - -o /dev/null --no-check-certificate'
+print 'wget https://'+(ip), '--user-agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8; rv:21.0) Gecko/20100101 Firefox/21.0" -O - -o /dev/null --no-check-certificate'
 print ('')
 print 'smbclient -L //'+(ip), '-p 445'
 print ('')
@@ -32,3 +32,7 @@ print ('')
 print 'nmap --script smb-os-discovery.nse -p445',(ip)
 print ('')
 print 'rpcinfo -p', (ip)
+print ('')
+print 'nmap -n -Pn -sS', (ip), '--top-ports 25'
+print ('')
+print 'ls /usr/share/nmap/scripts/* | grep ftp'

@@ -32,8 +32,8 @@ set nocompatible        " must be first line
 "  " if you want to use a python script (this script needs changed for marker)
 "  "nmap <F6> i<C-R>=system('/root/scripts/vimfolder.py')<CR><Esc>
 "  "imap <F6> <C-R>=system('/root/scripts/vimfolder.py')<CR>
-nmap <F7> i <C-R>="\n \n===============\n--\n===============\n"<CR><Up><Up><Up><Up><Up><Right><Right><Esc>
-imap <F7> <C-R>="\n \n===============\n--\n===============\n"<CR><Up><Up><Up><Up><Up><Right><Right><Esc>
+nmap <F7> i <C-R>="=================\n--\n=================\nX-----------------------------\n\n\n-----------------------------X"<CR><Up><Up><Up><Up><Up><Right><Right><Right><Space>
+imap <F7> <C-R>="\n=================\n--\n=================\nX-----------------------------\n\n\n-----------------------------X"<CR><Up><Up><Up><Up><Up><Right><Right><Right><Space>
 
 "
 "  " Map F9 to fold/unfold [[[ CONFLICTS WITH CURRENT TMUX CONF ]]]
@@ -91,8 +91,8 @@ imap <F7> <C-R>="\n \n===============\n--\n===============\n"<CR><Up><Up><Up><Up
   set foldmethod=marker " fold based on marker
   " Uncomment these to change the foldmarker to something other than the
 "  curly braces
-  "set foldmarker=start,end
-  "set foldmarker=/*,*/
+  set foldmarker=start,end
+  set foldmarker=X------------------------,------------------------X
 "  "}}}
 "
 "  "Backups

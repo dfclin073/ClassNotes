@@ -23,3 +23,5 @@ print 'ssh -S /tmp/sshT1 -O forward user@1.1.1.1 -L 0.0.0.0:'+str(randint(32768,
 print ('')
 print 'ssh root@'+(ip), '-D 1095'
 print ('')
+print 'portfwd add -l '+str(randint(32768, 65534)),'-p',(port),'-r',(ip)
+print ('')
