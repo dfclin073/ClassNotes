@@ -27,13 +27,13 @@ set nocompatible        " must be first line
   imap <F5> <C-R>=strftime("%Y-%m-%d %a %I:%M %p -- ")<CR>
 "
 "  " insert a fold template with F6 - change this if the marker is changed
-  nmap <F6> i<C-R>="\n# \n{{{\n\n\n}}}\n"<CR><Up><Up><Up><Up><Up><Right><Right><Esc>
-  imap <F6> <C-R>="\n#  \n{{{\n\n\n}}}\n"<CR><Up><Up><Up><Up><Up><Right><Right>                          
+"  nmap <F6> i<C-R>="\n# \n{{{\n\n\n}}}\n"<CR><Up><Up><Up><Up><Up><Right><Right><Esc>
+"  imap <F6> <C-R>="\n#  \n{{{\n\n\n}}}\n"<CR><Up><Up><Up><Up><Up><Right><Right>                          
 "  " if you want to use a python script (this script needs changed for marker)
 "  "nmap <F6> i<C-R>=system('/root/scripts/vimfolder.py')<CR><Esc>
 "  "imap <F6> <C-R>=system('/root/scripts/vimfolder.py')<CR>
-nmap <F7> i <C-R>="=================\n--\n=================\nX-----------------------------\n\n\n-----------------------------X"<CR><Up><Up><Up><Up><Up><Right><Right><Right><Space>
-imap <F7> <C-R>="\n=================\n--\n=================\nX-----------------------------\n\n\n-----------------------------X"<CR><Up><Up><Up><Up><Up><Right><Right><Right><Space>
+nmap <F6> i <C-R>="=================\n--\n=================\nX-----------------------------\n\n\n-----------------------------X"<CR><Up><Up><Up><Up><Up><Right><Right><Right><Space>
+imap <F6> <C-R>="\n=================\n--\n=================\nX-----------------------------\n\n\n-----------------------------X"<CR><Up><Up><Up><Up><Up><Right><Right><Right><Space>
 
 "
 "  " Map F9 to fold/unfold [[[ CONFLICTS WITH CURRENT TMUX CONF ]]]
