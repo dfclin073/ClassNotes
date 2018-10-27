@@ -1,0 +1,8 @@
+server {
+	listen 8000 default_server;
+	server_name upload_here;
+	location / {
+		root /tmp;
+        dav_methods PUT;
+	}
+}
