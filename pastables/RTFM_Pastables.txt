@@ -1586,3 +1586,9 @@ nmap -R -sL -dns-server server 1.1.1.0/24
 ###IDS TEST (XMAS SCAN WITH DECOY IPS AND SPOOFING)
 for x in {1 ..10000 ..1);do nmap -T5 -sX -S spoof-source-IP -D comma-
 seperated with no spaces list of decoy IPs --spoof-mac aa:bb:cc:dd:ee:ff -e eth0 -Pn targeted-IP ;done
+
+********************  GIT  ***********************
+git add *
+git commit -m "message"
+git push
+
