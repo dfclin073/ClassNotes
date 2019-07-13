@@ -1,0 +1,59 @@
+unset HISTFILE HISTFILESIZE HISTSIZE
+date; date +%s
+env
+/bin/bash -ic 'alias -p'; alias ll='ls -latr';alias pp="ps -ef | grep -v '\{'"; alias nn='netstat -natup'
+w
+find /var/log -type -f -mmin -10 2> /dev/null
+if [ -L /sbin/init ]; then echo "===> Systemd"; elif [ -e /sbin/initctl ]; then echo "===> Upstart"; else echo "===> SysV"; fi
+
+service auditd status
+service auditd stop
+OR
+systemctl status aduitd
+systemctl stop auditd
+
+pp;lsof | grep txt | grep -v proc
+lsof -np | grep TCP; nn
+
+ip a; netstat -rn
+hostname; uname -a; cat /etc/*release*
+free -m
+df -h
+
+systemctl -t service --no-pager ||initctl list || service --status-all | grep "running"
+#systemctl list-unit-files --type=service | grep enabled        #service set to run at boot
+
+systemctl status
+OR 
+chkconfig --list
+ls -l /etc/xinetd.d./
+
+for user in $(cat /etc/passwd | egrep '/bin/sh|/bin/bash' | cut -f1 -d:); do echo $user; crontab -u $user -l; done
+ls -la /etc/cron*
+cat /etc/crontab
+cat /var/spool/cron/crontabs/*
+
+for i in $(lsmod | cut -d ' ' -f1); do echo $i; modinfo $i | grep 'filename\|version:\|author'; ls -la $(modinfo $i| grep filename) 2> /dev/null; echo " "; done
+
+ls -lRitra /var/log
+last; lastlog
+ls /etc/*syslog*
+grep -v '#' /etc/syslog*
+grep -v '#' /etc/rsyslog.d/50*
+
+cat /etc/logrotate.d/rsyslog || cat /etc/logrotate.conf
+aureport
+cat -n /etc/audit/auditd.conf
+cat /etc/audit/audit.rules
+
+iptables -nvL --line-number
+iptables -t nat -nvL --line-numbers
+cat /etc/syslogd/journald.conf | grep Storage
+
+if [[ $(/sbin/getenforce 2> /dev/null) ]]; then eval /sbin/getenforce; else echo "No SELinux"; fi
+if [[ $(lsmod | grep -i table) ]]; then eval iptables -L; else echo "No IPTables"; fi
+
+cat /root/.bash_history /home/*/.bash_history
+ll /root /home/*
+
+

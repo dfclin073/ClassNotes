@@ -1,0 +1,61 @@
+SECURE LINUX 
+
+export HISTTIMEFORMAT="%d/%m/%y %T "    #adds a atime stamp to bash history
+
+### add this to /etc/bashrc, to send bash hist to /var/log
+PROMPT_COMMAND=$(history -a)
+typeset -r PROMPT_COMMAND
+
+function log2syslog
+
+{
+   declare command
+   command=$BASH_COMMAND
+   logger -p local1.notice -t bash -i -- $USER : $PWD : $command
+
+}
+trap log2syslog DEBUG
+
+chmod all other shells so they cannot be executed
+
+###   Add watchers to auditd rules
+-w /var/log/audit/ -k auditlog
+-w /etc/audit/ -p wa -k auditconfig
+-w /etc/group -p wa -k etcgroup
+-w /etc/passwd -p wa -k etcpasswd
+-w /etc/gshadow -k etcgroup
+-w /etc/shadow -k etcpasswd
+-w /etc/security/opasswd -k opasswd
+-w /etc/sudoers -p wa -k actions
+-w /usr/bin/passwd -p x -k passwd_modification
+-w /etc/hosts -p wa -k network_modifications
+-w /etc/sysconfig/network -p wa -k network_modifications
+-w /etc/network/ -p wa -k network
+-a always,exit -F dir=/etc/NetworkManager/ -F perm=wa -k network_modifications
+-w /etc/sysconfig/network -p wa -k network_modifications
+-w /etc/ssh/sshd_config -k sshd
+-w /bin/systemctl -p x -k systemd
+-w /etc/systemd/ -p wa -k systemd
+-w /bin/su -p x -k priv_esc
+-w /usr/bin/sudo -p x -k priv_esc
+-w /etc/sudoers -p rw -k priv_esc
+-w /usr/bin/whoami -p x -k recon
+-w /etc/issue -p r -k recon
+-w /etc/hostname -p r -k recon
+-w /usr/bin/wget -p x -k susp_activity
+-w /usr/bin/curl -p x -k susp_activity
+-w /usr/bin/base64 -p x -k susp_activity
+-w /bin/nc -p x -k susp_activity
+-w /bin/netcat -p x -k susp_activity
+-w /usr/bin/ncat -p x -k susp_activity
+-w /usr/bin/ssh -p x -k susp_activity
+-w /usr/bin/socat -p x -k susp_activity
+-w /usr/bin/wireshark -p x -k susp_activity
+-w /usr/bin/rawshark -p x -k susp_activity
+-w /usr/bin/rdesktop -p x -k sbin_susp
+-w /sbin/iptables -p x -k sbin_susp
+-w /sbin/ifconfig -p x -k sbin_susp
+-w /usr/sbin/tcpdump -p x -k sbin_susp
+-w /usr/sbin/traceroute -p x -k sbin_susp
+
+iptables rule logging
