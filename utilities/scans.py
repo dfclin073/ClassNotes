@@ -52,6 +52,7 @@ def win_scan():
     print ('')  
     print 'nc -nv 2>&1' ,(ip), '5985'
     print ('')
+    print 'hostname <NewHostName>'
     print 'smbclient -L //'+(ip), '-p 445 -U <domain/user>'
     print ('')
     print 'snmpwalk -c public -v1 '+ (ip)

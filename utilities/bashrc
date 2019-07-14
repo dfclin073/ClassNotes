@@ -16,8 +16,8 @@ HISTCONTROL=ignoreboth
 shopt -s histappend
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=1000
-HISTFILESIZE=2000
+HISTSIZE=10000
+HISTFILESIZE=20000
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -75,7 +75,7 @@ esac
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto'
+    alias ls='ls -h --color=auto'
     #alias dir='dir --color=auto'
     #alias vdir='vdir --color=auto'
 
@@ -85,24 +85,30 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 # some more ls aliases
-alias ll='ls -latr'
+alias ll='ls -latrh'
 #alias la='ls -A'
 #alias l='ls -CF'
 alias nn='netstat -natup'
 alias pp='ps -elf'
-alias scan='/root/tten/scans.py'
-alias tunnels='/root/tten/tunnels.py'
+alias myscans='/root/ClassNotes/utilities/scans.py'
+alias mytunnels='/root/ClassNotes/utilities/tunnels.py'
 alias msf='cd $f; systemctl start postgresql; msfdb init; msfconsole -r /root/.msf4/spool.rc'
 alias pupy='/usr/share/pupy/pupy/pupysh.py'
 alias veil='/usr/share/Veil-Evasion/Veil-Evasion.py'
 alias empire='/usr/share/Empire/setup/reset.sh'
 alias devploit='/usr/share/Devploit/Devploit.py'
 alias SET='setoolkit'
-alias scriptme='cd $f; script termscreen.$$'
-alias prepme='/root/tten/prepme.sh'
+alias myscript='cd $f; script termscreen.$$'
+alias myprep='/root/ClassNotes/utilities/prepme.sh'
 alias ftp='/usr/bin/netkit-ftp'
 alias pupygen='/usr/share/pupy/pupy/pupygen.py'
-
+alias rsf='python3 /usr/share/routersploit/rsf.py'
+alias myshells='/root/ClassNotes/utilities/shells.py'
+alias myrecon='/root/ClassNotes/utilities/recon.py'
+alias mymove='/root/ClassNotes/utilities/move.py'
+alias gg='grep --color=always -iI'
+lhost=$(hostname  -I | cut -f2 -d' ')
+export lhost
 # Alias definitions.
 # You may want to put all your additions into a separate file like
 # ~/.bash_aliases, instead of adding them here directly.
