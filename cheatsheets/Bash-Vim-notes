@@ -15,7 +15,11 @@ U - restore current line
 . - repeat last command
 dw - delete word
 D - Delete to end of line
-D0 - Delete to begnning of line
+d0 - Delete to begnning of line
+d$ - delete to the end of the line
 E - End of word
-W - move forward one word
-B - move backward one word 
+w - move forward one word
+b - move backward one word
+
+ctrl + w - delete word before the cursor
+ctrl + u - delete everthing left of cursor 

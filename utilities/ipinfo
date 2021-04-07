@@ -1,0 +1,7 @@
+#!/bin/bash
+curl ipinfo.io/$1
+#shodan host $1
+#needs shodan api
+#greynoise
+#dehashed
+#h8mail
